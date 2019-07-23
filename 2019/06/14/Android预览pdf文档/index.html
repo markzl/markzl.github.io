@@ -1,230 +1,724 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
+    <meta charset="utf-8">
+<title>Android预览pdf文档 - markzl的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
-  <title>Android预览pdf文档 | markzl的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法： 123456789101112131415161718192021222324/** * Creates a new instance. * &amp;lt;p&amp;gt; * &amp;lt;strong&amp;gt;Note:&amp;lt;/strong&amp;gt; The provided file descriptor m">
+
+
+    <meta name="description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android预览pdf文档">
 <meta property="og:url" content="http://yoursite.com/2019/06/14/Android预览pdf文档/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法： 123456789101112131415161718192021222324/** * Creates a new instance. * &amp;lt;p&amp;gt; * &amp;lt;strong&amp;gt;Note:&amp;lt;/strong&amp;gt; The provided file descriptor m">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-14T07:59:12.514Z">
+<meta property="og:description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-07-19T09:27:34.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android预览pdf文档">
-<meta name="twitter:description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法： 123456789101112131415161718192021222324/** * Creates a new instance. * &amp;lt;p&amp;gt; * &amp;lt;strong&amp;gt;Note:&amp;lt;/strong&amp;gt; The provided file descriptor m">
-  
-    <link rel="alternate" href="/atom.xml" title="markzl的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
 </head>
-</html>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">markzl的博客</a>
-      </h1>
-      
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Android预览pdf文档" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">首页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/categories">分类</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/photos">相册</a>
+                
+                <a class="navbar-item" href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/markzl">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-Android预览pdf文档" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/14/Android预览pdf文档/" class="article-date">
-  <time datetime="2019-06-14T07:30:48.000Z" itemprop="datePublished">2019-06-14</time>
-</a>
+</nav>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android开发笔记/">Android开发笔记</a>
-  </div>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-14T07:30:48.000Z">2019-06-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 702 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Android预览pdf文档
+            
+        </h1>
+        <div class="content">
+            <p>谷歌为我们提供了<code>PdfRender</code>工具类对<code>pdf</code>文档进行渲染，首先看一下<code>PdfRender</code>的构造方法：</p>
+<a id="more"></a>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Android预览pdf文档
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>谷歌为我们提供了<code>PdfRender</code>工具类对<code>pdf</code>文档进行渲染，首先看一下<code>PdfRender</code>的构造方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Creates a new instance.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * &lt;strong&gt;Note:&lt;/strong&gt; The provided file descriptor must be &lt;strong&gt;seekable&lt;/strong&gt;,</span></span><br><span class="line"><span class="comment"> * i.e. its data being randomly accessed, e.g. pointing to a file.</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * &lt;strong&gt;Note:&lt;/strong&gt; This class takes ownership of the passed in file descriptor</span></span><br><span class="line"><span class="comment"> * and is responsible for closing it when the renderer is closed.</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * If the file is from an untrusted source it is recommended to run the renderer in a separate,</span></span><br><span class="line"><span class="comment"> * isolated process with minimal permissions to limit the impact of security exploits.</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> input Seekable file descriptor to read from.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> java.io.IOException If an error occurs while reading the file.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> java.lang.SecurityException If the file requires a password or</span></span><br><span class="line"><span class="comment"> *         the security scheme is not supported.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">PdfRenderer</span><span class="params">(@NonNull ParcelFileDescriptor input)</span></span>&#123;</span><br><span class="line">  <span class="comment">//略...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Creates a new instance.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;strong&gt;Note:&lt;/strong&gt; The provided file descriptor must be &lt;strong&gt;seekable&lt;/strong&gt;,</span></span><br><span class="line"><span class="hljs-comment"> * i.e. its data being randomly accessed, e.g. pointing to a file.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;strong&gt;Note:&lt;/strong&gt; This class takes ownership of the passed in file descriptor</span></span><br><span class="line"><span class="hljs-comment"> * and is responsible for closing it when the renderer is closed.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * If the file is from an untrusted source it is recommended to run the renderer in a separate,</span></span><br><span class="line"><span class="hljs-comment"> * isolated process with minimal permissions to limit the impact of security exploits.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> input Seekable file descriptor to read from.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> java.io.IOException If an error occurs while reading the file.</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> java.lang.SecurityException If the file requires a password or</span></span><br><span class="line"><span class="hljs-comment"> *         the security scheme is not supported.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PdfRenderer</span><span class="hljs-params">(@NonNull ParcelFileDescriptor input)</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">//略...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可以看构造方法中的参数是<code>ParcelFileDescriptor</code>的一个实例，那么<code>ParcelFileDescriptor</code>类是做什么的呢？<code>ParcelFileDescriptor</code>是<code>Android</code>提供的一种数据结构，支持数据的写入和写出。我们通过<code>ParcelFileDescriptor#open</code>生成<code>ParcelFileDescriptor</code>对象：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Create a new ParcelFileDescriptor accessing a given file.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> file The file to be opened.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> mode The desired access mode, must be one of</span></span><br><span class="line"><span class="comment">   *            &#123;<span class="doctag">@link</span> #MODE_READ_ONLY&#125;, &#123;<span class="doctag">@link</span> #MODE_WRITE_ONLY&#125;, or</span></span><br><span class="line"><span class="comment">   *            &#123;<span class="doctag">@link</span> #MODE_READ_WRITE&#125;; may also be any combination of</span></span><br><span class="line"><span class="comment">   *            &#123;<span class="doctag">@link</span> #MODE_CREATE&#125;, &#123;<span class="doctag">@link</span> #MODE_TRUNCATE&#125;,</span></span><br><span class="line"><span class="comment">   *            &#123;<span class="doctag">@link</span> #MODE_WORLD_READABLE&#125;, and</span></span><br><span class="line"><span class="comment">   *            &#123;<span class="doctag">@link</span> #MODE_WORLD_WRITEABLE&#125;.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span> a new ParcelFileDescriptor pointing to the given file.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@throws</span> FileNotFoundException if the given file does not exist or can not</span></span><br><span class="line"><span class="comment">   *             be opened with the requested mode.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@see</span> #parseMode(String)</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ParcelFileDescriptor <span class="title">open</span><span class="params">(File file, <span class="keyword">int</span> mode)</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">      <span class="keyword">final</span> FileDescriptor fd = openInternal(file, mode);</span><br><span class="line">      <span class="keyword">if</span> (fd == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> ParcelFileDescriptor(fd);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * Create a new ParcelFileDescriptor accessing a given file.</span></span><br><span class="line"><span class="hljs-comment">   *</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@param</span> file The file to be opened.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@param</span> mode The desired access mode, must be one of</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_READ_ONLY&#125;, &#123;<span class="hljs-doctag">@link</span> #MODE_WRITE_ONLY&#125;, or</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_READ_WRITE&#125;; may also be any combination of</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_CREATE&#125;, &#123;<span class="hljs-doctag">@link</span> #MODE_TRUNCATE&#125;,</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_WORLD_READABLE&#125;, and</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_WORLD_WRITEABLE&#125;.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@return</span> a new ParcelFileDescriptor pointing to the given file.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@throws</span> FileNotFoundException if the given file does not exist or can not</span></span><br><span class="line"><span class="hljs-comment">   *             be opened with the requested mode.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@see</span> #parseMode(String)</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ParcelFileDescriptor <span class="hljs-title">open</span><span class="hljs-params">(File file, <span class="hljs-keyword">int</span> mode)</span> <span class="hljs-keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">      <span class="hljs-keyword">final</span> FileDescriptor fd = openInternal(file, mode);</span><br><span class="line">      <span class="hljs-keyword">if</span> (fd == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ParcelFileDescriptor(fd);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>从该方法中可以看出<code>ParcelFileDescriptor#open</code>实际操作的是<code>FileDescriptor</code>，仔细阅读<code>FileDescriptor</code>的注释，<code>FileDescriptor</code>是文件操作符。<code>FileDescriptor</code>可以用来表示开放文件、开放套接字。以<code>FileDecriptor</code>表示文件来说，当<code>FileDescroptor</code>表示某文件 时，我们可以通俗的将<code>FileDescriptor</code>看成是该文件。但是，我们不能直接通过<code>FileDescription</code>对该文件进行操作；若需要通过<code>FileDescriptor</code>对该文件进行操作，则需要新创建<code>FileDescriptor</code>对应的<code>FileOutputSteam</code>，再对文件进行操作。这里有对<code>FileDescription</code>的<a href="https://www.jb51.net/article/87476.htm" target="_blank" rel="noopener">详细描述</a>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> ParcelFileDescriptor mFileDescriptor;</span><br><span class="line"> PdfRenderer mPdfRenderer;  </span><br><span class="line"><span class="comment">//根据文件对象创建</span></span><br><span class="line">mFileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);</span><br><span class="line"> <span class="comment">// This is the PdfRenderer we use to render the PDF.</span></span><br><span class="line"> <span class="keyword">if</span> (mFileDescriptor != <span class="keyword">null</span>) &#123;</span><br><span class="line">   mPdfRenderer = <span class="keyword">new</span> PdfRenderer(mFileDescriptor);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> ParcelFileDescriptor mFileDescriptor;</span><br><span class="line"> PdfRenderer mPdfRenderer;  </span><br><span class="line"><span class="hljs-comment">//根据文件对象创建</span></span><br><span class="line">mFileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);</span><br><span class="line"> <span class="hljs-comment">// This is the PdfRenderer we use to render the PDF.</span></span><br><span class="line"> <span class="hljs-keyword">if</span> (mFileDescriptor != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">   mPdfRenderer = <span class="hljs-keyword">new</span> PdfRenderer(mFileDescriptor);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
 <p>打开<code>pdf</code>指定页面和生成当前页面的<code>Bitmap</code>展示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> PdfRenderer.Page mCurrentPage;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showPage</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mPdfRenderer.getPageCount() &lt;= index) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Make sure to close the current page before opening another one.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> != mCurrentPage) &#123;</span><br><span class="line">        mCurrentPage.close();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Use `openPage` to open a specific page in PDF.</span></span><br><span class="line">    mCurrentPage = mPdfRenderer.openPage(index);</span><br><span class="line">    <span class="comment">// Important: the destination bitmap must be ARGB (not RGB).</span></span><br><span class="line">    Bitmap bitmap = Bitmap.createBitmap(mCurrentPage.getWidth(), 			   mCurrentPage.getHeight(),Bitmap.Config.ARGB_8888);</span><br><span class="line">    <span class="comment">// Here, we render the page onto the Bitmap.</span></span><br><span class="line">    <span class="comment">// To render a portion of the page, use the second and third parameter. Pass nulls to get</span></span><br><span class="line">    <span class="comment">// the default result.</span></span><br><span class="line">    <span class="comment">// Pass either RENDER_MODE_FOR_DISPLAY or RENDER_MODE_FOR_PRINT for the last parameter.</span></span><br><span class="line">    mCurrentPage.render(bitmap, <span class="keyword">null</span>, <span class="keyword">null</span>, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);</span><br><span class="line">    <span class="comment">// We are ready to show the Bitmap to user.</span></span><br><span class="line">    mImageView.setImageBitmap(bitmap);</span><br><span class="line">    updateUi();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> PdfRenderer.Page mCurrentPage;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showPage</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (mPdfRenderer.getPageCount() &lt;= index) &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// Make sure to close the current page before opening another one.</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != mCurrentPage) &#123;</span><br><span class="line">        mCurrentPage.close();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// Use `openPage` to open a specific page in PDF.</span></span><br><span class="line">    mCurrentPage = mPdfRenderer.openPage(index);</span><br><span class="line">    <span class="hljs-comment">// Important: the destination bitmap must be ARGB (not RGB).</span></span><br><span class="line">    Bitmap bitmap = Bitmap.createBitmap(mCurrentPage.getWidth(), 			   mCurrentPage.getHeight(),Bitmap.Config.ARGB_8888);</span><br><span class="line">    <span class="hljs-comment">// Here, we render the page onto the Bitmap.</span></span><br><span class="line">    <span class="hljs-comment">// To render a portion of the page, use the second and third parameter. Pass nulls to get</span></span><br><span class="line">    <span class="hljs-comment">// the default result.</span></span><br><span class="line">    <span class="hljs-comment">// Pass either RENDER_MODE_FOR_DISPLAY or RENDER_MODE_FOR_PRINT for the last parameter.</span></span><br><span class="line">    mCurrentPage.render(bitmap, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);</span><br><span class="line">    <span class="hljs-comment">// We are ready to show the Bitmap to user.</span></span><br><span class="line">    mImageView.setImageBitmap(bitmap);</span><br><span class="line">    updateUi();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>渲染<code>pdf</code>代码，<code>pdf</code>文档来源于<code>assets</code>目录下</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/14/Android预览pdf文档/" data-id="cjwvs8fxt00014nrxx9lih6rk" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2019/06/14/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
+        </div>
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开发笔记/">Android开发笔记</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 10px;">Android</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Android/">Android</a>
+                </div>
+            </div>
+        </div>
         
-          <li>
-            <a href="/2019/06/14/Android预览pdf文档/">Android预览pdf文档</a>
-          </li>
         
-          <li>
-            <a href="/2019/06/14/hello-world/">Hello World</a>
-          </li>
         
-      </ul>
     </div>
-  </div>
+</div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2019 markzl<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
     </div>
-  </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/14/hello-world/">
+                <span class="level-item">Hello World</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.jpeg" alt="markzl">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        markzl
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        我的技术博客和读书笔记
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>江苏.南京</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        2
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        1
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        1
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/markzl" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/markzl">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Android开发笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Android/" style="font-size: 10px;">Android</a>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+        <div class="column-right-shadow  ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/Android预览pdf文档/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android预览pdf文档">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T07:30:48.000Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/Android预览pdf文档/" class="has-link-black-ter is-size-6">Android预览pdf文档</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/hello-world/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T06:16:36.813Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Android预览pdf文档" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 markzl&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
 
 
-<script src="/js/script.js"></script>
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
 
 
+<script src="/js/main.js" defer></script>
 
-  </div>
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
 </html>
