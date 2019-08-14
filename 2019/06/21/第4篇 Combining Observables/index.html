@@ -2,24 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>about - markzl的博客</title>
+<title>Rxjava操作符：第4篇 Combining Observables - markzl的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="这是关于的页面，可以在这里向世界介绍你！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+    <meta name="description" content="参考文章：https://github.com/ReactiveX/RxJava/wiki/Combining-Observables 本文基于Rxjava 2.x版本,介绍用于操作多个 Observable 对象的操作符。">
+<meta name="keywords" content="Rxjava操作符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rxjava操作符：第4篇 Combining Observables">
+<meta property="og:url" content="http://yoursite.com/2019/06/21/第4篇 Combining Observables/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="这是关于的页面，可以在这里向世界介绍你！">
+<meta property="og:description" content="参考文章：https://github.com/ReactiveX/RxJava/wiki/Combining-Observables 本文基于Rxjava 2.x版本,介绍用于操作多个 Observable 对象的操作符。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-19T07:01:16.503Z">
+<meta property="og:image" content="https://cn.bing.com/th?id=OHR.JanesCarousel_EN-CN1373704625_800x480.jpg">
+<meta property="og:updated_time" content="2019-07-25T09:49:42.461Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="这是关于的页面，可以在这里向世界介绍你！">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:title" content="Rxjava操作符：第4篇 Combining Observables">
+<meta name="twitter:description" content="参考文章：https://github.com/ReactiveX/RxJava/wiki/Combining-Observables 本文基于Rxjava 2.x版本,介绍用于操作多个 Observable 对象的操作符。">
+<meta name="twitter:image" content="https://cn.bing.com/th?id=OHR.JanesCarousel_EN-CN1373704625_800x480.jpg">
 
 
 
@@ -99,7 +100,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="about" height="28">
+                <img src="/images/logo.svg" alt="Rxjava操作符：第4篇 Combining Observables" height="28">
             
             </a>
         </div>
@@ -117,7 +118,7 @@
                 
                 <a class="navbar-item" href="/photos">相册</a>
                 
-                <a class="navbar-item is-active" href="/about">关于</a>
+                <a class="navbar-item" href="/about">关于</a>
                 
             </div>
             
@@ -132,6 +133,10 @@
                     </a>
                     
                 
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -148,16 +153,101 @@
             <div class="columns">
                 <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
     
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.JanesCarousel_EN-CN1373704625_800x480.jpg" alt="Rxjava操作符：第4篇 Combining Observables">
+        </span>
+    </div>
+    
     <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-21T07:30:48.000Z">2019-06-21</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 787 个字)
+                </span>
+                
+                
+            </div>
+        </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                about
+                Rxjava操作符：第4篇 Combining Observables
             
         </h1>
         <div class="content">
-            <p>这是关于的页面，可以在这里向世界介绍你！</p>
+            <p>参考文章：<a href="https://github.com/ReactiveX/RxJava/wiki/Combining-Observables" target="_blank" rel="noopener">https://github.com/ReactiveX/RxJava/wiki/Combining-Observables</a></p>
+<p>本文基于Rxjava 2.x版本,介绍用于操作多个 Observable 对象的操作符。</p>
+<a id="more"></a>
 
+<p><strong>Operators that work with multiple source Observables to create a single Observable</strong></p>
+<ul>
+<li><a href="http://reactivex.io/documentation/operators/and-then-when.html" target="_blank" rel="noopener"><strong>And/Then/When</strong></a> — combine sets of items emitted by two or more Observables by means of <code>Pattern</code>and <code>Plan</code> intermediaries</li>
+<li><a href="http://reactivex.io/documentation/operators/combinelatest.html" target="_blank" rel="noopener"><strong>CombineLatest</strong></a> — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function</li>
+<li><a href="http://reactivex.io/documentation/operators/join.html" target="_blank" rel="noopener"><strong>Join</strong></a> — combine items emitted by two Observables whenever an item from one Observable is emitted during a time window defined according to an item emitted by the other Observable</li>
+<li><a href="http://reactivex.io/documentation/operators/merge.html" target="_blank" rel="noopener"><strong>Merge</strong></a> — combine multiple Observables into one by merging their emissions</li>
+<li><a href="http://reactivex.io/documentation/operators/startwith.html" target="_blank" rel="noopener"><strong>StartWith</strong></a> — emit a specified sequence of items before beginning to emit the items from the source Observable</li>
+<li><a href="http://reactivex.io/documentation/operators/switch.html" target="_blank" rel="noopener"><strong>Switch</strong></a> — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently-emitted of those Observables</li>
+<li><a href="http://reactivex.io/documentation/operators/zip.html" target="_blank" rel="noopener"><strong>Zip</strong></a> — combine the emissions of multiple Observables together via a specified function and emit single items for each combination based on the results of this function</li>
+</ul>
+<h2 id="startWith操作符"><a href="#startWith操作符" class="headerlink" title="startWith操作符"></a>startWith操作符</h2><p>在 Observable 序列发送之前添加起始位置指定发送的 Observable</p>
+<p><strong>startWith Example</strong> </p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; names = Observable.just(<span class="hljs-string">"Spock"</span>, <span class="hljs-string">"McCoy"</span>);</span><br><span class="line">names.startWith(<span class="hljs-string">"Kirk"</span>).subscribe(item -&gt; System.out.println(item));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints Kirk, Spock, McCoy</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="315" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/startWith.o.png" alt="startWith 操作符">
+
+<h2 id="merge-操作符"><a href="#merge-操作符" class="headerlink" title="merge 操作符"></a>merge 操作符</h2><p><strong>merge 操作符</strong></p>
+<p>merge 操作符在用来合并多个 Observable 操作，合并的序列依次调用 <code>Emitter#onNext()</code> 方法执行，遇到错误序列将不继续执行。</p>
+<p><strong>merge Example</strong></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)</span><br><span class="line">    .mergeWith(Observable.just(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>))</span><br><span class="line">    .subscribe(item -&gt; System.out.println(item));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints 1, 2, 3, 4, 5, 6</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/merge.png" alt="merge 操作符">
+
+<p><strong>mergeDelayError 操作符</strong></p>
+<p> 和 merge 操作符类似，不过遇到错误会保存下来，等所有 Observable 执行完毕，再处理出现错误的Observable。<em>注意 mergeDelayError 是静态泛型方法，只可以通过类名访问</em>。</p>
+<p><strong>mergeDelayError Example</strong></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; observable1 = Observable.error(<span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">""</span>));</span><br><span class="line">Observable&lt;String&gt; observable2 = Observable.just(<span class="hljs-string">"Four"</span>, <span class="hljs-string">"Five"</span>, <span class="hljs-string">"Six"</span>);</span><br><span class="line">Observable.mergeDelayError(observable1, observable2)</span><br><span class="line">        .subscribe(item -&gt; System.out.println(item));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// emits 4, 5, 6 and then the IllegalArgumentException (in this specific</span></span><br><span class="line"><span class="hljs-comment">// example, this throws an `OnErrorNotImplementedException`).</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/mergeDelayError.png" alt="mergeDelayError 操作符">
+
+<h2 id="zip-操作符"><a href="#zip-操作符" class="headerlink" title="zip 操作符"></a>zip 操作符</h2><p>将多个 Observable 发射的数据合并起来，并生成一个Observable根据合并后的数据继续向下传递。onNext 方法只会调用一次。<code>zip</code> 、<code>zipArray</code>、<code>zipIterable</code>、<code>zipWith</code></p>
+<p><strong>zip Example</strong></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; firstNames = Observable.just(<span class="hljs-string">"James"</span>, <span class="hljs-string">"Jean-Luc"</span>, <span class="hljs-string">"Benjamin"</span>);</span><br><span class="line">Observable&lt;String&gt; lastNames = Observable.just(<span class="hljs-string">"Kirk"</span>, <span class="hljs-string">"Picard"</span>, <span class="hljs-string">"Sisko"</span>);</span><br><span class="line">firstNames.zipWith(lastNames, (first, last) -&gt; first + <span class="hljs-string">" "</span> + last)</span><br><span class="line">    .subscribe(item -&gt; System.out.println(item));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints James Kirk, Jean-Luc Picard, Benjamin Sisko</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/zip.png" alt="zipWith 操作符">
+
+<p><code>zip 操作符</code> 会将对应 Observable 对应的 <code>Emitter onNext</code> 的数据合并最后通过新生成的 Observable 发射调整后的数据。</p>
+<h2 id="combineLatest-操作符"><a href="#combineLatest-操作符" class="headerlink" title="combineLatest 操作符"></a>combineLatest 操作符</h2><p>让两个 Obserable 序列按照最新发出的数据组合在一起生成一个 Observable 序列向下传递。</p>
+<p><strong>combineLatest Example</strong></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Long&gt; newsRefreshes = Observable.interval(<span class="hljs-number">100</span>, TimeUnit.MILLISECONDS);</span><br><span class="line">Observable&lt;Long&gt; weatherRefreshes = Observable.interval(<span class="hljs-number">50</span>, TimeUnit.MILLISECONDS);</span><br><span class="line">Observable.combineLatest(newsRefreshes, weatherRefreshes,</span><br><span class="line">    (newsRefreshTimes, weatherRefreshTimes) -&gt;</span><br><span class="line">        <span class="hljs-string">"Refreshed news "</span> + newsRefreshTimes + <span class="hljs-string">" times and weather "</span> + weatherRefreshTimes)</span><br><span class="line">    .subscribe(item -&gt; System.out.println(item));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// Refreshed news 0 times and weather 0</span></span><br><span class="line"><span class="hljs-comment">// Refreshed news 0 times and weather 1</span></span><br><span class="line"><span class="hljs-comment">// Refreshed news 0 times and weather 2</span></span><br><span class="line"><span class="hljs-comment">// Refreshed news 1 times and weather 2</span></span><br><span class="line"><span class="hljs-comment">// Refreshed news 1 times and weather 3</span></span><br><span class="line"><span class="hljs-comment">// Refreshed news 1 times and weather 4</span></span><br><span class="line"><span class="hljs-comment">// Refreshed news 2 times and weather 4</span></span><br><span class="line"><span class="hljs-comment">// Refreshed news 2 times and weather 5</span></span><br><span class="line"><span class="hljs-comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/combineLatest.png" alt="combineLatest 操作符">
+
+<h2 id="switchOnNext-操作符"><a href="#switchOnNext-操作符" class="headerlink" title="switchOnNext 操作符"></a>switchOnNext 操作符</h2><p><strong>switchOnNext Example</strong></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Observable&lt;String&gt;&gt; timeIntervals =</span><br><span class="line">    Observable.interval(<span class="hljs-number">1</span>, TimeUnit.SECONDS)</span><br><span class="line">      .map(ticks -&gt; Observable.interval(<span class="hljs-number">100</span>, TimeUnit.MILLISECONDS)</span><br><span class="line">                              .map(innerInterval -&gt; <span class="hljs-string">"outer: "</span> + ticks + <span class="hljs-string">" - inner: "</span> + innerInterval));</span><br><span class="line">Observable.switchOnNext(timeIntervals)</span><br><span class="line">    .subscribe(item -&gt; System.out.println(item));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// outer: 0 - inner: 0</span></span><br><span class="line"><span class="hljs-comment">// outer: 0 - inner: 1</span></span><br><span class="line"><span class="hljs-comment">// outer: 0 - inner: 2</span></span><br><span class="line"><span class="hljs-comment">// outer: 0 - inner: 3</span></span><br><span class="line"><span class="hljs-comment">// outer: 0 - inner: 4</span></span><br><span class="line"><span class="hljs-comment">// outer: 0 - inner: 5</span></span><br><span class="line"><span class="hljs-comment">// outer: 0 - inner: 6</span></span><br><span class="line"><span class="hljs-comment">// outer: 0 - inner: 7</span></span><br><span class="line"><span class="hljs-comment">// outer: 0 - inner: 8</span></span><br><span class="line"><span class="hljs-comment">// outer: 1 - inner: 0</span></span><br><span class="line"><span class="hljs-comment">// outer: 1 - inner: 1</span></span><br><span class="line"><span class="hljs-comment">// outer: 1 - inner: 2</span></span><br><span class="line"><span class="hljs-comment">// outer: 1 - inner: 3</span></span><br><span class="line"><span class="hljs-comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/switchDo.png" alt="switchOnNext 操作符">
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Rxjava操作符/">Rxjava操作符</a>
+                </div>
+            </div>
         </div>
         
         
@@ -198,6 +288,20 @@
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/20/第3篇 Flitering Observables/">
+                <span class="level-item">Rxjava操作符：第3篇 Flitering Observable</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
 
 </div>
                 
@@ -211,6 +315,37 @@
 
     
         
+<div class="card widget" id="toc" style="max-height: 400px;overflow: auto;">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#startWith操作符">
+        <span class="has-mr-6">1</span>
+        <span>startWith操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#merge-操作符">
+        <span class="has-mr-6">2</span>
+        <span>merge 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#zip-操作符">
+        <span class="has-mr-6">3</span>
+        <span>zip 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#combineLatest-操作符">
+        <span class="has-mr-6">4</span>
+        <span>combineLatest 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#switchOnNext-操作符">
+        <span class="has-mr-6">5</span>
+        <span>switchOnNext 操作符</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 <div class="card widget">
@@ -472,7 +607,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="about" height="28">
+                    <img src="/images/logo.svg" alt="Rxjava操作符：第4篇 Combining Observables" height="28">
                 
                 </a>
                 <p class="is-size-7">

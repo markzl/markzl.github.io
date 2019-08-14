@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Rxjava操作符：第2篇 Transforming Observable - markzl的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="参考文章 https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables 本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。">
+<meta name="keywords" content="Rxjava操作符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rxjava操作符：第2篇 Transforming Observable">
+<meta property="og:url" content="http://yoursite.com/2019/06/19/第2篇 Transforming Observable/index.html">
+<meta property="og:site_name" content="markzl的博客">
+<meta property="og:description" content="参考文章 https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables 本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cn.bing.com/th?id=OHR.MoonMuseum_EN-CN7135152702_400x240.jpg">
+<meta property="og:updated_time" content="2019-07-25T09:51:01.051Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rxjava操作符：第2篇 Transforming Observable">
+<meta name="twitter:description" content="参考文章 https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables 本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。">
+<meta name="twitter:image" content="https://cn.bing.com/th?id=OHR.MoonMuseum_EN-CN7135152702_400x240.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+        <script type="text/javascript" src="https://js.users.51.la/20211709.js"></script>
+    
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Rxjava操作符：第2篇 Transforming Observable" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">首页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/categories">分类</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/photos">相册</a>
+                
+                <a class="navbar-item" href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/markzl">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MoonMuseum_EN-CN7135152702_400x240.jpg" alt="Rxjava操作符：第2篇 Transforming Observable">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-19T07:30:48.000Z">2019-06-19</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分钟 读完 (大约 1385 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Rxjava操作符：第2篇 Transforming Observable
+            
+        </h1>
+        <div class="content">
+            <p>参考文章 <a href="https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables" target="_blank" rel="noopener">https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables</a></p>
+<p>本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。</p>
+<a id="more"></a>
+
+<p><strong>Operators that transform items that are emitted by an Observable.</strong></p>
+<ul>
+<li><p><a href="http://reactivex.io/documentation/operators/buffer.html" target="_blank" rel="noopener"><strong>Buffer</strong></a> — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time</p>
+<p>定期将Observable中的项目收集到包中并发出这些包，而不是一次发送一个项目</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/flatmap.html" target="_blank" rel="noopener"><strong>FlatMap</strong></a> — transform the items emitted by an Observable into Observables, then flatten the emissions from those into a single Observable</p>
+<p>将Observable发出的项目转换为Observables，然后将这些项目的排放量变为单个Observable</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/groupby.html" target="_blank" rel="noopener"><strong>GroupBy</strong></a> — divide an Observable into a set of Observables that each emit a different group of items from the original Observable, organized by key</p>
+<p>将一个Observable划分为一组Observable，每个Observable从原始Observable中发出一组不同的项目，按键组织</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/map.html" target="_blank" rel="noopener"><strong>Map</strong></a> — transform the items emitted by an Observable by applying a function to each item</p>
+<p>通过将函数应用于每个项目来转换Observable发出的项目</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/scan.html" target="_blank" rel="noopener"><strong>Scan</strong></a> — apply a function to each item emitted by an Observable, sequentially, and emit each successive value</p>
+<p>将函数应用于Observable发出的每个项目，按顺序发出每个连续的值</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/window.html" target="_blank" rel="noopener"><strong>Window</strong></a> — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time</p>
+<p>定期将Observable中的项目细分为Observable窗口并发出这些窗口，而不是一次发出一个项目</p>
+</li>
+</ul>
+<h2 id="buffer-操作符"><a href="#buffer-操作符" class="headerlink" title="buffer 操作符"></a>buffer 操作符</h2><p> <code>buffer</code> 操作符是缓存多个 <code>emiter.onNext</code> 事件，一次发出。<code>buffer</code> 方法有多个重载方法，可以仔细阅读源码注释。Buffer 方法的返回值是 <code>Observable&lt;List&lt;T&gt;&gt;</code> 类型。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Observable.range(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)</span><br><span class="line">    .buffer(<span class="hljs-number">4</span>)</span><br><span class="line">    .subscribe((List&lt;Integer&gt; buffer) -&gt; System.out.println(buffer));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// [0, 1, 2, 3]</span></span><br><span class="line"><span class="hljs-comment">// [4, 5, 6, 7]</span></span><br><span class="line"><span class="hljs-comment">// [8, 9]</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="320" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/buffer3.png" alt>
+
+<h2 id="cast-操作符"><a href="#cast-操作符" class="headerlink" title="cast 操作符"></a>cast 操作符</h2><p>将被观察者传递的数据转换成指定类型。注意使用 <code>fliter</code> 操作符过滤非指定类型数据，以避免 Java 类型转换错误 <code>ClassCastException</code> 。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Number&gt; numbers = Observable.just(<span class="hljs-number">1</span>, <span class="hljs-number">4.0</span>, <span class="hljs-number">3f</span>, <span class="hljs-number">7</span>, <span class="hljs-number">12</span>, <span class="hljs-number">4.6</span>, <span class="hljs-number">5</span>);</span><br><span class="line"></span><br><span class="line">numbers.filter((Number x) -&gt; Integer.class.isInstance(x))</span><br><span class="line">    .cast(Integer.class)</span><br><span class="line">    .subscribe((Integer x) -&gt; System.out.println(x));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// 1</span></span><br><span class="line"><span class="hljs-comment">// 7</span></span><br><span class="line"><span class="hljs-comment">// 12</span></span><br><span class="line"><span class="hljs-comment">// 5</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/cast.png" alt>
+
+<h2 id="concatMap-操作符"><a href="#concatMap-操作符" class="headerlink" title="concatMap 操作符"></a>concatMap 操作符</h2><p>ConcatMap 操作符还有很多扩展方法，concatMapCompletable、 concatMapCompletableDelayError<br>、concatMapDelayError、 concatMapEager、<br>concatMapEagerDelayError、<br>concatMapIterable、 concatMapMaybe、<br>concatMapMaybeDelayError、 concatMapSingle<br>、concatMapSingleDelayError 等，这里主要介绍 concatMap 和 concatMapIterable 操作符。</p>
+<p><code>ConcatMap</code> 操作的是 Observable 对象，根据初始被观察者传递的数据转换成新的 Observable 向下传递。注意 <code>ConcatMap</code> 操作符是<strong>按照发射顺序执行</strong>的。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Observable.range(<span class="hljs-number">0</span>, <span class="hljs-number">5</span>)</span><br><span class="line">    .concatMap(i -&gt; &#123;</span><br><span class="line">        <span class="hljs-keyword">long</span> delay = Math.round(Math.random() * <span class="hljs-number">2</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> Observable.timer(delay, TimeUnit.SECONDS).map(n -&gt; i);</span><br><span class="line">    &#125;)</span><br><span class="line">    .blockingSubscribe(System.out::print);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints 01234</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/concatMap.png" alt>
+
+<h2 id="concatIterable-操作符"><a href="#concatIterable-操作符" class="headerlink" title="concatIterable  操作符"></a>concatIterable  操作符</h2><p><code>concatIterable</code> 操作符会将转换生成的 <code>Iterable</code> 列表数据中的每一项单独从发射源发出，且发射源数据是按照顺序发出的。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(<span class="hljs-string">"A"</span>, <span class="hljs-string">"B"</span>, <span class="hljs-string">"C"</span>)</span><br><span class="line">  .concatMapIterable(item -&gt; Arrays.asList(item,item,item))</span><br><span class="line">  .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//print AAABBBCCC</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="275" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/concatMapIterable.o.png" alt>
+
+<h2 id="flatMap-操作符"><a href="#flatMap-操作符" class="headerlink" title="flatMap 操作符"></a>flatMap 操作符</h2><p>作用和 <code>concatMap</code> 操作符类似。<code>flatMap</code> 操作符与 <code>concatMap</code> 操作符区别：<strong><code>flatMap</code> 操作符不是按照发射顺序执行</strong>。这种操作符主要是需要通过源 Observable 数据 获取新的 Observable 数据时使用。例如从某请求地址获取到参数，然后根据获取到的参数请求另一地址获取最终我们需要的数据。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(<span class="hljs-string">"A"</span>, <span class="hljs-string">"B"</span>, <span class="hljs-string">"C"</span>)</span><br><span class="line">    .flatMap(a -&gt; &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> Observable.intervalRange(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, TimeUnit.SECONDS)</span><br><span class="line">                .map(b -&gt; <span class="hljs-string">'('</span> + a + <span class="hljs-string">", "</span> + b + <span class="hljs-string">')'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    .blockingSubscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//打印顺序有可能不同</span></span><br><span class="line"><span class="hljs-comment">//(A, 1)</span></span><br><span class="line"><span class="hljs-comment">//(B, 1)</span></span><br><span class="line"><span class="hljs-comment">//(C, 1)</span></span><br><span class="line"><span class="hljs-comment">//(B, 2)</span></span><br><span class="line"><span class="hljs-comment">//(A, 2)</span></span><br><span class="line"><span class="hljs-comment">//(C, 2)</span></span><br><span class="line"><span class="hljs-comment">//(B, 3)</span></span><br><span class="line"><span class="hljs-comment">//(A, 3)</span></span><br><span class="line"><span class="hljs-comment">//(C, 3)</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="310" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/flatMap.png" alt>
+
+<h2 id="flatMapIterable-操作符"><a href="#flatMapIterable-操作符" class="headerlink" title="flatMapIterable 操作符"></a>flatMapIterable 操作符</h2><p>作用和 <code>concatMapIterable</code> 操作符相同，会将 Iterable 列表中的值生成 <code>Observable&lt;T&gt;</code> 发射源。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)</span><br><span class="line">  .flatMapIterable(x -&gt; &#123;</span><br><span class="line">    <span class="hljs-keyword">switch</span> (x % <span class="hljs-number">4</span>) &#123;</span><br><span class="line">      <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> Arrays.asList(<span class="hljs-string">"A"</span>);</span><br><span class="line">      <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> Arrays.asList(<span class="hljs-string">"B"</span>, <span class="hljs-string">"B"</span>);</span><br><span class="line">      <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> Arrays.asList(<span class="hljs-string">"C"</span>, <span class="hljs-string">"C"</span>, <span class="hljs-string">"C"</span>);</span><br><span class="line">      <span class="hljs-keyword">default</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> Arrays.asList();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  .subscribe(System.out::print);</span><br><span class="line"><span class="hljs-comment">//print ABBCCC</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="343" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/flatMapIterable.o.png" alt>
+
+<h2 id="groupBy-操作符"><a href="#groupBy-操作符" class="headerlink" title="groupBy 操作符"></a>groupBy 操作符</h2><p>类似 <code>butter</code> 操作符打包多个发射项目，但是是根据 group(key,value) 来分包的。注意groupBy操作符返回值类型是 <code>Observable&lt;GroupedObservable&lt;K, V&gt;&gt;</code> ，发射源 <code>onNext</code>方法中传递的将会是 <code>GroupedObservable&lt;K, V&gt;</code>  类型，而我们需要的值在每个 GroupeObservable 中，这里我们使用 <code>concatMapSingle</code> 操作符将每个中的数据合并生成新的 <code>Single&lt;List&lt;T&gt;&gt;</code> 向下传递。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; animals = Observable.just(</span><br><span class="line">  <span class="hljs-string">"Tiger"</span>, <span class="hljs-string">"Elephant"</span>, <span class="hljs-string">"Cat"</span>, <span class="hljs-string">"Chameleon"</span>, <span class="hljs-string">"Frog"</span>, <span class="hljs-string">"Fish"</span>, <span class="hljs-string">"Turtle"</span>, <span class="hljs-string">"Flamingo"</span>);</span><br><span class="line"></span><br><span class="line">animals.groupBy(animal -&gt; animal.charAt(<span class="hljs-number">0</span>), String::toUpperCase)</span><br><span class="line">  .concatMapSingle(Observable::toList)</span><br><span class="line">  .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//println</span></span><br><span class="line"><span class="hljs-comment">//[TIGER, TURTLE]</span></span><br><span class="line"><span class="hljs-comment">//[ELEPHANT]</span></span><br><span class="line"><span class="hljs-comment">//[CAT, CHAMELEON]</span></span><br><span class="line"><span class="hljs-comment">//[FROG, FISH, FLAMINGO]</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="360" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/groupBy.png" alt>
+
+<h2 id="map-操作符"><a href="#map-操作符" class="headerlink" title="map 操作符"></a>map 操作符</h2><p>直接操作发射数据，返回变换后的数据并向下游传递。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(1, 2, 3)</span><br><span class="line">    .map(x -&gt; x * x)</span><br><span class="line">    .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line">// prints:</span><br><span class="line">// 1</span><br><span class="line">// 4</span><br><span class="line">// 9</span><br></pre></td></tr></table></figure>
+
+<img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/map.png" alt>
+
+<h2 id="scan-操作符"><a href="#scan-操作符" class="headerlink" title="scan 操作符"></a>scan 操作符</h2><p><code>scan</code>操作符实现的是一种类似累加器的功能，如下所示 <code>partialSum</code> 参数为之前发射数据的和。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>, <span class="hljs-number">7</span>)</span><br><span class="line">    .scan(<span class="hljs-number">0</span>, (partialSum, x) -&gt; partialSum + x)</span><br><span class="line">    .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// 0</span></span><br><span class="line"><span class="hljs-comment">// 5</span></span><br><span class="line"><span class="hljs-comment">// 8</span></span><br><span class="line"><span class="hljs-comment">// 16</span></span><br><span class="line"><span class="hljs-comment">// 17</span></span><br><span class="line"><span class="hljs-comment">// 24</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="320" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/scanSeed.png" alt>
+
+<h2 id="window-操作符"><a href="#window-操作符" class="headerlink" title="window 操作符"></a>window 操作符</h2><p><code>window</code> 操作符作用和 <code>buffer</code> 类似，不过 window 方法的返回值是 <code>Observable&lt;Observable&lt;T&gt;&gt;</code> 对象，直接传递的是<code>Observable&lt;T&gt;</code> 对象，在订阅方法中打印的是 Observable 对象，而不是其中传递的值。通过 flatMap 方法或者其扩展方法，既可处理按照  window(connt , skip) 设置打包数据的传递。而 <code>buffer</code> 方法的操作符返回值类型是 <code>Observable&lt;List&lt;T&gt;&gt;</code>。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Observable.range(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// Create windows containing at most 2 items, and skip 3 items before starting a new window.</span></span><br><span class="line">    .window(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)</span><br><span class="line">    .flatMapSingle(window -&gt; &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> window.map(String::valueOf)</span><br><span class="line">                .reduce(<span class="hljs-keyword">new</span> StringJoiner(<span class="hljs-string">", "</span>, <span class="hljs-string">"["</span>, <span class="hljs-string">"]"</span>), StringJoiner::add);</span><br><span class="line">    &#125;)</span><br><span class="line">    .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// [1, 2] window 中 emitter.onNext(1); emitter.onNext(2);</span></span><br><span class="line"><span class="hljs-comment">// [4, 5]</span></span><br><span class="line"><span class="hljs-comment">// [7, 8]</span></span><br><span class="line"><span class="hljs-comment">// [10]</span></span><br></pre></td></tr></table></figure>
+
+<p>按照参数指定的数据打包为 <code>Observable&lt;T&gt;</code> 对象，参数 Observable 中会调用 onNext 方法来处理每一个集合数据。因为参数类型为 <code>Observable&lt;T&gt;</code> , 所有订阅方法中 <code>onNext</code> 方法只会调用4次。 </p>
+ <img width="640" height="365" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/window4.png" alt>
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Rxjava操作符/">Rxjava操作符</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/20/第3篇 Flitering Observables/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Rxjava操作符：第3篇 Flitering Observable</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/18/第1篇 Creating Observables/">
+                <span class="level-item">Rxjava操作符：第1篇 Creating Observables</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+
+    
+        
+<div class="card widget" id="toc" style="max-height: 400px;overflow: auto;">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#buffer-操作符">
+        <span class="has-mr-6">1</span>
+        <span>buffer 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#cast-操作符">
+        <span class="has-mr-6">2</span>
+        <span>cast 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#concatMap-操作符">
+        <span class="has-mr-6">3</span>
+        <span>concatMap 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#concatIterable-操作符">
+        <span class="has-mr-6">4</span>
+        <span>concatIterable  操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#flatMap-操作符">
+        <span class="has-mr-6">5</span>
+        <span>flatMap 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#flatMapIterable-操作符">
+        <span class="has-mr-6">6</span>
+        <span>flatMapIterable 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#groupBy-操作符">
+        <span class="has-mr-6">7</span>
+        <span>groupBy 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#map-操作符">
+        <span class="has-mr-6">8</span>
+        <span>map 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#scan-操作符">
+        <span class="has-mr-6">9</span>
+        <span>scan 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#window-操作符">
+        <span class="has-mr-6">10</span>
+        <span>window 操作符</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/06/21/第4篇 Combining Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.JanesCarousel_EN-CN1373704625_800x480.jpg" alt="Rxjava操作符：第4篇 Combining Observables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T07:30:48.000Z">2019-06-21</time></div>
+                    <a href="/2019/06/21/第4篇 Combining Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第4篇 Combining Observables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/20/第3篇 Flitering Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.Skywalk_EN-CN9319095731_400x240.jpg" alt="Rxjava操作符：第3篇 Flitering Observable">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-20T07:30:48.000Z">2019-06-20</time></div>
+                    <a href="/2019/06/20/第3篇 Flitering Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第3篇 Flitering Observable</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/19/第2篇 Transforming Observable/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MoonMuseum_EN-CN7135152702_400x240.jpg" alt="Rxjava操作符：第2篇 Transforming Observable">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T07:30:48.000Z">2019-06-19</time></div>
+                    <a href="/2019/06/19/第2篇 Transforming Observable/" class="has-link-black-ter is-size-6">Rxjava操作符：第2篇 Transforming Observable</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/18/第1篇 Creating Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MeerkatMob_EN-CN1201896184_800x480.jpg" alt="Rxjava操作符：第1篇 Creating Observables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T07:30:48.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/第1篇 Creating Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第1篇 Creating Observables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/16/AndroidIPC机制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OSA.8d522f53eadf1fa49ac27e826085fe0d&amp;w=372&amp;h=176&amp;c=7&amp;rs=2&amp;qlt=80&amp;cdv=1&amp;pid=PopNow" alt="Android中的IPC之Binder机制">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-16T10:11:48.000Z">2019-06-16</time></div>
+                    <a href="/2019/06/16/AndroidIPC机制/" class="has-link-black-ter is-size-6">Android中的IPC之Binder机制</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发艺术探索笔记/">Android开发艺术探索笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Android开发笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发艺术探索笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Rxjava笔记/">
+            <span class="level-start">
+                <span class="level-item">Rxjava笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+        <div class="column-right-shadow  ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开发艺术探索/">
+                        <span class="tag">Android开发艺术探索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Rxjava操作符/">
+                        <span class="tag">Rxjava操作符</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+            
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Rxjava操作符：第2篇 Transforming Observable" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 markzl&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

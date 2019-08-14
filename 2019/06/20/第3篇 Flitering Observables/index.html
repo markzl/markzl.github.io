@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Rxjava操作符：第3篇 Flitering Observable - markzl的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="参考文章：https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables本文基于Rxjava 2.x版本,介绍用于 Observable 过滤发射项目的操作符。">
+<meta name="keywords" content="Rxjava操作符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rxjava操作符：第3篇 Flitering Observable">
+<meta property="og:url" content="http://yoursite.com/2019/06/20/第3篇 Flitering Observables/index.html">
+<meta property="og:site_name" content="markzl的博客">
+<meta property="og:description" content="参考文章：https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables本文基于Rxjava 2.x版本,介绍用于 Observable 过滤发射项目的操作符。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cn.bing.com/th?id=OHR.Skywalk_EN-CN9319095731_400x240.jpg">
+<meta property="og:updated_time" content="2019-07-25T09:50:36.009Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rxjava操作符：第3篇 Flitering Observable">
+<meta name="twitter:description" content="参考文章：https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables本文基于Rxjava 2.x版本,介绍用于 Observable 过滤发射项目的操作符。">
+<meta name="twitter:image" content="https://cn.bing.com/th?id=OHR.Skywalk_EN-CN9319095731_400x240.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+        <script type="text/javascript" src="https://js.users.51.la/20211709.js"></script>
+    
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Rxjava操作符：第3篇 Flitering Observable" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">首页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/categories">分类</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/photos">相册</a>
+                
+                <a class="navbar-item" href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/markzl">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.Skywalk_EN-CN9319095731_400x240.jpg" alt="Rxjava操作符：第3篇 Flitering Observable">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-20T07:30:48.000Z">2019-06-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1212 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Rxjava操作符：第3篇 Flitering Observable
+            
+        </h1>
+        <div class="content">
+            <p>参考文章：<a href="https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables" target="_blank" rel="noopener">https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables</a><br>本文基于Rxjava 2.x版本,介绍用于 Observable 过滤发射项目的操作符。</p>
+<a id="more"></a>
+
+<p><strong>Operators that selectively emit items from a source Observable.</strong></p>
+<ul>
+<li><p><a href="http://reactivex.io/documentation/operators/debounce.html" target="_blank" rel="noopener"><strong>Debounce</strong></a> — only emit an item from an Observable if a particular timespan has passed without it emitting another item</p>
+<p>如果特定的时间跨度已经过去而没有发出另一个项目，则只从Observable中发出一个项目</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/distinct.html" target="_blank" rel="noopener"><strong>Distinct</strong></a> — suppress duplicate items emitted by an Observable</p>
+<p>过滤重复发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/elementat.html" target="_blank" rel="noopener"><strong>ElementAt</strong></a> — emit only item <em>n</em> emitted by an Observable</p>
+<p>仅发出方法中指定的发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/filter.html" target="_blank" rel="noopener"><strong>Filter</strong></a> — emit only those items from an Observable that pass a predicate test</p>
+<p>仅发出符合过滤条件的发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/first.html" target="_blank" rel="noopener"><strong>First</strong></a> — emit only the first item, or the first item that meets a condition, from an Observable</p>
+<p>仅保留发射序列的第一个发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/ignoreelements.html" target="_blank" rel="noopener"><strong>IgnoreElements</strong></a> — do not emit any items from an Observable but mirror its termination notification</p>
+<p>忽略发射序列的所有元素，只会响应 onComplete 方法</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/last.html" target="_blank" rel="noopener"><strong>Last</strong></a> — emit only the last item emitted by an Observable</p>
+<p>仅保留发射序列的最后一个发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/sample.html" target="_blank" rel="noopener"><strong>Sample</strong></a> — emit the most recent item emitted by an Observable within periodic time intervals</p>
+<p>取每个时间周期内的最后一个发射源。</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/skip.html" target="_blank" rel="noopener"><strong>Skip</strong></a> — suppress the first <em>n</em> items emitted by an Observable</p>
+<p>跳过起始位置的 n 个发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/skiplast.html" target="_blank" rel="noopener"><strong>SkipLast</strong></a> — suppress the last <em>n</em> items emitted by an Observable</p>
+<p>跳过终点位置的 n 个发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/take.html" target="_blank" rel="noopener"><strong>Take</strong></a> — emit only the first <em>n</em> items emitted by an Observable</p>
+<p>保留起始位置的 n 个发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/takelast.html" target="_blank" rel="noopener"><strong>TakeLast</strong></a> — emit only the last <em>n</em> items emitted by an Observable</p>
+<p>保留终点位置的 n 个发射源</p>
+</li>
+</ul>
+<h2 id="debounce-操作符"><a href="#debounce-操作符" class="headerlink" title="debounce 操作符"></a>debounce 操作符</h2><p>当发射源 <code>Emitter#onNext</code> 方法发射间隔小于 debounce 方法指定间隔，取时间间隔有交集的最后一个发射源。在当前指定时间周期内只有一个发射源的时候，直接发出该发射源，如果指定时间周期出现多个发射源，取周期内最后一个发射源发出，其他的发射源过滤掉。根据下面的 debounce 图解可以得知，debounce 周期随发射源发出开始计算。注意和 sample 操作符区别</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// Diagram:</span></span><br><span class="line"><span class="hljs-comment">// -A--------------B----C-D-------------------E-|----&gt;</span></span><br><span class="line"><span class="hljs-comment">//  a---------1s</span></span><br><span class="line"><span class="hljs-comment">//                 b---------1s</span></span><br><span class="line"><span class="hljs-comment">//                      c---------1s</span></span><br><span class="line"><span class="hljs-comment">//                        d---------1s</span></span><br><span class="line"><span class="hljs-comment">//                                            e-|----&gt;</span></span><br><span class="line"><span class="hljs-comment">// -----------A---------------------D-----------E-|--&gt;</span></span><br><span class="line"></span><br><span class="line">Observable&lt;String&gt; source = Observable.create(emitter -&gt; &#123;</span><br><span class="line">    emitter.onNext(<span class="hljs-string">"A"</span>);</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="hljs-number">1_500</span>);</span><br><span class="line">    emitter.onNext(<span class="hljs-string">"B"</span>);</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="hljs-number">500</span>);</span><br><span class="line">    emitter.onNext(<span class="hljs-string">"C"</span>);</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="hljs-number">250</span>);</span><br><span class="line">    emitter.onNext(<span class="hljs-string">"D"</span>);</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="hljs-number">2_000</span>);</span><br><span class="line">    emitter.onNext(<span class="hljs-string">"E"</span>);</span><br><span class="line">    emitter.onComplete();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">source.subscribeOn(Schedulers.io())</span><br><span class="line">        .debounce(<span class="hljs-number">1</span>, TimeUnit.SECONDS)</span><br><span class="line">        .blockingSubscribe(</span><br><span class="line">                item -&gt; System.out.println(<span class="hljs-string">"onNext: "</span> + item),</span><br><span class="line">                Throwable::printStackTrace,</span><br><span class="line">                () -&gt; System.out.println(<span class="hljs-string">"onComplete"</span>));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// onNext: A</span></span><br><span class="line"><span class="hljs-comment">// onNext: D</span></span><br><span class="line"><span class="hljs-comment">// onNext: E</span></span><br><span class="line"><span class="hljs-comment">// onComplete</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="310" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/debounce.png" alt>
+
+<h2 id="distinct-操作符"><a href="#distinct-操作符" class="headerlink" title="distinct  操作符"></a>distinct  操作符</h2><p>过滤重复的发射项目</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>)</span><br><span class="line">        .distinct()</span><br><span class="line">        .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// 2</span></span><br><span class="line"><span class="hljs-comment">// 3</span></span><br><span class="line"><span class="hljs-comment">// 4</span></span><br><span class="line"><span class="hljs-comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="310" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/distinct.png" alt>
+
+<h2 id="elementAt-操作符"><a href="#elementAt-操作符" class="headerlink" title="elementAt 操作符"></a>elementAt 操作符</h2><p>获取指定发射序列上某条数据</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Long&gt; source = Observable.&lt;Long, Long&gt;generate(() -&gt; <span class="hljs-number">1L</span>, (state, emitter) -&gt; &#123;</span><br><span class="line">    emitter.onNext(state);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> state + <span class="hljs-number">1L</span>;</span><br><span class="line">&#125;).scan((product, x) -&gt; product * x);</span><br><span class="line"></span><br><span class="line">Maybe&lt;Long&gt; element = source.elementAt(<span class="hljs-number">5</span>);</span><br><span class="line">element.subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints 720</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="363" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/elementAt.o.png" alt>
+
+<h2 id="filter-操作符"><a href="#filter-操作符" class="headerlink" title="filter 操作符"></a>filter 操作符</h2><p>过滤非函数判断指定的发射序列</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)</span><br><span class="line">        .filter(x -&gt; x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)</span><br><span class="line">        .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// 2</span></span><br><span class="line"><span class="hljs-comment">// 4</span></span><br><span class="line"><span class="hljs-comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="310" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/filter.png" alt>
+
+<h2 id="first-操作符"><a href="#first-操作符" class="headerlink" title="first 操作符"></a>first 操作符</h2><p>取发射序列的第一个发射源，和 last 操作符对应。first 方法中参数为指定默认值。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; source = Observable.just(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;);</span><br><span class="line">Single&lt;String&gt; firstOrDefault = source.first(&quot;D&quot;);</span><br><span class="line"></span><br><span class="line">firstOrDefault.subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line">// prints A</span><br></pre></td></tr></table></figure>
+
+<img width="640" height="286" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/first.s.png" alt>
+
+<h2 id="ignoreElement-操作符"><a href="#ignoreElement-操作符" class="headerlink" title="ignoreElement 操作符"></a>ignoreElement 操作符</h2><p>忽略被观察者发射序列携带的数据，返回值为 <code>Completable&lt;T&gt;</code> ，只调用 onComplete 方法</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Long&gt; source = Observable.intervalRange(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, TimeUnit.SECONDS);</span><br><span class="line">Completable completable = source.ignoreElements();</span><br><span class="line"></span><br><span class="line">completable.doOnComplete(() -&gt; System.out.println(<span class="hljs-string">"Done!"</span>))</span><br><span class="line">        .blockingAwait();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints (after 5 seconds):</span></span><br><span class="line"><span class="hljs-comment">// Done!</span></span><br></pre></td></tr></table></figure>
+
+ <img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/ignoreElements.2.png" alt>
+
+<h2 id="last-操作符"><a href="#last-操作符" class="headerlink" title="last 操作符"></a>last 操作符</h2><p>去发射序列最后一个发射源，last 方法参数为默认值</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; source = Observable.just(<span class="hljs-string">"A"</span>, <span class="hljs-string">"B"</span>, <span class="hljs-string">"C"</span>);</span><br><span class="line">Single&lt;String&gt; lastOrDefault = source.last(<span class="hljs-string">"D"</span>);</span><br><span class="line"></span><br><span class="line">lastOrDefault.subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints C</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/last.2.png" alt>
+
+<h2 id="sample-操作符"><a href="#sample-操作符" class="headerlink" title="sample 操作符"></a>sample 操作符</h2><p>从指定的时间周期中取最后一个发射源。与 debounce 操作符的区别是，sample 操作符的时间周期是独立的。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// Diagram:</span></span><br><span class="line"><span class="hljs-comment">// -A----B-C-------D-----E-|--&gt;</span></span><br><span class="line"><span class="hljs-comment">// -0s-----c--1s---d----2s-|--&gt;</span></span><br><span class="line"><span class="hljs-comment">// -----------C---------D--|--&gt;</span></span><br><span class="line"></span><br><span class="line">Observable&lt;String&gt; source = Observable.create(emitter -&gt; &#123;</span><br><span class="line">    emitter.onNext(<span class="hljs-string">"A"</span>);</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="hljs-number">500</span>);</span><br><span class="line">    emitter.onNext(<span class="hljs-string">"B"</span>);</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="hljs-number">200</span>);</span><br><span class="line">    emitter.onNext(<span class="hljs-string">"C"</span>);</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="hljs-number">800</span>);</span><br><span class="line">    emitter.onNext(<span class="hljs-string">"D"</span>);</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="hljs-number">600</span>);</span><br><span class="line">    emitter.onNext(<span class="hljs-string">"E"</span>);</span><br><span class="line">    emitter.onComplete();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">source.subscribeOn(Schedulers.io())</span><br><span class="line">        .sample(<span class="hljs-number">1</span>, TimeUnit.SECONDS)</span><br><span class="line">        .blockingSubscribe(</span><br><span class="line">                item -&gt; System.out.println(<span class="hljs-string">"onNext: "</span> + item),</span><br><span class="line">                Throwable::printStackTrace,</span><br><span class="line">                () -&gt; System.out.println(<span class="hljs-string">"onComplete"</span>));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// onNext: C</span></span><br><span class="line"><span class="hljs-comment">// onNext: D</span></span><br><span class="line"><span class="hljs-comment">// onComplete</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/sample.png" alt>
+
+<h2 id="skip-操作符"><a href="#skip-操作符" class="headerlink" title="skip 操作符"></a>skip 操作符</h2><p>指定从起始位置跳过 n 个发射源后继续发射</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; source = Observable.just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>);</span><br><span class="line"></span><br><span class="line">source.skip(<span class="hljs-number">4</span>)</span><br><span class="line">    .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// 5</span></span><br><span class="line"><span class="hljs-comment">// 6</span></span><br><span class="line"><span class="hljs-comment">// 7</span></span><br><span class="line"><span class="hljs-comment">// 8</span></span><br><span class="line"><span class="hljs-comment">// 9</span></span><br><span class="line"><span class="hljs-comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/skip.png" alt>
+
+<h2 id="skipLast-操作符"><a href="#skipLast-操作符" class="headerlink" title="skipLast 操作符"></a>skipLast 操作符</h2><p>指定跳过终点位置的 n 个发射源</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; source = Observable.just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>);</span><br><span class="line"></span><br><span class="line">source.skipLast(<span class="hljs-number">4</span>)</span><br><span class="line">    .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// 1</span></span><br><span class="line"><span class="hljs-comment">// 2</span></span><br><span class="line"><span class="hljs-comment">// 3</span></span><br><span class="line"><span class="hljs-comment">// 4</span></span><br><span class="line"><span class="hljs-comment">// 5</span></span><br><span class="line"><span class="hljs-comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/skipLast.png" alt>
+
+<h2 id="take-操作符"><a href="#take-操作符" class="headerlink" title="take 操作符"></a>take 操作符</h2><p>和 skip 操作符相反操作，指定保留从起始位置发射的 n 个发射源</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; source = Observable.just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>);</span><br><span class="line"></span><br><span class="line">source.take(<span class="hljs-number">4</span>)</span><br><span class="line">    .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// 1</span></span><br><span class="line"><span class="hljs-comment">// 2</span></span><br><span class="line"><span class="hljs-comment">// 3</span></span><br><span class="line"><span class="hljs-comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/take.png" alt>
+
+<h2 id="takeLast-操作符"><a href="#takeLast-操作符" class="headerlink" title="takeLast 操作符"></a>takeLast 操作符</h2><p>和 skipLast操作符相反，保留从终点位置发射的 n 个发射源</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; source = Observable.just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>);</span><br><span class="line"></span><br><span class="line">source.takeLast(<span class="hljs-number">4</span>)</span><br><span class="line">    .subscribe(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// 7</span></span><br><span class="line"><span class="hljs-comment">// 8</span></span><br><span class="line"><span class="hljs-comment">// 9</span></span><br><span class="line"><span class="hljs-comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<img width="640" height="310" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/takeLast.n.png" alt>
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Rxjava操作符/">Rxjava操作符</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/21/第4篇 Combining Observables/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Rxjava操作符：第4篇 Combining Observables</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/19/第2篇 Transforming Observable/">
+                <span class="level-item">Rxjava操作符：第2篇 Transforming Observable</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+
+    
+        
+<div class="card widget" id="toc" style="max-height: 400px;overflow: auto;">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#debounce-操作符">
+        <span class="has-mr-6">1</span>
+        <span>debounce 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#distinct-操作符">
+        <span class="has-mr-6">2</span>
+        <span>distinct  操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#elementAt-操作符">
+        <span class="has-mr-6">3</span>
+        <span>elementAt 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#filter-操作符">
+        <span class="has-mr-6">4</span>
+        <span>filter 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#first-操作符">
+        <span class="has-mr-6">5</span>
+        <span>first 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#ignoreElement-操作符">
+        <span class="has-mr-6">6</span>
+        <span>ignoreElement 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#last-操作符">
+        <span class="has-mr-6">7</span>
+        <span>last 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#sample-操作符">
+        <span class="has-mr-6">8</span>
+        <span>sample 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#skip-操作符">
+        <span class="has-mr-6">9</span>
+        <span>skip 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#skipLast-操作符">
+        <span class="has-mr-6">10</span>
+        <span>skipLast 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#take-操作符">
+        <span class="has-mr-6">11</span>
+        <span>take 操作符</span>
+        </a></li><li>
+        <a class="is-flex" href="#takeLast-操作符">
+        <span class="has-mr-6">12</span>
+        <span>takeLast 操作符</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/06/21/第4篇 Combining Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.JanesCarousel_EN-CN1373704625_800x480.jpg" alt="Rxjava操作符：第4篇 Combining Observables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T07:30:48.000Z">2019-06-21</time></div>
+                    <a href="/2019/06/21/第4篇 Combining Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第4篇 Combining Observables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/20/第3篇 Flitering Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.Skywalk_EN-CN9319095731_400x240.jpg" alt="Rxjava操作符：第3篇 Flitering Observable">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-20T07:30:48.000Z">2019-06-20</time></div>
+                    <a href="/2019/06/20/第3篇 Flitering Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第3篇 Flitering Observable</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/19/第2篇 Transforming Observable/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MoonMuseum_EN-CN7135152702_400x240.jpg" alt="Rxjava操作符：第2篇 Transforming Observable">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T07:30:48.000Z">2019-06-19</time></div>
+                    <a href="/2019/06/19/第2篇 Transforming Observable/" class="has-link-black-ter is-size-6">Rxjava操作符：第2篇 Transforming Observable</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/18/第1篇 Creating Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MeerkatMob_EN-CN1201896184_800x480.jpg" alt="Rxjava操作符：第1篇 Creating Observables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T07:30:48.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/第1篇 Creating Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第1篇 Creating Observables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/16/AndroidIPC机制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OSA.8d522f53eadf1fa49ac27e826085fe0d&amp;w=372&amp;h=176&amp;c=7&amp;rs=2&amp;qlt=80&amp;cdv=1&amp;pid=PopNow" alt="Android中的IPC之Binder机制">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-16T10:11:48.000Z">2019-06-16</time></div>
+                    <a href="/2019/06/16/AndroidIPC机制/" class="has-link-black-ter is-size-6">Android中的IPC之Binder机制</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发艺术探索笔记/">Android开发艺术探索笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Android开发笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发艺术探索笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Rxjava笔记/">
+            <span class="level-start">
+                <span class="level-item">Rxjava笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+        <div class="column-right-shadow  ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开发艺术探索/">
+                        <span class="tag">Android开发艺术探索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Rxjava操作符/">
+                        <span class="tag">Rxjava操作符</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+            
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Rxjava操作符：第3篇 Flitering Observable" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 markzl&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
