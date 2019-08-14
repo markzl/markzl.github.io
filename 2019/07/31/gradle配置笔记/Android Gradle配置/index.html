@@ -2,24 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Hello World - markzl的博客</title>
+<title>Gradle 配置常见问题 - markzl的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+    <meta name="description" content="对于项目中出现重复依赖且版本冲突处理方式 详情查看文章链接  对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本）出现的 Rxjava 版本冲突最终处理如下：统一项目使用的 Rxjava 版本。">
+<meta name="keywords" content="gradle">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/06/14/hello-world/index.html">
+<meta property="og:title" content="Gradle 配置常见问题">
+<meta property="og:url" content="http://yoursite.com/2019/07/31/gradle配置笔记/Android Gradle配置/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="对于项目中出现重复依赖且版本冲突处理方式 详情查看文章链接  对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本）出现的 Rxjava 版本冲突最终处理如下：统一项目使用的 Rxjava 版本。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-19T09:30:04.399Z">
+<meta property="og:image" content="https://cn.bing.com/th?id=OHR.TreeTower_EN-CN3424575110_800x480.jpg">
+<meta property="og:updated_time" content="2019-07-31T12:14:38.464Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:title" content="Gradle 配置常见问题">
+<meta name="twitter:description" content="对于项目中出现重复依赖且版本冲突处理方式 详情查看文章链接  对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本）出现的 Rxjava 版本冲突最终处理如下：统一项目使用的 Rxjava 版本。">
+<meta name="twitter:image" content="https://cn.bing.com/th?id=OHR.TreeTower_EN-CN3424575110_800x480.jpg">
 
 
 
@@ -99,7 +100,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Hello World" height="28">
+                <img src="/images/logo.svg" alt="Gradle 配置常见问题" height="28">
             
             </a>
         </div>
@@ -133,6 +134,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -148,17 +153,27 @@
             <div class="columns">
                 <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
     
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.TreeTower_EN-CN3424575110_800x480.jpg" alt="Gradle 配置常见问题">
+        </span>
+    </div>
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-14T06:16:36.813Z">2019-06-14</time>
+                <time class="level-item has-text-grey" datetime="2019-07-31T07:30:48.000Z">2019-07-31</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/gradle配置笔记/">gradle配置笔记</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 122 个字)
+                    2 分钟 读完 (大约 291 个字)
                 </span>
                 
                 
@@ -167,25 +182,41 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Hello World
+                Gradle 配置常见问题
             
         </h1>
         <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+            <h2 id="对于项目中出现重复依赖且版本冲突处理方式"><a href="#对于项目中出现重复依赖且版本冲突处理方式" class="headerlink" title="对于项目中出现重复依赖且版本冲突处理方式"></a>对于项目中出现重复依赖且版本冲突处理方式</h2><blockquote>
+<p>详情查看文章<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html" target="_blank" rel="noopener">链接</a></p>
+</blockquote>
+<p>对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本）出现的 Rxjava 版本冲突最终处理如下：统一项目使用的 Rxjava 版本。</p>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>全局替换重复依赖</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy.dependencySubstitution &#123;</span><br><span class="line">        <span class="hljs-comment">// Substitute one module dependency for another</span></span><br><span class="line">        <span class="hljs-function">substitute <span class="hljs-title">module</span><span class="hljs-params">(<span class="hljs-string">"io.reactivex.rxjava2:rxjava:2.2.0"</span>)</span> with <span class="hljs-title">module</span><span class="hljs-params">(<span class="hljs-string">"io.reactivex.rxjava3:rxjava:3.0.0-RC0"</span>)</span></span></span><br><span class="line"><span class="hljs-function">    &#125;</span></span><br><span class="line"><span class="hljs-function">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全局排除重复依赖</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">configurations &#123;</span><br><span class="line">    compile.exclude <span class="hljs-string">group:</span> <span class="hljs-string">'io.reactivex.rxjava2'</span>, <span class="hljs-string">module:</span> <span class="hljs-string">'rxjava'</span></span><br><span class="line">    all &#123;</span><br><span class="line">        resolutionStrategy &#123;</span><br><span class="line">            eachDependency &#123; details -&gt;</span><br><span class="line">                <span class="hljs-keyword">if</span> (details.requested.group == <span class="hljs-string">'io.reactivex.rxjava3'</span> &amp;&amp;</span><br><span class="line">                        details.requested.name == <span class="hljs-string">'rxjava'</span>) &#123;</span><br><span class="line">                    details.useVersion <span class="hljs-string">'3.0.0-RC0'</span></span><br><span class="line">                    details.because <span class="hljs-string">'Unified the version of RxJava3.'</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    <span class="hljs-comment">// ...</span></span><br><span class="line">    implementation rootProject.ext.dependencies[<span class="hljs-string">'rxjava3'</span>]</span><br><span class="line">    implementation rootProject.ext.dependencies[<span class="hljs-string">'rxandroid'</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定重复依赖项单独配置排除（不推荐）：</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">implementation (<span class="hljs-string">'io.reactivex.rxjava2:rxandroid:2.1.0'</span>)  &#123;</span><br><span class="line">  exclude <span class="hljs-string">group:</span> <span class="hljs-string">'io.reactivex.rxjava2'</span>, <span class="hljs-string">module:</span> <span class="hljs-string">'rxjava'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>替换本地与远程依赖（可以在开发 Library 时使用，方便切换本地库和在线库）</strong>：</p>
+  <figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy.dependencySubstitution &#123;</span><br><span class="line">        substitute module(<span class="hljs-string">"org.utils:api"</span>) because <span class="hljs-string">"we work with the unreleased development version"</span> with project(<span class="hljs-string">":api"</span>)</span><br><span class="line">        substitute module(<span class="hljs-string">"org.utils:util:2.5"</span>) with project(<span class="hljs-string">":util"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+<h2 id="打包统一输出配置"><a href="#打包统一输出配置" class="headerlink" title="打包统一输出配置"></a>打包统一输出配置</h2>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/gradle/">gradle</a>
+                </div>
+            </div>
         </div>
         
         
@@ -229,17 +260,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/16/Android开发笔记/AndroidIPC机制/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Android中的IPC之Binder机制</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/05/Android开发笔记/Android设置应用界面全屏/">
-                <span class="level-item">Android设置全屏及沉浸式布局</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/">
+                <span class="level-item">Rxjava操作符：第4篇 Combining Observables</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -260,6 +284,25 @@
 
     
         
+<div class="card widget" id="toc" style="max-height: 400px;overflow: auto;">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#对于项目中出现重复依赖且版本冲突处理方式">
+        <span class="has-mr-6">1</span>
+        <span>对于项目中出现重复依赖且版本冲突处理方式</span>
+        </a></li><li>
+        <a class="is-flex" href="#打包统一输出配置">
+        <span class="has-mr-6">2</span>
+        <span>打包统一输出配置</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 <div class="card widget">
@@ -580,7 +623,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Hello World" height="28">
+                    <img src="/images/logo.svg" alt="Gradle 配置常见问题" height="28">
                 
                 </a>
                 <p class="is-size-7">

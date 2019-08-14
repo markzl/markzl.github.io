@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Android okhttp使用详解 - markzl的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="1. Get 请求1234567Request request = new Request.Builder()  .url(url)  .build();OkHttpClient client = new OkHttpClient();try (Response response = client.newCall(request).execute()) &amp;#123;  return respons">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android okhttp使用详解">
+<meta property="og:url" content="http://yoursite.com/2018/06/22/Android开发笔记/Android okhttp使用详解/index.html">
+<meta property="og:site_name" content="markzl的博客">
+<meta property="og:description" content="1. Get 请求1234567Request request = new Request.Builder()  .url(url)  .build();OkHttpClient client = new OkHttpClient();try (Response response = client.newCall(request).execute()) &amp;#123;  return respons">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-07-31T12:29:04.256Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android okhttp使用详解">
+<meta name="twitter:description" content="1. Get 请求1234567Request request = new Request.Builder()  .url(url)  .build();OkHttpClient client = new OkHttpClient();try (Response response = client.newCall(request).execute()) &amp;#123;  return respons">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+        <script type="text/javascript" src="https://js.users.51.la/20211709.js"></script>
+    
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Android okhttp使用详解" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">首页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/categories">分类</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/photos">相册</a>
+                
+                <a class="navbar-item" href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/markzl">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-06-22T01:40:20.000Z">2018-06-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 分钟 读完 (大约 2036 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Android okhttp使用详解
+            
+        </h1>
+        <div class="content">
+            <h2 id="1-Get-请求"><a href="#1-Get-请求" class="headerlink" title="1. Get 请求"></a>1. Get 请求</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(url)</span><br><span class="line">  .build();</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> response.body().string();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过Request构建请求体，然后由 client 执行。这里 Request 默认请求类型是Get。<strong>注意这个是SynchronousGet是同步执行的</strong>。在Android UI线程直接运行会报错提示：==android.os.NetworkOnMainThreadException==。</p>
+<a id="more"></a>
+
+<h3 id="1-1-异步Get请求-AsynchronousGet"><a href="#1-1-异步Get请求-AsynchronousGet" class="headerlink" title="1.1 异步Get请求 AsynchronousGet"></a>1.1 异步Get请求 AsynchronousGet</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"http://publicobject.com/helloworld.txt"</span>)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">client.newCall(request).enqueue(<span class="hljs-keyword">new</span> Callback() &#123;</span><br><span class="line">  <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onFailure</span><span class="hljs-params">(Call call, IOException e)</span> </span>&#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResponse</span><span class="hljs-params">(Call call, Response response)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">try</span> (ResponseBody responseBody = response.body()) &#123;</span><br><span class="line">      System.out.println(responseBody.string());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>异步请求会在Android 中开启一个线程队列，在子线程中运行，不影响Android UI 线程。注意的是Callback类回调仍然执行在子线程中，需要通过handler处理UI线程相关操作。</p>
+<h2 id="2、Post-请求"><a href="#2、Post-请求" class="headerlink" title="2、Post 请求"></a>2、Post 请求</h2><p><strong>注意下述代码中演示的同步请求</strong>，通过<code>client.newCall(request).enqueue(Callback)</code>可以进行异步请求</p>
+<h3 id="2-1-Post-提交-json-请求体"><a href="#2-1-Post-提交-json-请求体" class="headerlink" title="2.1 Post 提交 json 请求体"></a>2.1 Post 提交 json 请求体</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">MediaType JSON = MediaType.get(<span class="hljs-string">"application/json; charset=utf-8"</span>);</span><br><span class="line">RequestBody body = RequestBody.create(JSON, json);</span><br><span class="line"></span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(url)</span><br><span class="line">  .post(body)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> response.body().string();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据string类型的json字符串请求请求体，通过post(ReqeustBody)方法请求数据。</p>
+<h3 id="2-2-Post-提交-String-请求体"><a href="#2-2-Post-提交-String-请求体" class="headerlink" title="2.2 Post 提交 String 请求体"></a>2.2 Post 提交 String 请求体</h3><p>注意创建的MediaType类型，MediaType类型根据自己需求创建。这里定义为markdown类型：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MediaType MEDIA_TYPE_MARKDOWN = MediaType.get(<span class="hljs-string">"text/x-markdown; charset=utf-8"</span>);</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"https://api.github.com/markdown/raw"</span>)</span><br><span class="line">  .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, postBody))</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-Post-提交Form表单（FormBody）"><a href="#2-3-Post-提交Form表单（FormBody）" class="headerlink" title="2.3 Post 提交Form表单（FormBody）"></a>2.3 Post 提交Form表单（FormBody）</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">RequestBody formBody = <span class="hljs-keyword">new</span> FormBody.Builder()</span><br><span class="line">  .add(<span class="hljs-string">"md5"</span>, <span class="hljs-string">"12232"</span>)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"http://221.130.29.94:8090/bookQr/test/isUpload"</span>)</span><br><span class="line">  .post(formBody)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-Post-提交File文件"><a href="#2-4-Post-提交File文件" class="headerlink" title="2.4 Post 提交File文件"></a>2.4 Post 提交File文件</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MediaType MEDIA_TYPE_MARKDOWN= MediaType.get(<span class="hljs-string">"text/x-markdown; charset=utf-8"</span>);</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line">File file = <span class="hljs-keyword">new</span> File(<span class="hljs-string">"README.md"</span>);</span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"https://api.github.com/markdown/raw"</span>)</span><br><span class="line">  .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-Post-提交多种类型文件（MultiPartBody）"><a href="#2-5-Post-提交多种类型文件（MultiPartBody）" class="headerlink" title="2.5 Post 提交多种类型文件（MultiPartBody）"></a>2.5 Post 提交多种类型文件（MultiPartBody）</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">MediaType MEDIA_TYPE_PNG = MediaType.get(<span class="hljs-string">"image/png"</span>);</span><br><span class="line">RequestBody requestBody = <span class="hljs-keyword">new</span> MultipartBody.Builder()</span><br><span class="line">  .setType(MultipartBody.FORM)</span><br><span class="line">  .addFormDataPart(<span class="hljs-string">"title"</span>, <span class="hljs-string">"Square Logo"</span>)</span><br><span class="line">  .addFormDataPart(<span class="hljs-string">"image"</span>, <span class="hljs-string">"logo-square.png"</span>,</span><br><span class="line">                   RequestBody.create(MEDIA_TYPE_PNG, <span class="hljs-keyword">new</span> File(filePath)))</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"https://api.imgur.com/3/image"</span>)</span><br><span class="line">  .post(requestBody)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>##3、访问请求头内容（Acessing Header）</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"https://api.github.com/repos/square/okhttp/issues"</span>)</span><br><span class="line">  .header(<span class="hljs-string">"User-Agent"</span>, <span class="hljs-string">"OkHttp Headers.java"</span>)</span><br><span class="line">  .addHeader(<span class="hljs-string">"Accept"</span>, <span class="hljs-string">"application/json; q=0.5"</span>)</span><br><span class="line">  .addHeader(<span class="hljs-string">"Accept"</span>, <span class="hljs-string">"application/vnd.github.v3+json"</span>)</span><br><span class="line">  .build();</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">  System.out.println(<span class="hljs-string">"Server: "</span> + response.header(<span class="hljs-string">"Server"</span>));</span><br><span class="line">  System.out.println(<span class="hljs-string">"Date: "</span> + response.header(<span class="hljs-string">"Date"</span>));</span><br><span class="line">  System.out.println(<span class="hljs-string">"Vary: "</span> + response.headers(<span class="hljs-string">"Vary"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Request.Builder#header()和Request.Builder#addHeader()区别，header()方法添加的key只有一个，多次添加改变value值，addHeader() 会为当前key再添加一个值。对于Response#header()和Response#headers()区别：header()方法会打印对于key出现的最后一次值，而headers()会将对应key的所有值列出来。</p>
+<h2 id="4、-okhttp拦截器-Interceptor"><a href="#4、-okhttp拦截器-Interceptor" class="headerlink" title="4、 okhttp拦截器 - Interceptor"></a>4、 okhttp拦截器 - Interceptor</h2><p>##4.1 添加应用拦截器</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">            .addInterceptor(<span class="hljs-keyword">new</span> LoggingInterceptor())</span><br><span class="line">            .build();</span><br></pre></td></tr></table></figure>
+
+<p>如何实现自定义拦截器，我们需要实现系统提供的 Interceptor 接口：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoggingInterceptor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Interceptor</span> </span>&#123;</span><br><span class="line">  <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">intercept</span><span class="hljs-params">(Chain chain)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">    Request request = chain.request();</span><br><span class="line">    logger.info(String.format(<span class="hljs-string">"Sending request %s on %s%n%s"</span>,</span><br><span class="line">                              request.url(), chain.connection(), request.headers()));</span><br><span class="line">    Response response = chain.proceed(request);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">long</span> t2 = System.nanoTime();</span><br><span class="line">    logger.info(String.format(<span class="hljs-string">"Received response for %s in %.1fms%n%s"</span>,</span><br><span class="line">                              request.url(), (t2 - t1) / <span class="hljs-number">1e6</span>d, response.headers()));</span><br><span class="line">    <span class="hljs-keyword">return</span> response;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们发起网络请求，打印日志如下,request#headers()值为空：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Sending request http:<span class="hljs-comment">//www.publicobject.com/helloworld.txt on null</span></span><br><span class="line">User-Agent: OkHttp Sample</span><br><span class="line"></span><br><span class="line">Received response <span class="hljs-keyword">for</span> http:<span class="hljs-comment">//www.publicobject.com/helloworld.txt in 2957.8ms</span></span><br><span class="line">Server: nginx/<span class="hljs-number">1.10</span>.0 (Ubuntu)</span><br><span class="line">Date: Mon, <span class="hljs-number">01</span> Jul <span class="hljs-number">2019</span> <span class="hljs-number">02</span>:<span class="hljs-number">52</span>:<span class="hljs-number">58</span> GMT</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: <span class="hljs-number">1759</span></span><br><span class="line">Last-Modified: Tue, <span class="hljs-number">27</span> May <span class="hljs-number">2014</span> <span class="hljs-number">02</span>:<span class="hljs-number">35</span>:<span class="hljs-number">47</span> GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ETag: <span class="hljs-string">"5383fa03-6df"</span></span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
+
+<p>##4.2 添加网络拦截器</p>
+<p>添加网络拦截器如下所示：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">  .addNetworkInterceptor(<span class="hljs-keyword">new</span> LoggingInterceptor())</span><br><span class="line">  .build();</span><br></pre></td></tr></table></figure>
+
+<p>打印日志信息：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Sending request http:<span class="hljs-comment">//www.publicobject.com/helloworld.txt on Connection&#123;www.publicobject.com:80, proxy=DIRECT hostAddress=www.publicobject.com/54.187.32.157:80 cipherSuite=none protocol=http/1.1&#125;</span></span><br><span class="line">User-Agent: OkHttp Sample</span><br><span class="line">Host: www.publicobject.com</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Accept-Encoding: gzip</span><br><span class="line"></span><br><span class="line">Received response <span class="hljs-keyword">for</span> http:<span class="hljs-comment">//www.publicobject.com/helloworld.txt in 271.5ms</span></span><br><span class="line">Server: nginx/<span class="hljs-number">1.10</span>.0 (Ubuntu)</span><br><span class="line">Date: Mon, <span class="hljs-number">01</span> Jul <span class="hljs-number">2019</span> <span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">12</span> GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: <span class="hljs-number">194</span></span><br><span class="line">Connection: keep-alive</span><br><span class="line">Location: https:<span class="hljs-comment">//publicobject.com/helloworld.txt</span></span><br><span class="line"></span><br><span class="line">Sending request https:<span class="hljs-comment">//publicobject.com/helloworld.txt on Connection&#123;publicobject.com:443, proxy=DIRECT hostAddress=publicobject.com/54.187.32.157:443 cipherSuite=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 protocol=http/1.1&#125;</span></span><br><span class="line">User-Agent: OkHttp Sample</span><br><span class="line">Host: publicobject.com</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Accept-Encoding: gzip</span><br><span class="line"></span><br><span class="line">Received response <span class="hljs-keyword">for</span> https:<span class="hljs-comment">//publicobject.com/helloworld.txt in 176.9ms</span></span><br><span class="line">Server: nginx/<span class="hljs-number">1.10</span>.0 (Ubuntu)</span><br><span class="line">Date: Mon, <span class="hljs-number">01</span> Jul <span class="hljs-number">2019</span> <span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">13</span> GMT</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: <span class="hljs-number">1759</span></span><br><span class="line">Last-Modified: Tue, <span class="hljs-number">27</span> May <span class="hljs-number">2014</span> <span class="hljs-number">02</span>:<span class="hljs-number">35</span>:<span class="hljs-number">47</span> GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ETag: <span class="hljs-string">"5383fa03-6df"</span></span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
+
+<p>网络拦截器打印了两次日志信息，第一个地址是<code>http://www.publicobject.com/helloworld.txt</code>,第二个地址是<code>https://publicobject.com/helloworld.txt</code>。</p>
+<p><strong>Application interceptors（应用拦截器）</strong></p>
+<ul>
+<li>不必担心中间的responses，例如重定向和重连。</li>
+<li>总是调用一次，即使是从缓存HTTP响应。</li>
+<li>观察应用程序的原始意图。不关心OkHttp的注入headers，例如If-None-Match</li>
+<li>允许短路和不执行Chain.proceed().</li>
+<li>允许重连，多次调用proceed()。</li>
+</ul>
+<p><strong>Network Interceptors （网络拦截器）</strong></p>
+<ul>
+<li>能够操作中间反应，例如重定向和重连。</li>
+<li>不能被缓存响应，例如短路网络调用（short-circuit the network）。</li>
+<li>观察数据，正如它将在网络上传输。</li>
+<li>访问携带request的Connection</li>
+</ul>
+<p>注意在进行okhttp请求获取下载进度，根据Callback返回</p>
+<h2 id="5、缓存响应数据（Reponse-Caching）"><a href="#5、缓存响应数据（Reponse-Caching）" class="headerlink" title="5、缓存响应数据（Reponse Caching）"></a>5、缓存响应数据（Reponse Caching）</h2><blockquote>
+<p>To cache responses, you’ll need a cache directory that you can read and write to, and a limit on the cache’s size. The cache directory should be private, and untrusted applications should not be able to read its contents!</p>
+<p>我们需要限制缓存的大小，并且缓存数据的目录不可以被其他应用读取。</p>
+<p>Response caching uses HTTP headers for all configuration. You can add request headers like <code>Cache-Control: max-stale=3600</code> and OkHttp’s cache will honor them. Your webserver configures how long responses are cached with its own response headers, like <code>Cache-Control: max-age=9600</code>. There are cache headers to force a cached response, force a network response, or force the network response to be validated with a conditional GET.</p>
+<p>我们可以手动为request请求添加请求头”Cache-Control: max-stale=3600”，设置缓存时间。或者由服务器决定我们的缓存时间。<code>max-stale</code>是发起请求方设置的缓存时间，只对请求端有效。<code>max-age</code>为设置相应数据的缓存有效期时间，在没有超过<code>max-age</code>的情况下，会自动从缓存中读数据；在超出<code>max-age</code>的情况会向服务端发送新的请求，如果<strong>请求失败会返回缓存的数据</strong>。如果<code>max-age</code>有效期过了，请求端设置了<code>max-stale</code>，仍然可以从缓存中读取，不需要去服务器请求新的内容。因此<code>max-age</code>和<code>max-stale</code>在请求中同时使用的情况下，缓存的时间为<code>max-age</code>和<code>max-stale</code>的和，超出<code>max-age</code>值会提示<code>Warning: 110 HttpURLConnection &quot;Response is stale</code>。<a href="https://www.cnblogs.com/polo2044/p/9217043.html" target="_blank" rel="noopener">max-age和max-stale详解</a></p>
+</blockquote>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> cacheSize = <span class="hljs-number">10</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>; <span class="hljs-comment">// 10 MiB</span></span><br><span class="line">Cache cache = <span class="hljs-keyword">new</span> Cache(cacheDirectory, cacheSize);</span><br><span class="line"></span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">  .cache(cache)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"http://publicobject.com/helloworld.txt"</span>)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">String response1Body;</span><br><span class="line"><span class="hljs-keyword">try</span> (Response response1 = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response1.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response1);</span><br><span class="line"></span><br><span class="line">  response1Body = response1.body().string();</span><br><span class="line">  System.out.println(<span class="hljs-string">"Response 1 response:          "</span> + response1);</span><br><span class="line">  System.out.println(<span class="hljs-string">"Response 1 cache response:    "</span> + response1.cacheResponse());</span><br><span class="line">  System.out.println(<span class="hljs-string">"Response 1 network response:  "</span> + response1.networkResponse());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">String response2Body;</span><br><span class="line"><span class="hljs-keyword">try</span> (Response response2 = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response2.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response2);</span><br><span class="line"></span><br><span class="line">  response2Body = response2.body().string();</span><br><span class="line">  System.out.println(<span class="hljs-string">"Response 2 response:          "</span> + response2);</span><br><span class="line">  System.out.println(<span class="hljs-string">"Response 2 cache response:    "</span> + response2.cacheResponse());</span><br><span class="line">  System.out.println(<span class="hljs-string">"Response 2 network response:  "</span> + response2.networkResponse());</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="hljs-string">"Response 2 equals Response 1? "</span> + response1Body.equals(response2Body));</span><br></pre></td></tr></table></figure>
+
+<p>response2的数据将从缓存中获取，日志信息如下：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Response <span class="hljs-number">1</span> response:          Response&#123;protocol=http/<span class="hljs-number">1.1</span>, code=<span class="hljs-number">200</span>, message=OK, url=https:<span class="hljs-comment">//publicobject.com/helloworld.txt&#125;</span></span><br><span class="line">Response <span class="hljs-number">1</span> cache response:    Response&#123;protocol=http/<span class="hljs-number">1.1</span>, code=<span class="hljs-number">200</span>, message=OK, url=https:<span class="hljs-comment">//publicobject.com/helloworld.txt&#125;</span></span><br><span class="line">Response <span class="hljs-number">1</span> network response:  Response&#123;protocol=http/<span class="hljs-number">1.1</span>, code=<span class="hljs-number">304</span>, message=Not Modified, url=https:<span class="hljs-comment">//publicobject.com/helloworld.txt&#125;</span></span><br><span class="line">Response <span class="hljs-number">2</span> response:          Response&#123;protocol=http/<span class="hljs-number">1.1</span>, code=<span class="hljs-number">200</span>, message=OK, url=https:<span class="hljs-comment">//publicobject.com/helloworld.txt&#125;</span></span><br><span class="line">Response <span class="hljs-number">2</span> cache response:    Response&#123;protocol=http/<span class="hljs-number">1.1</span>, code=<span class="hljs-number">200</span>, message=OK, url=https:<span class="hljs-comment">//publicobject.com/helloworld.txt&#125;</span></span><br><span class="line">Response <span class="hljs-number">2</span> network response:  <span class="hljs-keyword">null</span></span><br><span class="line">Response <span class="hljs-number">2</span> equals Response <span class="hljs-number">1</span>? <span class="hljs-keyword">true</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Android/">Android</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/06/Android开发笔记/Android使用RenderScript处理图片/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Android使用RenderScript处理图片</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/04/18/Android开发笔记/Android预览pdf文档/">
+                <span class="level-item">Android预览pdf文档</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+
+    
+        
+<div class="card widget" id="toc" style="max-height: 400px;overflow: auto;">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-Get-请求">
+        <span class="has-mr-6">1</span>
+        <span>1. Get 请求</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-异步Get请求-AsynchronousGet">
+        <span class="has-mr-6">1.1</span>
+        <span>1.1 异步Get请求 AsynchronousGet</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2、Post-请求">
+        <span class="has-mr-6">2</span>
+        <span>2、Post 请求</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-Post-提交-json-请求体">
+        <span class="has-mr-6">2.1</span>
+        <span>2.1 Post 提交 json 请求体</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-Post-提交-String-请求体">
+        <span class="has-mr-6">2.2</span>
+        <span>2.2 Post 提交 String 请求体</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-Post-提交Form表单（FormBody）">
+        <span class="has-mr-6">2.3</span>
+        <span>2.3 Post 提交Form表单（FormBody）</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-4-Post-提交File文件">
+        <span class="has-mr-6">2.4</span>
+        <span>2.4 Post 提交File文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-5-Post-提交多种类型文件（MultiPartBody）">
+        <span class="has-mr-6">2.5</span>
+        <span>2.5 Post 提交多种类型文件（MultiPartBody）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4、-okhttp拦截器-Interceptor">
+        <span class="has-mr-6">3</span>
+        <span>4、 okhttp拦截器 - Interceptor</span>
+        </a></li><li>
+        <a class="is-flex" href="#5、缓存响应数据（Reponse-Caching）">
+        <span class="has-mr-6">4</span>
+        <span>5、缓存响应数据（Reponse Caching）</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.TreeTower_EN-CN3424575110_800x480.jpg" alt="Gradle 配置常见问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T07:30:48.000Z">2019-07-31</time></div>
+                    <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="has-link-black-ter is-size-6">Gradle 配置常见问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/gradle配置笔记/">gradle配置笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.JanesCarousel_EN-CN1373704625_800x480.jpg" alt="Rxjava操作符：第4篇 Combining Observables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T07:30:48.000Z">2019-06-21</time></div>
+                    <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第4篇 Combining Observables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.Skywalk_EN-CN9319095731_400x240.jpg" alt="Rxjava操作符：第3篇 Flitering Observable">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-20T07:30:48.000Z">2019-06-20</time></div>
+                    <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第3篇 Flitering Observable</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MoonMuseum_EN-CN7135152702_400x240.jpg" alt="Rxjava操作符：第2篇 Transforming Observable">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T07:30:48.000Z">2019-06-19</time></div>
+                    <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="has-link-black-ter is-size-6">Rxjava操作符：第2篇 Transforming Observable</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/18/Rxjava笔记/第1篇 Creating Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MeerkatMob_EN-CN1201896184_800x480.jpg" alt="Rxjava操作符：第1篇 Creating Observables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T07:30:48.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/Rxjava笔记/第1篇 Creating Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第1篇 Creating Observables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Android开发笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发艺术探索笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Rxjava笔记/">
+            <span class="level-start">
+                <span class="level-item">Rxjava笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/gradle配置笔记/">
+            <span class="level-start">
+                <span class="level-item">gradle配置笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+        <div class="column-right-shadow  ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开发艺术探索/">
+                        <span class="tag">Android开发艺术探索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Rxjava操作符/">
+                        <span class="tag">Rxjava操作符</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gradle/">
+                        <span class="tag">gradle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+            
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Android okhttp使用详解" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 markzl&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

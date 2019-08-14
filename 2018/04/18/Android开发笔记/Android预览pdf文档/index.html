@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Android预览pdf文档 - markzl的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android预览pdf文档">
+<meta property="og:url" content="http://yoursite.com/2018/04/18/Android开发笔记/Android预览pdf文档/index.html">
+<meta property="og:site_name" content="markzl的博客">
+<meta property="og:description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-07-31T12:29:37.183Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android预览pdf文档">
+<meta name="twitter:description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+        <script type="text/javascript" src="https://js.users.51.la/20211709.js"></script>
+    
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Android预览pdf文档" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">首页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/categories">分类</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/photos">相册</a>
+                
+                <a class="navbar-item" href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/markzl">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-04-18T01:40:20.000Z">2018-04-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分钟 读完 (大约 1385 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Android预览pdf文档
+            
+        </h1>
+        <div class="content">
+            <p>谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：</p>
+<a id="more"></a>
+
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Creates a new instance.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;strong&gt;Note:&lt;/strong&gt; The provided file descriptor must be &lt;strong&gt;seekable&lt;/strong&gt;,</span></span><br><span class="line"><span class="hljs-comment"> * i.e. its data being randomly accessed, e.g. pointing to a file.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;strong&gt;Note:&lt;/strong&gt; This class takes ownership of the passed in file descriptor</span></span><br><span class="line"><span class="hljs-comment"> * and is responsible for closing it when the renderer is closed.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * If the file is from an untrusted source it is recommended to run the renderer in a separate,</span></span><br><span class="line"><span class="hljs-comment"> * isolated process with minimal permissions to limit the impact of security exploits.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> input Seekable file descriptor to read from.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> java.io.IOException If an error occurs while reading the file.</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> java.lang.SecurityException If the file requires a password or</span></span><br><span class="line"><span class="hljs-comment"> *         the security scheme is not supported.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PdfRenderer</span><span class="hljs-params">(@NonNull ParcelFileDescriptor input)</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">//略...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看构造方法中的参数是ParcelFileDescriptor的一个实例，那么ParcelFileDescriptor类是做什么的呢？ParcelFileDescriptor是Android 提供的一种数据结构，支持数据的写入和写出。我们通过ParcelFileDescriptor#open 建立文件和ParcelFileDescriptor的联系</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * Create a new ParcelFileDescriptor accessing a given file.</span></span><br><span class="line"><span class="hljs-comment">   *</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@param</span> file The file to be opened.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@param</span> mode The desired access mode, must be one of</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_READ_ONLY&#125;, &#123;<span class="hljs-doctag">@link</span> #MODE_WRITE_ONLY&#125;, or</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_READ_WRITE&#125;; may also be any combination of</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_CREATE&#125;, &#123;<span class="hljs-doctag">@link</span> #MODE_TRUNCATE&#125;,</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_WORLD_READABLE&#125;, and</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_WORLD_WRITEABLE&#125;.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@return</span> a new ParcelFileDescriptor pointing to the given file.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@throws</span> FileNotFoundException if the given file does not exist or can not</span></span><br><span class="line"><span class="hljs-comment">   *             be opened with the requested mode.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@see</span> #parseMode(String)</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ParcelFileDescriptor <span class="hljs-title">open</span><span class="hljs-params">(File file, <span class="hljs-keyword">int</span> mode)</span> <span class="hljs-keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">      <span class="hljs-keyword">final</span> FileDescriptor fd = openInternal(file, mode);</span><br><span class="line">      <span class="hljs-keyword">if</span> (fd == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ParcelFileDescriptor(fd);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>从该方法中可以看出<code>ParcelFileDescriptor#open</code>实际操作的是<code>FileDescriptor</code>，仔细阅读<code>FileDescriptor</code>的注释，<code>FileDescriptor</code>是文件操作符。<code>FileDescriptor</code>可以用来表示开放文件、开放套接字。以<code>FileDecriptor</code> 表示文件来说，当<code>FileDescroptor</code>表示某文件 时，我们可以通俗的将<code>FileDescriptor</code>看成是该文件。但是，我们不能直接通过<code>FileDescription</code>对该文件进行操作；若需要通过<code>FileDescriptor</code>对该文件进行操作，则需要新创建<code>FileDescriptor</code>对应的<code>FileOutputSteam</code>，再对文件进行操作。这里有对<code>FileDescription</code>的<a href="https://www.jb51.net/article/87476.htm" target="_blank" rel="noopener">详细描述</a>。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> ParcelFileDescriptor mFileDescriptor;</span><br><span class="line"> PdfRenderer mPdfRenderer;  </span><br><span class="line"><span class="hljs-comment">//根据文件对象创建</span></span><br><span class="line">mFileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);</span><br><span class="line"> <span class="hljs-comment">// This is the PdfRenderer we use to render the PDF.</span></span><br><span class="line"> <span class="hljs-keyword">if</span> (mFileDescriptor != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">   mPdfRenderer = <span class="hljs-keyword">new</span> PdfRenderer(mFileDescriptor);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>打开pdf指定页面和生成当前页面的Bitmap展示：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> PdfRenderer.Page mCurrentPage;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showPage</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (mPdfRenderer.getPageCount() &lt;= index) &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// Make sure to close the current page before opening another one.</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != mCurrentPage) &#123;</span><br><span class="line">        mCurrentPage.close();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// Use `openPage` to open a specific page in PDF.</span></span><br><span class="line">    mCurrentPage = mPdfRenderer.openPage(index);</span><br><span class="line">    <span class="hljs-comment">// Important: the destination bitmap must be ARGB (not RGB).</span></span><br><span class="line">    Bitmap bitmap = Bitmap.createBitmap(mCurrentPage.getWidth(), 			   mCurrentPage.getHeight(),Bitmap.Config.ARGB_8888);</span><br><span class="line">    <span class="hljs-comment">// Here, we render the page onto the Bitmap.</span></span><br><span class="line">    <span class="hljs-comment">// To render a portion of the page, use the second and third parameter. Pass nulls to get</span></span><br><span class="line">    <span class="hljs-comment">// the default result.</span></span><br><span class="line">    <span class="hljs-comment">// Pass either RENDER_MODE_FOR_DISPLAY or RENDER_MODE_FOR_PRINT for the last parameter.</span></span><br><span class="line">    mCurrentPage.render(bitmap, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);</span><br><span class="line">    <span class="hljs-comment">// We are ready to show the Bitmap to user.</span></span><br><span class="line">    mImageView.setImageBitmap(bitmap);</span><br><span class="line">    updateUi();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完整实例：</p>
+<p>页面R.layout.fragment_pdf_renderer_basic：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:tools</span>=<span class="hljs-string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">tools:context</span>=<span class="hljs-string">".PdfRendererBasicFragment"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">ImageView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/image"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"0dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@android:color/white"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:scaleType</span>=<span class="hljs-string">"fitCenter"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:contentDescription</span>=<span class="hljs-string">"@null"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">style</span>=<span class="hljs-string">"?android:attr/buttonBarStyle"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:measureWithLargestChild</span>=<span class="hljs-string">"true"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"horizontal"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/previous"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">style</span>=<span class="hljs-string">"?android:attr/buttonBarButtonStyle"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"0dp"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:text</span>=<span class="hljs-string">"@string/previous"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/next"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">style</span>=<span class="hljs-string">"?android:attr/buttonBarButtonStyle"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"0dp"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:text</span>=<span class="hljs-string">"@string/next"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>渲染pdf代码，pdf文档来源于asset目录下：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PdfRendererBasicFragment</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Fragment</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">View</span>.<span class="hljs-title">OnClickListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Key string for saving the state of current page index.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String STATE_CURRENT_PAGE_INDEX = <span class="hljs-string">"current_page_index"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * The filename of the PDF.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String FILENAME = <span class="hljs-string">"sample.pdf"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * File descriptor of the PDF.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> ParcelFileDescriptor mFileDescriptor;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * &#123;<span class="hljs-doctag">@link</span> android.graphics.pdf.PdfRenderer&#125; to render the PDF.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> PdfRenderer mPdfRenderer;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Page that is currently shown on the screen.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> PdfRenderer.Page mCurrentPage;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * &#123;<span class="hljs-doctag">@link</span> android.widget.ImageView&#125; that shows a PDF page as a &#123;<span class="hljs-doctag">@link</span> android.graphics.Bitmap&#125;</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> ImageView mImageView;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * &#123;<span class="hljs-doctag">@link</span> android.widget.Button&#125; to move to the previous page.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> Button mButtonPrevious;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * &#123;<span class="hljs-doctag">@link</span> android.widget.Button&#125; to move to the next page.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> Button mButtonNext;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * PDF page index</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mPageIndex;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PdfRendererBasicFragment</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> View <span class="hljs-title">onCreateView</span><span class="hljs-params">(LayoutInflater inflater, ViewGroup container,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                             Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> inflater.inflate(R.layout.fragment_pdf_renderer_basic, container, <span class="hljs-keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onViewCreated</span><span class="hljs-params">(View view, Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onViewCreated(view, savedInstanceState);</span><br><span class="line">        <span class="hljs-comment">// Retain view references.</span></span><br><span class="line">        mImageView = (ImageView) view.findViewById(R.id.image);</span><br><span class="line">        mButtonPrevious = (Button) view.findViewById(R.id.previous);</span><br><span class="line">        mButtonNext = (Button) view.findViewById(R.id.next);</span><br><span class="line">        <span class="hljs-comment">// Bind events.</span></span><br><span class="line">        mButtonPrevious.setOnClickListener(<span class="hljs-keyword">this</span>);</span><br><span class="line">        mButtonNext.setOnClickListener(<span class="hljs-keyword">this</span>);</span><br><span class="line"></span><br><span class="line">        mPageIndex = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-comment">// If there is a savedInstanceState (screen orientations, etc.), we restore the page index.</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != savedInstanceState) &#123;</span><br><span class="line">            mPageIndex = savedInstanceState.getInt(STATE_CURRENT_PAGE_INDEX, <span class="hljs-number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onStart();</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            openRenderer(getActivity());</span><br><span class="line">            showPage(mPageIndex);</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            Toast.makeText(getActivity(), <span class="hljs-string">"Error! "</span> + e.getMessage(), Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStop</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            closeRenderer();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onStop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSaveInstanceState</span><span class="hljs-params">(Bundle outState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onSaveInstanceState(outState);</span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != mCurrentPage) &#123;</span><br><span class="line">            outState.putInt(STATE_CURRENT_PAGE_INDEX, mCurrentPage.getIndex());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Sets up a &#123;<span class="hljs-doctag">@link</span> android.graphics.pdf.PdfRenderer&#125; and related resources.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">openRenderer</span><span class="hljs-params">(Context context)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// In this sample, we read a PDF from the assets directory.</span></span><br><span class="line">        File file = <span class="hljs-keyword">new</span> File(context.getCacheDir(), FILENAME);</span><br><span class="line">        <span class="hljs-keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">            <span class="hljs-comment">// Since PdfRenderer cannot handle the compressed asset file directly, we copy it into</span></span><br><span class="line">            <span class="hljs-comment">// the cache directory.</span></span><br><span class="line">            InputStream asset = context.getAssets().open(FILENAME);</span><br><span class="line">            FileOutputStream output = <span class="hljs-keyword">new</span> FileOutputStream(file);</span><br><span class="line">            <span class="hljs-keyword">final</span> <span class="hljs-keyword">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];</span><br><span class="line">            <span class="hljs-keyword">int</span> size;</span><br><span class="line">            <span class="hljs-keyword">while</span> ((size = asset.read(buffer)) != -<span class="hljs-number">1</span>) &#123;</span><br><span class="line">                output.write(buffer, <span class="hljs-number">0</span>, size);</span><br><span class="line">            &#125;</span><br><span class="line">            asset.close();</span><br><span class="line">            output.close();</span><br><span class="line">        &#125;</span><br><span class="line">        mFileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);</span><br><span class="line">        <span class="hljs-comment">// This is the PdfRenderer we use to render the PDF.</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (mFileDescriptor != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            mPdfRenderer = <span class="hljs-keyword">new</span> PdfRenderer(mFileDescriptor);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Closes the &#123;<span class="hljs-doctag">@link</span> android.graphics.pdf.PdfRenderer&#125; and related resources.</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> java.io.IOException When the PDF file cannot be closed.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">closeRenderer</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != mCurrentPage) &#123;</span><br><span class="line">            mCurrentPage.close();</span><br><span class="line">        &#125;</span><br><span class="line">        mPdfRenderer.close();</span><br><span class="line">        mFileDescriptor.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Shows the specified page of PDF to the screen.</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> index The page index.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showPage</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (mPdfRenderer.getPageCount() &lt;= index) &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">// Make sure to close the current page before opening another one.</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != mCurrentPage) &#123;</span><br><span class="line">            mCurrentPage.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">// Use `openPage` to open a specific page in PDF.</span></span><br><span class="line">        mCurrentPage = mPdfRenderer.openPage(index);</span><br><span class="line">        <span class="hljs-comment">// Important: the destination bitmap must be ARGB (not RGB).</span></span><br><span class="line">        Bitmap bitmap = Bitmap.createBitmap(mCurrentPage.getWidth(), mCurrentPage.getHeight(),</span><br><span class="line">                Bitmap.Config.ARGB_8888);</span><br><span class="line">        <span class="hljs-comment">// Here, we render the page onto the Bitmap.</span></span><br><span class="line">        <span class="hljs-comment">// To render a portion of the page, use the second and third parameter. Pass nulls to get</span></span><br><span class="line">        <span class="hljs-comment">// the default result.</span></span><br><span class="line">        <span class="hljs-comment">// Pass either RENDER_MODE_FOR_DISPLAY or RENDER_MODE_FOR_PRINT for the last parameter.</span></span><br><span class="line">        mCurrentPage.render(bitmap, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);</span><br><span class="line">        <span class="hljs-comment">// We are ready to show the Bitmap to user.</span></span><br><span class="line">        mImageView.setImageBitmap(bitmap);</span><br><span class="line">        updateUi();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Updates the state of 2 control buttons in response to the current page index.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateUi</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> index = mCurrentPage.getIndex();</span><br><span class="line">        <span class="hljs-keyword">int</span> pageCount = mPdfRenderer.getPageCount();</span><br><span class="line">        mButtonPrevious.setEnabled(<span class="hljs-number">0</span> != index);</span><br><span class="line">        mButtonNext.setEnabled(index + <span class="hljs-number">1</span> &lt; pageCount);</span><br><span class="line">        getActivity().setTitle(getString(R.string.app_name_with_index, index + <span class="hljs-number">1</span>, pageCount));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Gets the number of pages in the PDF. This method is marked as public for testing.</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> The number of pages.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getPageCount</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> mPdfRenderer.getPageCount();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">switch</span> (view.getId()) &#123;</span><br><span class="line">            <span class="hljs-keyword">case</span> R.id.previous: &#123;</span><br><span class="line">                <span class="hljs-comment">// Move to the previous page</span></span><br><span class="line">                showPage(mCurrentPage.getIndex() - <span class="hljs-number">1</span>);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">case</span> R.id.next: &#123;</span><br><span class="line">                <span class="hljs-comment">// Move to the next page</span></span><br><span class="line">                showPage(mCurrentPage.getIndex() + <span class="hljs-number">1</span>);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Android/">Android</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/06/22/Android开发笔记/Android okhttp使用详解/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Android okhttp使用详解</span>
+            </a>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+
+    
+        
+<div class="card widget" id="toc" style="max-height: 400px;overflow: auto;">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.TreeTower_EN-CN3424575110_800x480.jpg" alt="Gradle 配置常见问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T07:30:48.000Z">2019-07-31</time></div>
+                    <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="has-link-black-ter is-size-6">Gradle 配置常见问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/gradle配置笔记/">gradle配置笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.JanesCarousel_EN-CN1373704625_800x480.jpg" alt="Rxjava操作符：第4篇 Combining Observables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T07:30:48.000Z">2019-06-21</time></div>
+                    <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第4篇 Combining Observables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.Skywalk_EN-CN9319095731_400x240.jpg" alt="Rxjava操作符：第3篇 Flitering Observable">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-20T07:30:48.000Z">2019-06-20</time></div>
+                    <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第3篇 Flitering Observable</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MoonMuseum_EN-CN7135152702_400x240.jpg" alt="Rxjava操作符：第2篇 Transforming Observable">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T07:30:48.000Z">2019-06-19</time></div>
+                    <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="has-link-black-ter is-size-6">Rxjava操作符：第2篇 Transforming Observable</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/18/Rxjava笔记/第1篇 Creating Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MeerkatMob_EN-CN1201896184_800x480.jpg" alt="Rxjava操作符：第1篇 Creating Observables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T07:30:48.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/Rxjava笔记/第1篇 Creating Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第1篇 Creating Observables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Android开发笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发艺术探索笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Rxjava笔记/">
+            <span class="level-start">
+                <span class="level-item">Rxjava笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/gradle配置笔记/">
+            <span class="level-start">
+                <span class="level-item">gradle配置笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+        <div class="column-right-shadow  ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开发艺术探索/">
+                        <span class="tag">Android开发艺术探索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Rxjava操作符/">
+                        <span class="tag">Rxjava操作符</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gradle/">
+                        <span class="tag">gradle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+            
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Android预览pdf文档" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 markzl&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

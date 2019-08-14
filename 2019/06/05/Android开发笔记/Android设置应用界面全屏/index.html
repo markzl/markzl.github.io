@@ -2,24 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Hello World - markzl的博客</title>
+<title>Android设置全屏及沉浸式布局 - markzl的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+    <meta name="description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/06/14/hello-world/index.html">
+<meta property="og:title" content="Android设置全屏及沉浸式布局">
+<meta property="og:url" content="http://yoursite.com/2019/06/05/Android开发笔记/Android设置应用界面全屏/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-19T09:30:04.399Z">
+<meta property="og:image" content="https://cn.bing.com/th?id=OHR.NebraskaCarArt_EN-CN3915175917_400x240.jpg">
+<meta property="og:updated_time" content="2019-07-31T12:47:55.650Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:title" content="Android设置全屏及沉浸式布局">
+<meta name="twitter:description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。">
+<meta name="twitter:image" content="https://cn.bing.com/th?id=OHR.NebraskaCarArt_EN-CN3915175917_400x240.jpg">
 
 
 
@@ -99,7 +100,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Hello World" height="28">
+                <img src="/images/logo.svg" alt="Android设置全屏及沉浸式布局" height="28">
             
             </a>
         </div>
@@ -133,6 +134,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -148,17 +153,27 @@
             <div class="columns">
                 <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
     
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.NebraskaCarArt_EN-CN3915175917_400x240.jpg" alt="Android设置全屏及沉浸式布局">
+        </span>
+    </div>
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-14T06:16:36.813Z">2019-06-14</time>
+                <time class="level-item has-text-grey" datetime="2019-06-05T01:40:20.000Z">2019-06-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 122 个字)
+                    9 分钟 读完 (大约 1344 个字)
                 </span>
                 
                 
@@ -167,25 +182,116 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Hello World
+                Android设置全屏及沉浸式布局
             
         </h1>
         <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+            <p>注意：下述代码根据 AppCompatActivity 及主题  <code>parent=&quot;Theme.AppCompat.NoActionBar&quot;</code> 和<code>midSdk 21</code>实现。</p>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考文章：<a href="https://www.jianshu.com/p/ce65dc7b0b56" target="_blank" rel="noopener">Android沉浸式全屏讲解(状态栏、导航栏处理)</a></p>
+<p>参考文章：<a href="https://juejin.im/post/5c99dae85188252d93208b15" target="_blank" rel="noopener">Android刘海屏适配全方案（华为、小米、Vivo、Oppo)</a></p>
+</blockquote>
+<h2 id="1-对于非刘海屏幕而言有两种方式设置全屏"><a href="#1-对于非刘海屏幕而言有两种方式设置全屏" class="headerlink" title="1.对于非刘海屏幕而言有两种方式设置全屏"></a>1.对于非刘海屏幕而言有两种方式设置全屏</h2><ol>
+<li><p>代码中设定，需要写在 setContentView() 之前： </p>
+ <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 隐藏标题</span></span><br><span class="line"><span class="hljs-comment">//requestWindowFeature(Window.FEATURE_NO_TITLE);</span></span><br><span class="line"><span class="hljs-comment">// 设置全屏</span></span><br><span class="line">getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)</span><br><span class="line"><span class="hljs-comment">//或者是通过设置DecorView#setSystemUiVisibility(int)</span></span><br><span class="line"> <span class="hljs-comment">//getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN)</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p> 需要说明一点 requestWindowFeature() 方法是指定主题为 <code>parent=&quot;android:Theme.Black&quot;</code>之类的Activity 时隐藏老式 ActionBar 标题栏内容。对于继承 AppCompatActivity 这个方法无效。如果继承 AppCompatActivity 的 Activity 需要隐藏标题栏，可以通过以下方法：</p>
+ <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span>(getSupportActionBar()!=<span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">  getSupportActionBar().hide();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定 Activity 的 Theme 主题</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:theme="@style/FullScreenTheme"</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>主题设置属性：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//styles.xml</span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"FullScreenTheme"</span> <span class="hljs-attr">parent</span>=<span class="hljs-string">"Theme.AppCompat.NoActionBar"</span>&gt;</span></span><br><span class="line">  //这里指定的是Appcompat主题，这个属性可以去掉</span><br><span class="line"><span class="hljs-xml">  <span class="hljs-comment">&lt;!--&lt;item name="windowNoTitle"&gt;true&lt;/item&gt;--&gt;</span></span></span><br><span class="line"><span class="hljs-xml">  <span class="hljs-tag">&lt;<span class="hljs-name">item</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"android:windowFullscreen"</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">item</span>&gt;</span></span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
+
+</li>
+</ol>
+<p>上述两种方式都可以指定非刘海屏幕全屏显示。</p>
+<img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4eeorc6pgj30u01o0qv7.jpg" height="400px">
+
+<h2 id="2-关于刘海屏的全屏展示。"><a href="#2-关于刘海屏的全屏展示。" class="headerlink" title="2.关于刘海屏的全屏展示。"></a>2.关于刘海屏的全屏展示。</h2><p>测试机是华为8x刘海屏手机，发现设置全屏之后界面并没有延伸到刘海。刘海屏幕全屏适配分为两种情况：Android P 及Android P 一下：</p>
+<ol>
+<li>Android P 9.0系统提供了处理刘海屏的方法。设置全屏如下</li>
+</ol>
+<ul>
+<li><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.P) &#123;</span><br><span class="line">  WindowManager.LayoutParams lp = getWindow().getAttributes();</span><br><span class="line">  <span class="hljs-comment">// 始终允许窗口延伸到屏幕短边上的刘海区域</span></span><br><span class="line">  lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;</span><br><span class="line">  getWindow().setAttributes(lp);</span><br><span class="line">&#125;</span><br><span class="line">getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p>Android P 中新增了窗口布局参数属性 <strong>layoutInDisplayCutoutMode</strong>，共有三种模式</p>
+<ul>
+<li><strong>LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT</strong>：仅当缺口区域完全包含在状态栏之中时，才允许窗口延伸到刘海区域显示</li>
+<li><strong>LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER</strong>：// 永远不允许窗口延伸到刘海区域</li>
+<li><strong>LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES</strong>：始终允许窗口延伸到屏幕短边上的刘海区域</li>
+</ul>
+<img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4eodg6xs9j30u01o0qv7.jpg" height="400px/">
+
+<p>通过设置 <code>setSystemUiVisibility(int)</code> 方法可以获取实现常见的全屏或者是沉浸式布局的效果:</p>
+<p>控制SystemBar相关：</p>
+<ul>
+<li>SYSTEM_UI_FLAG_FULLSCREEN</li>
+<li>SYSTEM_UI_FLAG_HIDE_NAVIGATION</li>
+<li>SYSTEM_UI_FLAG_LOW_PROFILE</li>
+</ul>
+<p><em>布局相关：</em></p>
+<ul>
+<li>SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</li>
+<li>SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</li>
+<li>SYSTEM_UI_FLAG_LAYOUT_STABLE</li>
+</ul>
+<p><em>沉浸式相关 (4.4 引入)：</em></p>
+<ul>
+<li>SYSTEM_UI_IMMERSIVE</li>
+<li>SYSTEM_UI_IMMERSIVE_STICKY</li>
+</ul>
+<h3 id="控制-SystemBar-相关"><a href="#控制-SystemBar-相关" class="headerlink" title="控制 SystemBar 相关"></a>控制 SystemBar 相关</h3><h5 id="SYSTEM-UI-FLAG-FULLSCREEN"><a href="#SYSTEM-UI-FLAG-FULLSCREEN" class="headerlink" title="SYSTEM_UI_FLAG_FULLSCREEN"></a>SYSTEM_UI_FLAG_FULLSCREEN</h5><blockquote>
+<p>该属性是用来隐藏状态栏的，</p>
+</blockquote>
+<h5 id="SYSTEM-UI-HIDE-NAVIGATION"><a href="#SYSTEM-UI-HIDE-NAVIGATION" class="headerlink" title="SYSTEM_UI_HIDE_NAVIGATION"></a>SYSTEM_UI_HIDE_NAVIGATION</h5><blockquote>
+<p>该属性是用来隐藏导航栏的</p>
+</blockquote>
+<p><strong>SYSTEM_UI_LOW_PROFILE</strong></p>
+<blockquote>
+<p>这个属性的能力是让SystemBar在视觉上变得模糊，重要性变得更低一点。具体表现是状态栏图标仅保留电量时间关键图标，并且变暗。导航栏图标变成三个点或者变暗。这个flag使用的很少。</p>
+</blockquote>
+<h3 id="布局相关"><a href="#布局相关" class="headerlink" title="布局相关"></a>布局相关</h3><blockquote>
+<p>在新的Android4.1以及之后新的SystemUI设置里，仅单独设置隐藏状态栏和导航栏的flag会导致布局重绘，为了在显隐状态栏和导航栏的时候保持布局的稳定的显示效果，就需要以下属性了。</p>
+</blockquote>
+<p><strong>SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</strong></p>
+<blockquote>
+<p>可以让布局延伸到状态栏的位置。在状态栏在隐藏和显示之前切换的时候，布局稳定的显示在状态栏后面（如果显示状态栏则布局在状态栏后面，隐藏状态栏布局也不变）。</p>
+</blockquote>
+<h5 id="SYSTEM-UI-FLAG-LAYOUT-STABLE"><a href="#SYSTEM-UI-FLAG-LAYOUT-STABLE" class="headerlink" title="SYSTEM_UI_FLAG_LAYOUT_STABLE"></a>SYSTEM_UI_FLAG_LAYOUT_STABLE</h5><blockquote>
+<p>该flag的作用是保持布局稳定，避免在显隐状态栏导航栏的时候发生布局的变化。可以辅助以下SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN、SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION两个flag的使用，让应用保持全屏的情况下，布局不随状态栏导航栏显隐发生变化。也可以不配合这两个flag使用，也能达到保持布局稳定的效果，不过不能实现全屏，会留出状态栏和导航栏的位置。</p>
+</blockquote>
+<p><strong>SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</strong></p>
+<blockquote>
+<p>可以让布局延伸到导航栏的位置。可以让导航栏在隐藏和显示之前切换的时候，布局稳定的显示在导航栏后面（如果显示导航栏则在导航栏后面，隐藏导航栏也不变）。</p>
+</blockquote>
+<h2 id="2-关于沉浸式界面"><a href="#2-关于沉浸式界面" class="headerlink" title="2. 关于沉浸式界面"></a>2. 关于沉浸式界面</h2><p>在代码中指定。在 setContentView() 之前指定状态栏颜色透明即可,设置状态栏透明后，界面布局将延伸到状态栏。注意如果设置全屏，状态栏不再显示.</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//设置沉浸式状态栏</span></span><br><span class="line">Window window = getWindow();</span><br><span class="line"><span class="hljs-comment">//设置状态栏颜色</span></span><br><span class="line">window.setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line"><span class="hljs-comment">//设置布局延伸到状态栏</span></span><br><span class="line">window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);</span><br></pre></td></tr></table></figure>
+
+<img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4emq1cpctj30u01o0qv7.jpg" height="400px">
+
+<p>对于状态栏白色的情况，在Android 6.0 sdk版本23 的情况，应如下设置：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Window window = getWindow();</span><br><span class="line"><span class="hljs-keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</span><br><span class="line">  window.setStatusBarColor(Color.WHITE);</span><br><span class="line">  window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |</span><br><span class="line">                                              View.SYSTEM_UI_FLAG_LAYOUT_STABLE |</span><br><span class="line">                                              View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">//关于小米魅族状态栏颜色设置暂不考虑</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Android/">Android</a>
+                </div>
+            </div>
         </div>
         
         
@@ -230,16 +336,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/16/Android开发笔记/AndroidIPC机制/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/14/hello-world/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Android中的IPC之Binder机制</span>
+                <span class="level-item">Hello World</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/05/Android开发笔记/Android设置应用界面全屏/">
-                <span class="level-item">Android设置全屏及沉浸式布局</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/06/Android开发笔记/Android使用RenderScript处理图片/">
+                <span class="level-item">Android使用RenderScript处理图片</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -260,6 +366,49 @@
 
     
         
+<div class="card widget" id="toc" style="max-height: 400px;overflow: auto;">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-对于非刘海屏幕而言有两种方式设置全屏">
+        <span class="has-mr-6">1</span>
+        <span>1.对于非刘海屏幕而言有两种方式设置全屏</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-关于刘海屏的全屏展示。">
+        <span class="has-mr-6">2</span>
+        <span>2.关于刘海屏的全屏展示。</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#控制-SystemBar-相关">
+        <span class="has-mr-6">2.1</span>
+        <span>控制 SystemBar 相关</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#SYSTEM-UI-FLAG-FULLSCREEN">
+        <span class="has-mr-6">2.1.1</span>
+        <span>SYSTEM_UI_FLAG_FULLSCREEN</span>
+        </a></li><li>
+        <a class="is-flex" href="#SYSTEM-UI-HIDE-NAVIGATION">
+        <span class="has-mr-6">2.1.2</span>
+        <span>SYSTEM_UI_HIDE_NAVIGATION</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#布局相关">
+        <span class="has-mr-6">2.2</span>
+        <span>布局相关</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#SYSTEM-UI-FLAG-LAYOUT-STABLE">
+        <span class="has-mr-6">2.2.1</span>
+        <span>SYSTEM_UI_FLAG_LAYOUT_STABLE</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#2-关于沉浸式界面">
+        <span class="has-mr-6">3</span>
+        <span>2. 关于沉浸式界面</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 <div class="card widget">
@@ -580,7 +729,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Hello World" height="28">
+                    <img src="/images/logo.svg" alt="Android设置全屏及沉浸式布局" height="28">
                 
                 </a>
                 <p class="is-size-7">

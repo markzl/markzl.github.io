@@ -207,6 +207,7 @@ img.thumbnail {
   position: relative;
 }
 .article .content a img {
+  max-width: 50%;
   margin: auto;
   display: block;
 }
