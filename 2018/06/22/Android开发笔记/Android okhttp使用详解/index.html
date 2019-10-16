@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="1. Get 请求1234567Request request = new Request.Builder()  .url(url)  .build();OkHttpClient client = new OkHttpClient();try (Response response = client.newCall(request).execute()) &amp;#123;  return respons">
+    <meta name="description" content="Get 请求1234567Request request = new Request.Builder()  .url(url)  .build();OkHttpClient client = new OkHttpClient();try (Response response = client.newCall(request).execute()) &amp;#123;  return response.b">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android okhttp使用详解">
 <meta property="og:url" content="http://yoursite.com/2018/06/22/Android开发笔记/Android okhttp使用详解/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="1. Get 请求1234567Request request = new Request.Builder()  .url(url)  .build();OkHttpClient client = new OkHttpClient();try (Response response = client.newCall(request).execute()) &amp;#123;  return respons">
+<meta property="og:description" content="Get 请求1234567Request request = new Request.Builder()  .url(url)  .build();OkHttpClient client = new OkHttpClient();try (Response response = client.newCall(request).execute()) &amp;#123;  return response.b">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-31T12:29:04.256Z">
+<meta property="og:updated_time" content="2019-10-16T07:37:25.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android okhttp使用详解">
-<meta name="twitter:description" content="1. Get 请求1234567Request request = new Request.Builder()  .url(url)  .build();OkHttpClient client = new OkHttpClient();try (Response response = client.newCall(request).execute()) &amp;#123;  return respons">
+<meta name="twitter:description" content="Get 请求1234567Request request = new Request.Builder()  .url(url)  .build();OkHttpClient client = new OkHttpClient();try (Response response = client.newCall(request).execute()) &amp;#123;  return response.b">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -167,7 +167,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分钟 读完 (大约 2036 个字)
+                    14 分钟 读完 (大约 2032 个字)
                 </span>
                 
                 
@@ -180,32 +180,32 @@
             
         </h1>
         <div class="content">
-            <h2 id="1-Get-请求"><a href="#1-Get-请求" class="headerlink" title="1. Get 请求"></a>1. Get 请求</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(url)</span><br><span class="line">  .build();</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> response.body().string();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h2 id="Get-请求"><a href="#Get-请求" class="headerlink" title="Get 请求"></a>Get 请求</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(url)</span><br><span class="line">  .build();</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> response.body().string();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>通过Request构建请求体，然后由 client 执行。这里 Request 默认请求类型是Get。<strong>注意这个是SynchronousGet是同步执行的</strong>。在Android UI线程直接运行会报错提示：==android.os.NetworkOnMainThreadException==。</p>
 <a id="more"></a>
 
-<h3 id="1-1-异步Get请求-AsynchronousGet"><a href="#1-1-异步Get请求-AsynchronousGet" class="headerlink" title="1.1 异步Get请求 AsynchronousGet"></a>1.1 异步Get请求 AsynchronousGet</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"http://publicobject.com/helloworld.txt"</span>)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">client.newCall(request).enqueue(<span class="hljs-keyword">new</span> Callback() &#123;</span><br><span class="line">  <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onFailure</span><span class="hljs-params">(Call call, IOException e)</span> </span>&#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResponse</span><span class="hljs-params">(Call call, Response response)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">try</span> (ResponseBody responseBody = response.body()) &#123;</span><br><span class="line">      System.out.println(responseBody.string());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="异步Get请求-AsynchronousGet"><a href="#异步Get请求-AsynchronousGet" class="headerlink" title="异步Get请求 AsynchronousGet"></a>异步Get请求 AsynchronousGet</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"http://publicobject.com/helloworld.txt"</span>)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">client.newCall(request).enqueue(<span class="hljs-keyword">new</span> Callback() &#123;</span><br><span class="line">  <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onFailure</span><span class="hljs-params">(Call call, IOException e)</span> </span>&#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResponse</span><span class="hljs-params">(Call call, Response response)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">try</span> (ResponseBody responseBody = response.body()) &#123;</span><br><span class="line">      System.out.println(responseBody.string());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>异步请求会在Android 中开启一个线程队列，在子线程中运行，不影响Android UI 线程。注意的是Callback类回调仍然执行在子线程中，需要通过handler处理UI线程相关操作。</p>
-<h2 id="2、Post-请求"><a href="#2、Post-请求" class="headerlink" title="2、Post 请求"></a>2、Post 请求</h2><p><strong>注意下述代码中演示的同步请求</strong>，通过<code>client.newCall(request).enqueue(Callback)</code>可以进行异步请求</p>
-<h3 id="2-1-Post-提交-json-请求体"><a href="#2-1-Post-提交-json-请求体" class="headerlink" title="2.1 Post 提交 json 请求体"></a>2.1 Post 提交 json 请求体</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">MediaType JSON = MediaType.get(<span class="hljs-string">"application/json; charset=utf-8"</span>);</span><br><span class="line">RequestBody body = RequestBody.create(JSON, json);</span><br><span class="line"></span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(url)</span><br><span class="line">  .post(body)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> response.body().string();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Post-请求"><a href="#Post-请求" class="headerlink" title="Post 请求"></a>Post 请求</h2><p><strong>注意下述代码中演示的同步请求</strong>，通过<code>client.newCall(request).enqueue(Callback)</code>可以进行异步请求</p>
+<h3 id="Post-提交-json-请求体"><a href="#Post-提交-json-请求体" class="headerlink" title="Post 提交 json 请求体"></a>Post 提交 json 请求体</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">MediaType JSON = MediaType.get(<span class="hljs-string">"application/json; charset=utf-8"</span>);</span><br><span class="line">RequestBody body = RequestBody.create(JSON, json);</span><br><span class="line"></span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(url)</span><br><span class="line">  .post(body)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> response.body().string();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>根据string类型的json字符串请求请求体，通过post(ReqeustBody)方法请求数据。</p>
-<h3 id="2-2-Post-提交-String-请求体"><a href="#2-2-Post-提交-String-请求体" class="headerlink" title="2.2 Post 提交 String 请求体"></a>2.2 Post 提交 String 请求体</h3><p>注意创建的MediaType类型，MediaType类型根据自己需求创建。这里定义为markdown类型：</p>
+<h3 id="Post-提交-String-请求体"><a href="#Post-提交-String-请求体" class="headerlink" title="Post 提交 String 请求体"></a>Post 提交 String 请求体</h3><p>注意创建的MediaType类型，MediaType类型根据自己需求创建。这里定义为markdown类型：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MediaType MEDIA_TYPE_MARKDOWN = MediaType.get(<span class="hljs-string">"text/x-markdown; charset=utf-8"</span>);</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"https://api.github.com/markdown/raw"</span>)</span><br><span class="line">  .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, postBody))</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-3-Post-提交Form表单（FormBody）"><a href="#2-3-Post-提交Form表单（FormBody）" class="headerlink" title="2.3 Post 提交Form表单（FormBody）"></a>2.3 Post 提交Form表单（FormBody）</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">RequestBody formBody = <span class="hljs-keyword">new</span> FormBody.Builder()</span><br><span class="line">  .add(<span class="hljs-string">"md5"</span>, <span class="hljs-string">"12232"</span>)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"http://221.130.29.94:8090/bookQr/test/isUpload"</span>)</span><br><span class="line">  .post(formBody)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Post-提交Form表单（FormBody）"><a href="#Post-提交Form表单（FormBody）" class="headerlink" title="Post 提交Form表单（FormBody）"></a>Post 提交Form表单（FormBody）</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">RequestBody formBody = <span class="hljs-keyword">new</span> FormBody.Builder()</span><br><span class="line">  .add(<span class="hljs-string">"md5"</span>, <span class="hljs-string">"12232"</span>)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"http://221.130.29.94:8090/bookQr/test/isUpload"</span>)</span><br><span class="line">  .post(formBody)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-4-Post-提交File文件"><a href="#2-4-Post-提交File文件" class="headerlink" title="2.4 Post 提交File文件"></a>2.4 Post 提交File文件</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MediaType MEDIA_TYPE_MARKDOWN= MediaType.get(<span class="hljs-string">"text/x-markdown; charset=utf-8"</span>);</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line">File file = <span class="hljs-keyword">new</span> File(<span class="hljs-string">"README.md"</span>);</span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"https://api.github.com/markdown/raw"</span>)</span><br><span class="line">  .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Post-提交File文件"><a href="#Post-提交File文件" class="headerlink" title="Post 提交File文件"></a>Post 提交File文件</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MediaType MEDIA_TYPE_MARKDOWN= MediaType.get(<span class="hljs-string">"text/x-markdown; charset=utf-8"</span>);</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line">File file = <span class="hljs-keyword">new</span> File(<span class="hljs-string">"README.md"</span>);</span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"https://api.github.com/markdown/raw"</span>)</span><br><span class="line">  .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-5-Post-提交多种类型文件（MultiPartBody）"><a href="#2-5-Post-提交多种类型文件（MultiPartBody）" class="headerlink" title="2.5 Post 提交多种类型文件（MultiPartBody）"></a>2.5 Post 提交多种类型文件（MultiPartBody）</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">MediaType MEDIA_TYPE_PNG = MediaType.get(<span class="hljs-string">"image/png"</span>);</span><br><span class="line">RequestBody requestBody = <span class="hljs-keyword">new</span> MultipartBody.Builder()</span><br><span class="line">  .setType(MultipartBody.FORM)</span><br><span class="line">  .addFormDataPart(<span class="hljs-string">"title"</span>, <span class="hljs-string">"Square Logo"</span>)</span><br><span class="line">  .addFormDataPart(<span class="hljs-string">"image"</span>, <span class="hljs-string">"logo-square.png"</span>,</span><br><span class="line">                   RequestBody.create(MEDIA_TYPE_PNG, <span class="hljs-keyword">new</span> File(filePath)))</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"https://api.imgur.com/3/image"</span>)</span><br><span class="line">  .post(requestBody)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Post-提交多种类型文件（MultiPartBody）"><a href="#Post-提交多种类型文件（MultiPartBody）" class="headerlink" title="Post 提交多种类型文件（MultiPartBody）"></a>Post 提交多种类型文件（MultiPartBody）</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">MediaType MEDIA_TYPE_PNG = MediaType.get(<span class="hljs-string">"image/png"</span>);</span><br><span class="line">RequestBody requestBody = <span class="hljs-keyword">new</span> MultipartBody.Builder()</span><br><span class="line">  .setType(MultipartBody.FORM)</span><br><span class="line">  .addFormDataPart(<span class="hljs-string">"title"</span>, <span class="hljs-string">"Square Logo"</span>)</span><br><span class="line">  .addFormDataPart(<span class="hljs-string">"image"</span>, <span class="hljs-string">"logo-square.png"</span>,</span><br><span class="line">                   RequestBody.create(MEDIA_TYPE_PNG, <span class="hljs-keyword">new</span> File(filePath)))</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"https://api.imgur.com/3/image"</span>)</span><br><span class="line">  .post(requestBody)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line">  System.out.println(response.body().string());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>##3、访问请求头内容（Acessing Header）</p>
+<p>##访问请求头内容（Acessing Header）</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(<span class="hljs-string">"https://api.github.com/repos/square/okhttp/issues"</span>)</span><br><span class="line">  .header(<span class="hljs-string">"User-Agent"</span>, <span class="hljs-string">"OkHttp Headers.java"</span>)</span><br><span class="line">  .addHeader(<span class="hljs-string">"Accept"</span>, <span class="hljs-string">"application/json; q=0.5"</span>)</span><br><span class="line">  .addHeader(<span class="hljs-string">"Accept"</span>, <span class="hljs-string">"application/vnd.github.v3+json"</span>)</span><br><span class="line">  .build();</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!response.isSuccessful()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"Unexpected code "</span> + response);</span><br><span class="line"></span><br><span class="line">  System.out.println(<span class="hljs-string">"Server: "</span> + response.header(<span class="hljs-string">"Server"</span>));</span><br><span class="line">  System.out.println(<span class="hljs-string">"Date: "</span> + response.header(<span class="hljs-string">"Date"</span>));</span><br><span class="line">  System.out.println(<span class="hljs-string">"Vary: "</span> + response.headers(<span class="hljs-string">"Vary"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Request.Builder#header()和Request.Builder#addHeader()区别，header()方法添加的key只有一个，多次添加改变value值，addHeader() 会为当前key再添加一个值。对于Response#header()和Response#headers()区别：header()方法会打印对于key出现的最后一次值，而headers()会将对应key的所有值列出来。</p>
-<h2 id="4、-okhttp拦截器-Interceptor"><a href="#4、-okhttp拦截器-Interceptor" class="headerlink" title="4、 okhttp拦截器 - Interceptor"></a>4、 okhttp拦截器 - Interceptor</h2><p>##4.1 添加应用拦截器</p>
+<h2 id="okhttp拦截器-Interceptor"><a href="#okhttp拦截器-Interceptor" class="headerlink" title="okhttp拦截器 - Interceptor"></a>okhttp拦截器 - Interceptor</h2><p>##添加应用拦截器</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">            .addInterceptor(<span class="hljs-keyword">new</span> LoggingInterceptor())</span><br><span class="line">            .build();</span><br></pre></td></tr></table></figure>
 
 <p>如何实现自定义拦截器，我们需要实现系统提供的 Interceptor 接口：</p>
@@ -214,7 +214,7 @@
 <p>当我们发起网络请求，打印日志如下,request#headers()值为空：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Sending request http:<span class="hljs-comment">//www.publicobject.com/helloworld.txt on null</span></span><br><span class="line">User-Agent: OkHttp Sample</span><br><span class="line"></span><br><span class="line">Received response <span class="hljs-keyword">for</span> http:<span class="hljs-comment">//www.publicobject.com/helloworld.txt in 2957.8ms</span></span><br><span class="line">Server: nginx/<span class="hljs-number">1.10</span>.0 (Ubuntu)</span><br><span class="line">Date: Mon, <span class="hljs-number">01</span> Jul <span class="hljs-number">2019</span> <span class="hljs-number">02</span>:<span class="hljs-number">52</span>:<span class="hljs-number">58</span> GMT</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: <span class="hljs-number">1759</span></span><br><span class="line">Last-Modified: Tue, <span class="hljs-number">27</span> May <span class="hljs-number">2014</span> <span class="hljs-number">02</span>:<span class="hljs-number">35</span>:<span class="hljs-number">47</span> GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ETag: <span class="hljs-string">"5383fa03-6df"</span></span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
 
-<p>##4.2 添加网络拦截器</p>
+<p>##添加网络拦截器</p>
 <p>添加网络拦截器如下所示：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">  .addNetworkInterceptor(<span class="hljs-keyword">new</span> LoggingInterceptor())</span><br><span class="line">  .build();</span><br></pre></td></tr></table></figure>
 
@@ -238,7 +238,7 @@
 <li>访问携带request的Connection</li>
 </ul>
 <p>注意在进行okhttp请求获取下载进度，根据Callback返回</p>
-<h2 id="5、缓存响应数据（Reponse-Caching）"><a href="#5、缓存响应数据（Reponse-Caching）" class="headerlink" title="5、缓存响应数据（Reponse Caching）"></a>5、缓存响应数据（Reponse Caching）</h2><blockquote>
+<h2 id="缓存响应数据（Reponse-Caching）"><a href="#缓存响应数据（Reponse-Caching）" class="headerlink" title="缓存响应数据（Reponse Caching）"></a>缓存响应数据（Reponse Caching）</h2><blockquote>
 <p>To cache responses, you’ll need a cache directory that you can read and write to, and a limit on the cache’s size. The cache directory should be private, and untrusted applications should not be able to read its contents!</p>
 <p>我们需要限制缓存的大小，并且缓存数据的目录不可以被其他应用读取。</p>
 <p>Response caching uses HTTP headers for all configuration. You can add request headers like <code>Cache-Control: max-stale=3600</code> and OkHttp’s cache will honor them. Your webserver configures how long responses are cached with its own response headers, like <code>Cache-Control: max-age=9600</code>. There are cache headers to force a cached response, force a network response, or force the network response to be validated with a conditional GET.</p>
@@ -340,45 +340,45 @@
                 目录
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-Get-请求">
+        <a class="is-flex" href="#Get-请求">
         <span class="has-mr-6">1</span>
-        <span>1. Get 请求</span>
+        <span>Get 请求</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#1-1-异步Get请求-AsynchronousGet">
+        <a class="is-flex" href="#异步Get请求-AsynchronousGet">
         <span class="has-mr-6">1.1</span>
-        <span>1.1 异步Get请求 AsynchronousGet</span>
+        <span>异步Get请求 AsynchronousGet</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#2、Post-请求">
+        <a class="is-flex" href="#Post-请求">
         <span class="has-mr-6">2</span>
-        <span>2、Post 请求</span>
+        <span>Post 请求</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-Post-提交-json-请求体">
+        <a class="is-flex" href="#Post-提交-json-请求体">
         <span class="has-mr-6">2.1</span>
-        <span>2.1 Post 提交 json 请求体</span>
+        <span>Post 提交 json 请求体</span>
         </a></li><li>
-        <a class="is-flex" href="#2-2-Post-提交-String-请求体">
+        <a class="is-flex" href="#Post-提交-String-请求体">
         <span class="has-mr-6">2.2</span>
-        <span>2.2 Post 提交 String 请求体</span>
+        <span>Post 提交 String 请求体</span>
         </a></li><li>
-        <a class="is-flex" href="#2-3-Post-提交Form表单（FormBody）">
+        <a class="is-flex" href="#Post-提交Form表单（FormBody）">
         <span class="has-mr-6">2.3</span>
-        <span>2.3 Post 提交Form表单（FormBody）</span>
+        <span>Post 提交Form表单（FormBody）</span>
         </a></li><li>
-        <a class="is-flex" href="#2-4-Post-提交File文件">
+        <a class="is-flex" href="#Post-提交File文件">
         <span class="has-mr-6">2.4</span>
-        <span>2.4 Post 提交File文件</span>
+        <span>Post 提交File文件</span>
         </a></li><li>
-        <a class="is-flex" href="#2-5-Post-提交多种类型文件（MultiPartBody）">
+        <a class="is-flex" href="#Post-提交多种类型文件（MultiPartBody）">
         <span class="has-mr-6">2.5</span>
-        <span>2.5 Post 提交多种类型文件（MultiPartBody）</span>
+        <span>Post 提交多种类型文件（MultiPartBody）</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#4、-okhttp拦截器-Interceptor">
+        <a class="is-flex" href="#okhttp拦截器-Interceptor">
         <span class="has-mr-6">3</span>
-        <span>4、 okhttp拦截器 - Interceptor</span>
+        <span>okhttp拦截器 - Interceptor</span>
         </a></li><li>
-        <a class="is-flex" href="#5、缓存响应数据（Reponse-Caching）">
+        <a class="is-flex" href="#缓存响应数据（Reponse-Caching）">
         <span class="has-mr-6">4</span>
-        <span>5、缓存响应数据（Reponse Caching）</span>
+        <span>缓存响应数据（Reponse Caching）</span>
         </a></li></ul>
         </div>
     </div>
@@ -531,6 +531,14 @@
             <span class="level-end">
                 <span class="level-item tag">1</span>
             </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/java笔记/">
+            <span class="level-start">
+                <span class="level-item">java笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
         </a></li>
             </ul>
         </div>
@@ -604,7 +612,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -635,6 +643,28 @@
             <a class="level is-marginless" href="/archives/2018/04/">
                 <span class="level-start">
                     <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -679,6 +709,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/gradle/">
                         <span class="tag">gradle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/内部类、闭包/">
+                        <span class="tag">内部类、闭包</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

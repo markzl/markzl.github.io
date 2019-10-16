@@ -16,7 +16,7 @@
 <meta property="og:description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://cn.bing.com/th?id=OHR.NebraskaCarArt_EN-CN3915175917_400x240.jpg">
-<meta property="og:updated_time" content="2019-07-31T12:47:55.650Z">
+<meta property="og:updated_time" content="2019-10-16T07:36:31.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android设置全屏及沉浸式布局">
 <meta name="twitter:description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。">
@@ -193,7 +193,7 @@
 <p>参考文章：<a href="https://www.jianshu.com/p/ce65dc7b0b56" target="_blank" rel="noopener">Android沉浸式全屏讲解(状态栏、导航栏处理)</a></p>
 <p>参考文章：<a href="https://juejin.im/post/5c99dae85188252d93208b15" target="_blank" rel="noopener">Android刘海屏适配全方案（华为、小米、Vivo、Oppo)</a></p>
 </blockquote>
-<h2 id="1-对于非刘海屏幕而言有两种方式设置全屏"><a href="#1-对于非刘海屏幕而言有两种方式设置全屏" class="headerlink" title="1.对于非刘海屏幕而言有两种方式设置全屏"></a>1.对于非刘海屏幕而言有两种方式设置全屏</h2><ol>
+<h2 id="对于非刘海屏幕而言有两种方式设置全屏"><a href="#对于非刘海屏幕而言有两种方式设置全屏" class="headerlink" title="对于非刘海屏幕而言有两种方式设置全屏"></a>对于非刘海屏幕而言有两种方式设置全屏</h2><ol>
 <li><p>代码中设定，需要写在 setContentView() 之前： </p>
  <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 隐藏标题</span></span><br><span class="line"><span class="hljs-comment">//requestWindowFeature(Window.FEATURE_NO_TITLE);</span></span><br><span class="line"><span class="hljs-comment">// 设置全屏</span></span><br><span class="line">getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)</span><br><span class="line"><span class="hljs-comment">//或者是通过设置DecorView#setSystemUiVisibility(int)</span></span><br><span class="line"> <span class="hljs-comment">//getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN)</span></span><br></pre></td></tr></table></figure>
 
@@ -213,7 +213,7 @@
 <p>上述两种方式都可以指定非刘海屏幕全屏显示。</p>
 <img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4eeorc6pgj30u01o0qv7.jpg" height="400px">
 
-<h2 id="2-关于刘海屏的全屏展示。"><a href="#2-关于刘海屏的全屏展示。" class="headerlink" title="2.关于刘海屏的全屏展示。"></a>2.关于刘海屏的全屏展示。</h2><p>测试机是华为8x刘海屏手机，发现设置全屏之后界面并没有延伸到刘海。刘海屏幕全屏适配分为两种情况：Android P 及Android P 一下：</p>
+<h2 id="关于刘海屏的全屏展示。"><a href="#关于刘海屏的全屏展示。" class="headerlink" title="关于刘海屏的全屏展示。"></a>关于刘海屏的全屏展示。</h2><p>测试机是华为8x刘海屏手机，发现设置全屏之后界面并没有延伸到刘海。刘海屏幕全屏适配分为两种情况：Android P 及Android P 一下：</p>
 <ol>
 <li>Android P 9.0系统提供了处理刘海屏的方法。设置全屏如下</li>
 </ol>
@@ -274,7 +274,7 @@
 <blockquote>
 <p>可以让布局延伸到导航栏的位置。可以让导航栏在隐藏和显示之前切换的时候，布局稳定的显示在导航栏后面（如果显示导航栏则在导航栏后面，隐藏导航栏也不变）。</p>
 </blockquote>
-<h2 id="2-关于沉浸式界面"><a href="#2-关于沉浸式界面" class="headerlink" title="2. 关于沉浸式界面"></a>2. 关于沉浸式界面</h2><p>在代码中指定。在 setContentView() 之前指定状态栏颜色透明即可,设置状态栏透明后，界面布局将延伸到状态栏。注意如果设置全屏，状态栏不再显示.</p>
+<h2 id="关于沉浸式界面"><a href="#关于沉浸式界面" class="headerlink" title="关于沉浸式界面"></a>关于沉浸式界面</h2><p>在代码中指定。在 setContentView() 之前指定状态栏颜色透明即可,设置状态栏透明后，界面布局将延伸到状态栏。注意如果设置全屏，状态栏不再显示.</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//设置沉浸式状态栏</span></span><br><span class="line">Window window = getWindow();</span><br><span class="line"><span class="hljs-comment">//设置状态栏颜色</span></span><br><span class="line">window.setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line"><span class="hljs-comment">//设置布局延伸到状态栏</span></span><br><span class="line">window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);</span><br></pre></td></tr></table></figure>
 
 <img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4emq1cpctj30u01o0qv7.jpg" height="400px">
@@ -336,9 +336,9 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/14/hello-world/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/16/Android开发笔记/AndroidIPC机制/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Hello World</span>
+                <span class="level-item">Android中的IPC之Binder机制</span>
             </a>
         </div>
         
@@ -373,13 +373,13 @@
                 目录
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-对于非刘海屏幕而言有两种方式设置全屏">
+        <a class="is-flex" href="#对于非刘海屏幕而言有两种方式设置全屏">
         <span class="has-mr-6">1</span>
-        <span>1.对于非刘海屏幕而言有两种方式设置全屏</span>
+        <span>对于非刘海屏幕而言有两种方式设置全屏</span>
         </a></li><li>
-        <a class="is-flex" href="#2-关于刘海屏的全屏展示。">
+        <a class="is-flex" href="#关于刘海屏的全屏展示。">
         <span class="has-mr-6">2</span>
-        <span>2.关于刘海屏的全屏展示。</span>
+        <span>关于刘海屏的全屏展示。</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#控制-SystemBar-相关">
         <span class="has-mr-6">2.1</span>
@@ -401,9 +401,9 @@
         <span class="has-mr-6">2.2.1</span>
         <span>SYSTEM_UI_FLAG_LAYOUT_STABLE</span>
         </a></li></ul></li></ul></li><li>
-        <a class="is-flex" href="#2-关于沉浸式界面">
+        <a class="is-flex" href="#关于沉浸式界面">
         <span class="has-mr-6">3</span>
-        <span>2. 关于沉浸式界面</span>
+        <span>关于沉浸式界面</span>
         </a></li></ul>
         </div>
     </div>
@@ -556,6 +556,14 @@
             <span class="level-end">
                 <span class="level-item tag">1</span>
             </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/java笔记/">
+            <span class="level-start">
+                <span class="level-item">java笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
         </a></li>
             </ul>
         </div>
@@ -629,7 +637,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -660,6 +668,28 @@
             <a class="level is-marginless" href="/archives/2018/04/">
                 <span class="level-start">
                     <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -704,6 +734,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/gradle/">
                         <span class="tag">gradle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/内部类、闭包/">
+                        <span class="tag">内部类、闭包</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
