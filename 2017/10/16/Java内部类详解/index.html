@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="参考文章：https://www.cnblogs.com/dolphin0520/p/3811445.html 参考文章：https://www.cnblogs.com/tiancai/p/7350464.html 成员内部类成员内部类是最普通的内部类，它的定义是位于另外一个类的内部，如下所示：">
+    <meta name="description" content="成员内部类成员内部类是最普通的内部类，它的定义是位于另外一个类的内部，如下所示：">
 <meta name="keywords" content="内部类、闭包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内部类详解">
 <meta property="og:url" content="http://yoursite.com/2017/10/16/Java内部类详解/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="参考文章：https://www.cnblogs.com/dolphin0520/p/3811445.html 参考文章：https://www.cnblogs.com/tiancai/p/7350464.html 成员内部类成员内部类是最普通的内部类，它的定义是位于另外一个类的内部，如下所示：">
+<meta property="og:description" content="成员内部类成员内部类是最普通的内部类，它的定义是位于另外一个类的内部，如下所示：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-16T07:37:56.324Z">
+<meta property="og:updated_time" content="2019-10-17T07:40:42.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内部类详解">
-<meta name="twitter:description" content="参考文章：https://www.cnblogs.com/dolphin0520/p/3811445.html 参考文章：https://www.cnblogs.com/tiancai/p/7350464.html 成员内部类成员内部类是最普通的内部类，它的定义是位于另外一个类的内部，如下所示：">
+<meta name="twitter:description" content="成员内部类成员内部类是最普通的内部类，它的定义是位于另外一个类的内部，如下所示：">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -160,14 +160,14 @@
                 <time class="level-item has-text-grey" datetime="2017-10-16T07:00:35.000Z">2017-10-16</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/java笔记/">java笔记</a>
+                <a class="has-link-grey -link" href="/categories/Java笔记/">Java笔记</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1063 个字)
+                    7 分钟 读完 (大约 1057 个字)
                 </span>
                 
                 
@@ -180,9 +180,7 @@
             
         </h1>
         <div class="content">
-            <p>参考文章：<a href="https://www.cnblogs.com/dolphin0520/p/3811445.html" target="_blank" rel="noopener">https://www.cnblogs.com/dolphin0520/p/3811445.html</a></p>
-<p>参考文章：<a href="https://www.cnblogs.com/tiancai/p/7350464.html" target="_blank" rel="noopener">https://www.cnblogs.com/tiancai/p/7350464.html</a></p>
-<h2 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h2><p>成员内部类是最普通的内部类，它的定义是位于另外一个类的内部，如下所示：</p>
+            <h2 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h2><p>成员内部类是最普通的内部类，它的定义是位于另外一个类的内部，如下所示：</p>
 <a id="more"></a>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Outer</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> Inner inner = <span class="hljs-keyword">null</span>;</span><br><span class="line">  </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Outer</span><span class="hljs-params">()</span></span>&#123;&#125;</span><br><span class="line">  </span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Inner</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -211,6 +209,8 @@
 <p>闭包（closure）是一个可调用的对象，它记录了一些信息，这些信息来自于创建它的作用域。通过这个定义，可以看出内部类是面向对象的闭包，因为它不仅包含外部类对象（创建内部类的作用域）的信息，还自动拥有指向外部类对象的引用，在此作用域内，内部类有权操作所有的成员。</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Writer</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">work</span><span class="hljs-params">()</span></span>&#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">programmer</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">work</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WriterProgrammer</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Writer</span></span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">work</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.work();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">programmer <span class="hljs-title">getProgrammer</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ProgrammerInner();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        WriterProgrammer writerProgrammer = <span class="hljs-keyword">new</span> WriterProgrammer();</span><br><span class="line">        writerProgrammer.getProgrammer().work();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProgrammerInner</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">programmer</span></span>&#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">work</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">            code();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.cnblogs.com/dolphin0520/p/3811445.html" target="_blank" rel="noopener">https://www.cnblogs.com/dolphin0520/p/3811445.html</a></p>
+<p><a href="https://www.cnblogs.com/tiancai/p/7350464.html" target="_blank" rel="noopener">https://www.cnblogs.com/tiancai/p/7350464.html</a></p>
 
         </div>
         
@@ -273,8 +273,8 @@
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2016/10/16/hello-world/">
-                <span class="level-item">Hello World</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2016/10/17/Java异常详解/">
+                <span class="level-item">Java异常详解</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -321,6 +321,10 @@
         <a class="is-flex" href="#闭包（closure）和回调">
         <span class="has-mr-6">5</span>
         <span>闭包（closure）和回调</span>
+        </a></li><li>
+        <a class="is-flex" href="#参考资料">
+        <span class="has-mr-6">6</span>
+        <span>参考资料</span>
         </a></li></ul>
         </div>
     </div>
@@ -458,6 +462,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Java笔记/">
+            <span class="level-start">
+                <span class="level-item">Java笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Rxjava笔记/">
             <span class="level-start">
                 <span class="level-item">Rxjava笔记</span>
@@ -469,14 +481,6 @@
         <a class="level is-marginless" href="/categories/gradle配置笔记/">
             <span class="level-start">
                 <span class="level-item">gradle配置笔记</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/java笔记/">
-            <span class="level-start">
-                <span class="level-item">java笔记</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -609,7 +613,7 @@
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -637,6 +641,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开发艺术探索/">
                         <span class="tag">Android开发艺术探索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Exception、Error、throw、throws/">
+                        <span class="tag">Exception、Error、throw、throws</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
