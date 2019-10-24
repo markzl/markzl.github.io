@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="异常摘要 (来自于 Java编程思想)  Java 的基本理念是“结构不佳的代码不能运行”。  改进的错误恢复机制是提高代码健壮性的最强有力的方式。错误恢复在我们所编写的每一个程序中都是基本的要素，但是在 Java 中它显得格外重要，因为 Java 的主要目标之一就是创建供他人使用的程序构件。">
+    <meta name="description" content="摘要 (来自于 Java编程思想)  Java 的基本理念是“结构不佳的代码不能运行”。  改进的错误恢复机制是提高代码健壮性的最强有力的方式。错误恢复在我们所编写的每一个程序中都是基本的要素，但是在 Java 中它显得格外重要，因为 Java 的主要目标之一就是创建供他人使用的程序构件。发现错误的理想时机是在编译阶段，也就是在你试图运行程序之前。然而，编译期间并不能找出所有的错误，余下的问题必须">
 <meta name="keywords" content="Exception,Error,throw,throws">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java异常详解">
 <meta property="og:url" content="http://yoursite.com/2017/10/17/Java笔记/Java异常详解/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="异常摘要 (来自于 Java编程思想)  Java 的基本理念是“结构不佳的代码不能运行”。  改进的错误恢复机制是提高代码健壮性的最强有力的方式。错误恢复在我们所编写的每一个程序中都是基本的要素，但是在 Java 中它显得格外重要，因为 Java 的主要目标之一就是创建供他人使用的程序构件。">
+<meta property="og:description" content="摘要 (来自于 Java编程思想)  Java 的基本理念是“结构不佳的代码不能运行”。  改进的错误恢复机制是提高代码健壮性的最强有力的方式。错误恢复在我们所编写的每一个程序中都是基本的要素，但是在 Java 中它显得格外重要，因为 Java 的主要目标之一就是创建供他人使用的程序构件。发现错误的理想时机是在编译阶段，也就是在你试图运行程序之前。然而，编译期间并不能找出所有的错误，余下的问题必须">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-17T09:14:09.212Z">
+<meta property="og:updated_time" content="2019-10-23T09:48:07.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java异常详解">
-<meta name="twitter:description" content="异常摘要 (来自于 Java编程思想)  Java 的基本理念是“结构不佳的代码不能运行”。  改进的错误恢复机制是提高代码健壮性的最强有力的方式。错误恢复在我们所编写的每一个程序中都是基本的要素，但是在 Java 中它显得格外重要，因为 Java 的主要目标之一就是创建供他人使用的程序构件。">
+<meta name="twitter:description" content="摘要 (来自于 Java编程思想)  Java 的基本理念是“结构不佳的代码不能运行”。  改进的错误恢复机制是提高代码健壮性的最强有力的方式。错误恢复在我们所编写的每一个程序中都是基本的要素，但是在 Java 中它显得格外重要，因为 Java 的主要目标之一就是创建供他人使用的程序构件。发现错误的理想时机是在编译阶段，也就是在你试图运行程序之前。然而，编译期间并不能找出所有的错误，余下的问题必须">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -167,7 +167,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 分钟 读完 (大约 1733 个字)
+                    12 分钟 读完 (大约 1731 个字)
                 </span>
                 
                 
@@ -180,14 +180,11 @@
             
         </h1>
         <div class="content">
-            <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p><strong>摘要</strong> (来自于 Java编程思想)</p>
+            <p><strong>摘要</strong> (来自于 Java编程思想)</p>
 <blockquote>
 <p>Java 的基本理念是“结构不佳的代码不能运行”。</p>
 </blockquote>
-<p><strong>改进的错误恢复机制是提高代码健壮性的最强有力的方式。错误恢复在我们所编写的每一个程序中都是基本的要素</strong>，但是在 Java 中它显得格外重要，因为 Java 的主要目标之一就是创建供他人使用的程序构件。</p>
-<a id="more"></a>
-
-<p>发现错误的理想时机是在编译阶段，也就是在你试图运行程序之前。然而，编译期间并不能找出所有的错误，余下的问题必须在运行期间解决。这就需要错误源能通过某种方式，把适当的信息传递给某个接受者–该接受者将知道如何正确处理这个问题。</p>
+<p><strong>改进的错误恢复机制是提高代码健壮性的最强有力的方式。错误恢复在我们所编写的每一个程序中都是基本的要素</strong>，但是在 Java 中它显得格外重要，因为 Java 的主要目标之一就是创建供他人使用的程序构件。发现错误的理想时机是在编译阶段，也就是在你试图运行程序之前。然而，编译期间并不能找出所有的错误，余下的问题必须在运行期间解决。这就需要错误源能通过某种方式，把适当的信息传递给某个接受者–该接受者将知道如何正确处理这个问题。<a id="more"></a></p>
 <p>异常往往能降低错误代码的复杂度的。如果不使用异常，那么就必须检查特定的错误，并在程序中的许多地方去处理它。而如果使用异常，那就不必在方法调用处进行检查，因为异常机制将保证能够捕获这个错误。总结，与普通的错误处理方法相比，异常处理方式使程序更加简洁、清晰，同时方便我们定位错误和处理错误。</p>
 <h2 id="Java-异常分类"><a href="#Java-异常分类" class="headerlink" title="Java 异常分类"></a>Java 异常分类</h2><p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g811cteu8uj30hz0b3aal.jpg" alt="936870-20170709120346087-1351539391"></p>
 <ol>
@@ -304,9 +301,9 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/04/18/Android开发笔记/Android预览pdf文档/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2017/10/21/Java笔记/Java线程详解/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Android预览pdf文档</span>
+                <span class="level-item">Java线程详解</span>
             </a>
         </div>
         
@@ -341,36 +338,32 @@
                 目录
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#异常">
-        <span class="has-mr-6">1</span>
-        <span>异常</span>
-        </a></li><li>
         <a class="is-flex" href="#Java-异常分类">
-        <span class="has-mr-6">2</span>
+        <span class="has-mr-6">1</span>
         <span>Java 异常分类</span>
         </a></li><li>
         <a class="is-flex" href="#Java-Exception和Error区别">
-        <span class="has-mr-6">3</span>
+        <span class="has-mr-6">2</span>
         <span>Java Exception和Error区别</span>
         </a></li><li>
         <a class="is-flex" href="#Java-检查异常、非检查异常、运行时异常、非运行时异常的区别">
-        <span class="has-mr-6">4</span>
+        <span class="has-mr-6">3</span>
         <span>Java 检查异常、非检查异常、运行时异常、非运行时异常的区别</span>
         </a></li><li>
         <a class="is-flex" href="#Java-自定义异常">
-        <span class="has-mr-6">5</span>
+        <span class="has-mr-6">4</span>
         <span>Java 自定义异常</span>
         </a></li><li>
         <a class="is-flex" href="#Java-throw关键字和throws关键字区别">
-        <span class="has-mr-6">6</span>
+        <span class="has-mr-6">5</span>
         <span>Java throw关键字和throws关键字区别</span>
         </a></li><li>
         <a class="is-flex" href="#捕获异常">
-        <span class="has-mr-6">7</span>
+        <span class="has-mr-6">6</span>
         <span>捕获异常</span>
         </a></li><li>
         <a class="is-flex" href="#参考资料">
-        <span class="has-mr-6">8</span>
+        <span class="has-mr-6">7</span>
         <span>参考资料</span>
         </a></li></ul>
         </div>
@@ -389,7 +382,7 @@
             
             <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.TreeTower_EN-CN3424575110_800x480.jpg" alt="Gradle 配置常见问题">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gradle 配置常见问题">
                 </p>
             </a>
             
@@ -408,7 +401,7 @@
             
             <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.JanesCarousel_EN-CN1373704625_800x480.jpg" alt="Rxjava操作符：第4篇 Combining Observables">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第4篇 Combining Observables">
                 </p>
             </a>
             
@@ -427,7 +420,7 @@
             
             <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.Skywalk_EN-CN9319095731_400x240.jpg" alt="Rxjava操作符：第3篇 Flitering Observable">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第3篇 Flitering Observable">
                 </p>
             </a>
             
@@ -446,7 +439,7 @@
             
             <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MoonMuseum_EN-CN7135152702_400x240.jpg" alt="Rxjava操作符：第2篇 Transforming Observable">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第2篇 Transforming Observable">
                 </p>
             </a>
             
@@ -465,7 +458,7 @@
             
             <a href="/2019/06/18/Rxjava笔记/第1篇 Creating Observables/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MeerkatMob_EN-CN1201896184_800x480.jpg" alt="Rxjava操作符：第1篇 Creating Observables">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第1篇 Creating Observables">
                 </p>
             </a>
             
@@ -530,7 +523,7 @@
                 <span class="level-item">java笔记</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li>
             </ul>
@@ -580,6 +573,17 @@
         </li>
         
         <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2018/06/">
                 <span class="level-start">
                     <span class="level-item">六月 2018</span>
@@ -607,7 +611,7 @@
                     <span class="level-item">十月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -679,6 +683,27 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/jdk/">
+                        <span class="tag">jdk</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jre/">
+                        <span class="tag">jre</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jvm/">
+                        <span class="tag">jvm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/throw/">
                         <span class="tag">throw</span>
                         <span class="tag is-grey">1</span>
@@ -695,6 +720,69 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/内部类/">
                         <span class="tag">内部类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/基本类型/">
+                        <span class="tag">基本类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/堆栈/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引用类型/">
+                        <span class="tag">引用类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/抽象/">
+                        <span class="tag">抽象</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/接口/">
+                        <span class="tag">接口</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/操作系统/">
+                        <span class="tag">操作系统</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/特征/">
+                        <span class="tag">特征</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/进程/">
+                        <span class="tag">进程</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

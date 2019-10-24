@@ -7,20 +7,20 @@
 
 
 
-    <meta name="description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。">
+    <meta name="description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。  对于非刘海屏幕而言有两种方式设置全屏 代码中设定，需要写在 setContentView() 之前：   123456// 隐藏标题//requestWindowFeature(Window.FEATURE_">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android设置全屏及沉浸式布局">
 <meta property="og:url" content="http://yoursite.com/2019/06/05/Android开发笔记/Android设置应用界面全屏/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。">
+<meta property="og:description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。  对于非刘海屏幕而言有两种方式设置全屏 代码中设定，需要写在 setContentView() 之前：   123456// 隐藏标题//requestWindowFeature(Window.FEATURE_">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://cn.bing.com/th?id=OHR.NebraskaCarArt_EN-CN3915175917_400x240.jpg">
-<meta property="og:updated_time" content="2019-10-16T07:36:31.715Z">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-10-23T09:59:12.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android设置全屏及沉浸式布局">
-<meta name="twitter:description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。">
-<meta name="twitter:image" content="https://cn.bing.com/th?id=OHR.NebraskaCarArt_EN-CN3915175917_400x240.jpg">
+<meta name="twitter:description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。  对于非刘海屏幕而言有两种方式设置全屏 代码中设定，需要写在 setContentView() 之前：   123456// 隐藏标题//requestWindowFeature(Window.FEATURE_">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
 
@@ -153,12 +153,6 @@
             <div class="columns">
                 <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
     
-    <div class="card-image">
-        <span class="image is-7by1">
-            <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.NebraskaCarArt_EN-CN3915175917_400x240.jpg" alt="Android设置全屏及沉浸式布局">
-        </span>
-    </div>
-    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
@@ -173,7 +167,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1344 个字)
+                    9 分钟 读完 (大约 1339 个字)
                 </span>
                 
                 
@@ -186,18 +180,16 @@
             
         </h1>
         <div class="content">
-            <p>注意：下述代码根据 AppCompatActivity 及主题  <code>parent=&quot;Theme.AppCompat.NoActionBar&quot;</code> 和<code>midSdk 21</code>实现。</p>
-<a id="more"></a>
-
-<blockquote>
-<p>参考文章：<a href="https://www.jianshu.com/p/ce65dc7b0b56" target="_blank" rel="noopener">Android沉浸式全屏讲解(状态栏、导航栏处理)</a></p>
-<p>参考文章：<a href="https://juejin.im/post/5c99dae85188252d93208b15" target="_blank" rel="noopener">Android刘海屏适配全方案（华为、小米、Vivo、Oppo)</a></p>
+            <blockquote>
+<p>注意：下述代码根据 AppCompatActivity 及主题  <code>parent=&quot;Theme.AppCompat.NoActionBar&quot;</code> 和<code>midSdk 21</code>实现。</p>
 </blockquote>
 <h2 id="对于非刘海屏幕而言有两种方式设置全屏"><a href="#对于非刘海屏幕而言有两种方式设置全屏" class="headerlink" title="对于非刘海屏幕而言有两种方式设置全屏"></a>对于非刘海屏幕而言有两种方式设置全屏</h2><ol>
 <li><p>代码中设定，需要写在 setContentView() 之前： </p>
  <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 隐藏标题</span></span><br><span class="line"><span class="hljs-comment">//requestWindowFeature(Window.FEATURE_NO_TITLE);</span></span><br><span class="line"><span class="hljs-comment">// 设置全屏</span></span><br><span class="line">getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)</span><br><span class="line"><span class="hljs-comment">//或者是通过设置DecorView#setSystemUiVisibility(int)</span></span><br><span class="line"> <span class="hljs-comment">//getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN)</span></span><br></pre></td></tr></table></figure>
 
 <p> 需要说明一点 requestWindowFeature() 方法是指定主题为 <code>parent=&quot;android:Theme.Black&quot;</code>之类的Activity 时隐藏老式 ActionBar 标题栏内容。对于继承 AppCompatActivity 这个方法无效。如果继承 AppCompatActivity 的 Activity 需要隐藏标题栏，可以通过以下方法：</p>
+ <a id="more"></a>
+
  <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span>(getSupportActionBar()!=<span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">  getSupportActionBar().hide();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>指定 Activity 的 Theme 主题</p>
@@ -282,6 +274,9 @@
 <p>对于状态栏白色的情况，在Android 6.0 sdk版本23 的情况，应如下设置：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Window window = getWindow();</span><br><span class="line"><span class="hljs-keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</span><br><span class="line">  window.setStatusBarColor(Color.WHITE);</span><br><span class="line">  window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |</span><br><span class="line">                                              View.SYSTEM_UI_FLAG_LAYOUT_STABLE |</span><br><span class="line">                                              View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">//关于小米魅族状态栏颜色设置暂不考虑</span></span><br></pre></td></tr></table></figure>
 
+<p><strong>参考文章：</strong></p>
+<p><a href="https://www.jianshu.com/p/ce65dc7b0b56" target="_blank" rel="noopener">Android沉浸式全屏讲解(状态栏、导航栏处理)</a></p>
+<p><a href="https://juejin.im/post/5c99dae85188252d93208b15" target="_blank" rel="noopener">Android刘海屏适配全方案（华为、小米、Vivo、Oppo)</a></p>
 
         </div>
         
@@ -421,7 +416,7 @@
             
             <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.TreeTower_EN-CN3424575110_800x480.jpg" alt="Gradle 配置常见问题">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gradle 配置常见问题">
                 </p>
             </a>
             
@@ -440,7 +435,7 @@
             
             <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.JanesCarousel_EN-CN1373704625_800x480.jpg" alt="Rxjava操作符：第4篇 Combining Observables">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第4篇 Combining Observables">
                 </p>
             </a>
             
@@ -459,7 +454,7 @@
             
             <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.Skywalk_EN-CN9319095731_400x240.jpg" alt="Rxjava操作符：第3篇 Flitering Observable">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第3篇 Flitering Observable">
                 </p>
             </a>
             
@@ -478,7 +473,7 @@
             
             <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MoonMuseum_EN-CN7135152702_400x240.jpg" alt="Rxjava操作符：第2篇 Transforming Observable">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第2篇 Transforming Observable">
                 </p>
             </a>
             
@@ -497,7 +492,7 @@
             
             <a href="/2019/06/18/Rxjava笔记/第1篇 Creating Observables/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MeerkatMob_EN-CN1201896184_800x480.jpg" alt="Rxjava操作符：第1篇 Creating Observables">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第1篇 Creating Observables">
                 </p>
             </a>
             
@@ -562,7 +557,7 @@
                 <span class="level-item">java笔记</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li>
             </ul>
@@ -612,6 +607,17 @@
         </li>
         
         <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2018/06/">
                 <span class="level-start">
                     <span class="level-item">六月 2018</span>
@@ -639,7 +645,7 @@
                     <span class="level-item">十月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -711,6 +717,27 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/jdk/">
+                        <span class="tag">jdk</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jre/">
+                        <span class="tag">jre</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jvm/">
+                        <span class="tag">jvm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/throw/">
                         <span class="tag">throw</span>
                         <span class="tag is-grey">1</span>
@@ -727,6 +754,69 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/内部类/">
                         <span class="tag">内部类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/基本类型/">
+                        <span class="tag">基本类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/堆栈/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引用类型/">
+                        <span class="tag">引用类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/抽象/">
+                        <span class="tag">抽象</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/接口/">
+                        <span class="tag">接口</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/操作系统/">
+                        <span class="tag">操作系统</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/特征/">
+                        <span class="tag">特征</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/进程/">
+                        <span class="tag">进程</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

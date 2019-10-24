@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：">
+    <meta name="description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法： 123456789101112131415161718192021222324/** * Creates a new instance. * &amp;lt;p&amp;gt; * &amp;lt;strong&amp;gt;Note:&amp;lt;/strong&amp;gt; The provided file descriptor m">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android预览pdf文档">
 <meta property="og:url" content="http://yoursite.com/2018/04/18/Android开发笔记/Android预览pdf文档/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：">
+<meta property="og:description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法： 123456789101112131415161718192021222324/** * Creates a new instance. * &amp;lt;p&amp;gt; * &amp;lt;strong&amp;gt;Note:&amp;lt;/strong&amp;gt; The provided file descriptor m">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-31T12:29:37.183Z">
+<meta property="og:updated_time" content="2019-10-23T09:57:04.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android预览pdf文档">
-<meta name="twitter:description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：">
+<meta name="twitter:description" content="谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法： 123456789101112131415161718192021222324/** * Creates a new instance. * &amp;lt;p&amp;gt; * &amp;lt;strong&amp;gt;Note:&amp;lt;/strong&amp;gt; The provided file descriptor m">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -181,11 +181,11 @@
         </h1>
         <div class="content">
             <p>谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：</p>
-<a id="more"></a>
-
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Creates a new instance.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;strong&gt;Note:&lt;/strong&gt; The provided file descriptor must be &lt;strong&gt;seekable&lt;/strong&gt;,</span></span><br><span class="line"><span class="hljs-comment"> * i.e. its data being randomly accessed, e.g. pointing to a file.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;strong&gt;Note:&lt;/strong&gt; This class takes ownership of the passed in file descriptor</span></span><br><span class="line"><span class="hljs-comment"> * and is responsible for closing it when the renderer is closed.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * If the file is from an untrusted source it is recommended to run the renderer in a separate,</span></span><br><span class="line"><span class="hljs-comment"> * isolated process with minimal permissions to limit the impact of security exploits.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> input Seekable file descriptor to read from.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> java.io.IOException If an error occurs while reading the file.</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> java.lang.SecurityException If the file requires a password or</span></span><br><span class="line"><span class="hljs-comment"> *         the security scheme is not supported.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PdfRenderer</span><span class="hljs-params">(@NonNull ParcelFileDescriptor input)</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">//略...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可以看构造方法中的参数是ParcelFileDescriptor的一个实例，那么ParcelFileDescriptor类是做什么的呢？ParcelFileDescriptor是Android 提供的一种数据结构，支持数据的写入和写出。我们通过ParcelFileDescriptor#open 建立文件和ParcelFileDescriptor的联系</p>
+<a id="more"></a>
+
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * Create a new ParcelFileDescriptor accessing a given file.</span></span><br><span class="line"><span class="hljs-comment">   *</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@param</span> file The file to be opened.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@param</span> mode The desired access mode, must be one of</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_READ_ONLY&#125;, &#123;<span class="hljs-doctag">@link</span> #MODE_WRITE_ONLY&#125;, or</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_READ_WRITE&#125;; may also be any combination of</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_CREATE&#125;, &#123;<span class="hljs-doctag">@link</span> #MODE_TRUNCATE&#125;,</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_WORLD_READABLE&#125;, and</span></span><br><span class="line"><span class="hljs-comment">   *            &#123;<span class="hljs-doctag">@link</span> #MODE_WORLD_WRITEABLE&#125;.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@return</span> a new ParcelFileDescriptor pointing to the given file.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@throws</span> FileNotFoundException if the given file does not exist or can not</span></span><br><span class="line"><span class="hljs-comment">   *             be opened with the requested mode.</span></span><br><span class="line"><span class="hljs-comment">   * <span class="hljs-doctag">@see</span> #parseMode(String)</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ParcelFileDescriptor <span class="hljs-title">open</span><span class="hljs-params">(File file, <span class="hljs-keyword">int</span> mode)</span> <span class="hljs-keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">      <span class="hljs-keyword">final</span> FileDescriptor fd = openInternal(file, mode);</span><br><span class="line">      <span class="hljs-keyword">if</span> (fd == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ParcelFileDescriptor(fd);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>从该方法中可以看出<code>ParcelFileDescriptor#open</code>实际操作的是<code>FileDescriptor</code>，仔细阅读<code>FileDescriptor</code>的注释，<code>FileDescriptor</code>是文件操作符。<code>FileDescriptor</code>可以用来表示开放文件、开放套接字。以<code>FileDecriptor</code> 表示文件来说，当<code>FileDescroptor</code>表示某文件 时，我们可以通俗的将<code>FileDescriptor</code>看成是该文件。但是，我们不能直接通过<code>FileDescription</code>对该文件进行操作；若需要通过<code>FileDescriptor</code>对该文件进行操作，则需要新创建<code>FileDescriptor</code>对应的<code>FileOutputSteam</code>，再对文件进行操作。这里有对<code>FileDescription</code>的<a href="https://www.jb51.net/article/87476.htm" target="_blank" rel="noopener">详细描述</a>。</p>
@@ -263,8 +263,8 @@
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2017/10/17/Java笔记/Java异常详解/">
-                <span class="level-item">Java异常详解</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2017/10/21/Java笔记/Java线程详解/">
+                <span class="level-item">Java线程详解</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -308,7 +308,7 @@
             
             <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.TreeTower_EN-CN3424575110_800x480.jpg" alt="Gradle 配置常见问题">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gradle 配置常见问题">
                 </p>
             </a>
             
@@ -327,7 +327,7 @@
             
             <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.JanesCarousel_EN-CN1373704625_800x480.jpg" alt="Rxjava操作符：第4篇 Combining Observables">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第4篇 Combining Observables">
                 </p>
             </a>
             
@@ -346,7 +346,7 @@
             
             <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.Skywalk_EN-CN9319095731_400x240.jpg" alt="Rxjava操作符：第3篇 Flitering Observable">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第3篇 Flitering Observable">
                 </p>
             </a>
             
@@ -365,7 +365,7 @@
             
             <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MoonMuseum_EN-CN7135152702_400x240.jpg" alt="Rxjava操作符：第2篇 Transforming Observable">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第2篇 Transforming Observable">
                 </p>
             </a>
             
@@ -384,7 +384,7 @@
             
             <a href="/2019/06/18/Rxjava笔记/第1篇 Creating Observables/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cn.bing.com/th?id=OHR.MeerkatMob_EN-CN1201896184_800x480.jpg" alt="Rxjava操作符：第1篇 Creating Observables">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第1篇 Creating Observables">
                 </p>
             </a>
             
@@ -449,7 +449,7 @@
                 <span class="level-item">java笔记</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li>
             </ul>
@@ -499,6 +499,17 @@
         </li>
         
         <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2018/06/">
                 <span class="level-start">
                     <span class="level-item">六月 2018</span>
@@ -526,7 +537,7 @@
                     <span class="level-item">十月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -598,6 +609,27 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/jdk/">
+                        <span class="tag">jdk</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jre/">
+                        <span class="tag">jre</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jvm/">
+                        <span class="tag">jvm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/throw/">
                         <span class="tag">throw</span>
                         <span class="tag is-grey">1</span>
@@ -614,6 +646,69 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/内部类/">
                         <span class="tag">内部类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/基本类型/">
+                        <span class="tag">基本类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/堆栈/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引用类型/">
+                        <span class="tag">引用类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/抽象/">
+                        <span class="tag">抽象</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/接口/">
+                        <span class="tag">接口</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/操作系统/">
+                        <span class="tag">操作系统</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/特征/">
+                        <span class="tag">特征</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/进程/">
+                        <span class="tag">进程</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
