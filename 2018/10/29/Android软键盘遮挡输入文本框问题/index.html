@@ -15,7 +15,7 @@
 <meta property="og:description" content="在开发过程中，经常遇到在某个界面有多个文本框时，点击输入会出现软件盘遮挡输入框的情况，或者是类似在登录或注册页面可以输入信息，但是键盘遮挡登录注册按钮的问题，还有遮挡住输入框下面的输入框，用户必须手动收起键盘才可以继续输入的情况。本篇文章介绍如何处理这些问题，首先我们来介绍一下adjustSize和adjustPan属性。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-29T09:58:03.293Z">
+<meta property="og:updated_time" content="2019-10-29T12:26:53.206Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android软键盘遮挡输入文本框问题">
 <meta name="twitter:description" content="在开发过程中，经常遇到在某个界面有多个文本框时，点击输入会出现软件盘遮挡输入框的情况，或者是类似在登录或注册页面可以输入信息，但是键盘遮挡登录注册按钮的问题，还有遮挡住输入框下面的输入框，用户必须手动收起键盘才可以继续输入的情况。本篇文章介绍如何处理这些问题，首先我们来介绍一下adjustSize和adjustPan属性。">
@@ -193,11 +193,12 @@
 <img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g8f5pbd3adj30u01hc76z.jpg" width="300">
 
 <p>在设置布局文件根布局为ScrollView时，如下所示：</p>
-<img src="https://s31.aconvert.com/convert/p3r68-cdx67/9j46s-pcdrq.gif" width="300">
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8fbtyp3vog30u01hcqv5.gif" width="300">
+
 
 <p>可以看到当我们设置属性为”android:windowSoftInputMode=”adjustResize”且根布局为ScrollView时，调整窗口尺寸是通过平移ScrollView中的内容来实现的，注意这里的文本标题并没有平移。且ScrollView中的文本内容我们可以滚动到最底部，不会被软键盘遮挡。</p>
 <p><strong>当我们设置Activity属性为”android:windowSoftInputMode=”adjustPan”</strong>且根布局为LinearLayout时，点击文本输入8可以看到整个窗口包括标题向上平移如下所示：</p>
-<img src="https://s31.aconvert.com/convert/p3r68-cdx67/0t1r5-k123n.gif" width="300">
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8fc1v28fsg30u01hckjl.gif" width="300">
 
 <p>当我们设置activity属性为adjustPan且根布局为ScrollView，这时候发现当我们点击文本输入8后滑动视图时，始终有部分文本输入框被软键盘遮挡，必须用户手动隐藏软键盘，才可以选择下面的文本输入。如下图所示：</p>
 <img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g8f6r04q8bj30u01hcmzq.jpg" width="300">
