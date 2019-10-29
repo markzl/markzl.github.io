@@ -16,7 +16,7 @@
 <meta property="og:description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。  对于非刘海屏幕而言有两种方式设置全屏 代码中设定，需要写在 setContentView() 之前：   123456// 隐藏标题//requestWindowFeature(Window.FEATURE_">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-23T09:59:12.011Z">
+<meta property="og:updated_time" content="2019-10-29T02:51:51.437Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android设置全屏及沉浸式布局">
 <meta name="twitter:description" content="注意：下述代码根据 AppCompatActivity 及主题  parent=&amp;quot;Theme.AppCompat.NoActionBar&amp;quot; 和midSdk 21实现。  对于非刘海屏幕而言有两种方式设置全屏 代码中设定，需要写在 setContentView() 之前：   123456// 隐藏标题//requestWindowFeature(Window.FEATURE_">
@@ -203,7 +203,7 @@
 </li>
 </ol>
 <p>上述两种方式都可以指定非刘海屏幕全屏显示。</p>
-<img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4eeorc6pgj30u01o0qv7.jpg" height="400px">
+<img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4eeorc6pgj30u01o0qv7.jpg" width="300">
 
 <h2 id="关于刘海屏的全屏展示。"><a href="#关于刘海屏的全屏展示。" class="headerlink" title="关于刘海屏的全屏展示。"></a>关于刘海屏的全屏展示。</h2><p>测试机是华为8x刘海屏手机，发现设置全屏之后界面并没有延伸到刘海。刘海屏幕全屏适配分为两种情况：Android P 及Android P 一下：</p>
 <ol>
@@ -222,7 +222,7 @@
 <li><strong>LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER</strong>：// 永远不允许窗口延伸到刘海区域</li>
 <li><strong>LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES</strong>：始终允许窗口延伸到屏幕短边上的刘海区域</li>
 </ul>
-<img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4eodg6xs9j30u01o0qv7.jpg" height="400px/">
+<img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4eodg6xs9j30u01o0qv7.jpg" width="300">
 
 <p>通过设置 <code>setSystemUiVisibility(int)</code> 方法可以获取实现常见的全屏或者是沉浸式布局的效果:</p>
 <p>控制SystemBar相关：</p>
@@ -269,7 +269,7 @@
 <h2 id="关于沉浸式界面"><a href="#关于沉浸式界面" class="headerlink" title="关于沉浸式界面"></a>关于沉浸式界面</h2><p>在代码中指定。在 setContentView() 之前指定状态栏颜色透明即可,设置状态栏透明后，界面布局将延伸到状态栏。注意如果设置全屏，状态栏不再显示.</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//设置沉浸式状态栏</span></span><br><span class="line">Window window = getWindow();</span><br><span class="line"><span class="hljs-comment">//设置状态栏颜色</span></span><br><span class="line">window.setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line"><span class="hljs-comment">//设置布局延伸到状态栏</span></span><br><span class="line">window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);</span><br></pre></td></tr></table></figure>
 
-<img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4emq1cpctj30u01o0qv7.jpg" height="400px">
+<img src="http://ww4.sinaimg.cn/large/006tNc79gy1g4emq1cpctj30u01o0qv7.jpg" width="300">
 
 <p>对于状态栏白色的情况，在Android 6.0 sdk版本23 的情况，应如下设置：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Window window = getWindow();</span><br><span class="line"><span class="hljs-keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</span><br><span class="line">  window.setStatusBarColor(Color.WHITE);</span><br><span class="line">  window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |</span><br><span class="line">                                              View.SYSTEM_UI_FLAG_LAYOUT_STABLE |</span><br><span class="line">                                              View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">//关于小米魅族状态栏颜色设置暂不考虑</span></span><br></pre></td></tr></table></figure>
@@ -290,6 +290,10 @@
         </div>
         
         
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
         
     </div>
 </div>
@@ -612,7 +616,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>

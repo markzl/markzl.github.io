@@ -206,11 +206,6 @@ img.thumbnail {
   font-size: 1.15rem;
   position: relative;
 }
-.article .content a img {
-  max-width: 50%;
-  margin: auto;
-  display: block;
-}
 .rtl {
   direction: rtl;
 }

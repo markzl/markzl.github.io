@@ -149,6 +149,105 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-22T09:02:12.000Z">2018-10-22</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 137 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/22/Android开发笔记/Android的Handler消息机制分析/">Android的Handler消息机制分析</a>
+            
+        </h1>
+        <div class="content">
+            <p>Handler的介绍中出现最多的关键字，Looper，ThreadLocal，MessageQueue。</p>
+<p>在工作线程的handler#sendMessage方法实际上是向主线程即UI线程的线程存储空间（ThreadLocal）或消息队列插入消息，通过Looper循环查询消息队列的新消息。</p>
+<h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;Looper&gt; sThreadLocal = <span class="hljs-keyword">new</span> ThreadLocal&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>在ActivityThread中调用 Looper.prepare方法，创建当前线程的Looper对象和MessageQueue队列，并通过sThreadLocal.set()方法保存当前队列。在Looper#loop方法中循环遍历消息队列</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-06-22T01:40:20.000Z">2018-06-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 分钟 读完 (大约 2032 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/06/22/Android开发笔记/Android okhttp使用详解/">Android okhttp使用详解</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="Get-请求"><a href="#Get-请求" class="headerlink" title="Get 请求"></a>Get 请求</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(url)</span><br><span class="line">  .build();</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> response.body().string();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过Request构建请求体，然后由 client 执行。这里 Request 默认请求类型是Get。<strong>注意这个是SynchronousGet是同步执行的</strong>。在Android UI线程直接运行会报错提示：==android.os.NetworkOnMainThreadException==。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/06/22/Android开发笔记/Android okhttp使用详解/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-04-18T01:40:20.000Z">2018-04-18</time>
                 
                 <div class="level-item">
@@ -426,7 +525,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1958 个字)
+                    14 分钟 读完 (大约 2027 个字)
                 </span>
                 
                 
@@ -627,7 +726,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        18
+                        20
                     </p>
                 </div>
             </div>
@@ -905,7 +1004,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>

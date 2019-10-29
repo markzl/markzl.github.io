@@ -159,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 291 个字)
+                    2 分钟 读完 (大约 355 个字)
                 </span>
                 
                 
@@ -172,7 +172,11 @@
             
         </h1>
         <div class="content">
-            <h2 id="对于项目中出现重复依赖且版本冲突处理方式"><a href="#对于项目中出现重复依赖且版本冲突处理方式" class="headerlink" title="对于项目中出现重复依赖且版本冲突处理方式"></a>对于项目中出现重复依赖且版本冲突处理方式</h2><blockquote>
+            <p>常见gradle配置记录，如输出应用包名，相关debug和release版本信息分开配置等，对于gradle中常见问题如版本重复依赖版本冲突等问题的处理记录。</p>
+<p><strong>输出包名</strong></p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="对于项目中出现重复依赖且版本冲突处理方式"><a href="#对于项目中出现重复依赖且版本冲突处理方式" class="headerlink" title="对于项目中出现重复依赖且版本冲突处理方式"></a>对于项目中出现重复依赖且版本冲突处理方式</h2><blockquote>
 <p>详情查看文章<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html" target="_blank" rel="noopener">链接</a></p>
 </blockquote>
 <p>对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本）出现的 Rxjava 版本冲突最终处理如下：统一项目使用的 Rxjava 版本。</p>
@@ -576,13 +580,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-22T09:02:12.000Z">2018-10-22</time>
+                <time class="level-item has-text-grey" datetime="2018-10-29T09:52:17.000Z">2018-10-29</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 137 个字)
+                    5 分钟 读完 (大约 683 个字)
                 </span>
                 
                 
@@ -591,18 +595,21 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/10/22/Android开发笔记/Android的Handler消息机制分析/">Android的Handler消息机制分析</a>
+                <a class="has-link-black-ter" href="/2018/10/29/Android软键盘遮挡输入文本框问题/">Android软键盘遮挡输入文本框问题</a>
             
         </h1>
         <div class="content">
-            <p>Handler的介绍中出现最多的关键字，Looper，ThreadLocal，MessageQueue。</p>
-<p>在工作线程的handler#sendMessage方法实际上是向主线程即UI线程的线程存储空间（ThreadLocal）或消息队列插入消息，通过Looper循环查询消息队列的新消息。</p>
-<h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;Looper&gt; sThreadLocal = <span class="hljs-keyword">new</span> ThreadLocal&lt;&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>在ActivityThread中调用 Looper.prepare方法，创建当前线程的Looper对象和MessageQueue队列，并通过sThreadLocal.set()方法保存当前队列。在Looper#loop方法中循环遍历消息队列</p>
-
+            <p>在开发过程中，经常遇到在某个界面有多个文本框时，点击输入会出现软件盘遮挡输入框的情况，或者是类似在登录或注册页面可以输入信息，但是键盘遮挡登录注册按钮的问题，还有遮挡住输入框下面的输入框，用户必须手动收起键盘才可以继续输入的情况。本篇文章介绍如何处理这些问题，首先我们来介绍一下adjustSize和adjustPan属性。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/29/Android软键盘遮挡输入文本框问题/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -621,17 +628,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-22T01:40:20.000Z">2018-06-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
-                </div>
+                <time class="level-item has-text-grey" datetime="2018-10-25T07:20:08.000Z">2018-10-25</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分钟 读完 (大约 2032 个字)
+                    几秒 读完 (大约 54 个字)
                 </span>
                 
                 
@@ -640,23 +643,17 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/06/22/Android开发笔记/Android okhttp使用详解/">Android okhttp使用详解</a>
+                <a class="has-link-black-ter" href="/2018/10/25/Java面试知识点/">Java面试知识点</a>
             
         </h1>
         <div class="content">
-            <h2 id="Get-请求"><a href="#Get-请求" class="headerlink" title="Get 请求"></a>Get 请求</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(url)</span><br><span class="line">  .build();</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> response.body().string();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p><strong>continue、break和return区别</strong></p>
+<p>continue：仅推出本次循环，剩下循环和方法继续执行。</p>
+<p>break：终止循环，但是继续执行方法</p>
+<p>return：终止循环和方法。</p>
 
-<p>通过Request构建请求体，然后由 client 执行。这里 Request 默认请求类型是Get。<strong>注意这个是SynchronousGet是同步执行的</strong>。在Android UI线程直接运行会报错提示：==android.os.NetworkOnMainThreadException==。</p>
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/22/Android开发笔记/Android okhttp使用详解/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -734,7 +731,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        18
+                        20
                     </p>
                 </div>
             </div>
@@ -1012,7 +1009,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
