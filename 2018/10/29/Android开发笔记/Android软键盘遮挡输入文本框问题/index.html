@@ -2,19 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: App Links - markzl的博客</title>
+<title>Android软键盘遮挡输入文本框问题 - markzl的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="markzl的博客">
-<meta property="og:url" content="http://yoursite.com/tags/App-Links/index.html">
+    <meta name="description" content="在开发过程中，经常遇到在某个界面有多个文本框时，点击输入会出现软件盘遮挡输入框的情况，或者是类似在登录或注册页面可以输入信息，但是键盘遮挡登录注册按钮的问题，还有遮挡住输入框下面的输入框，用户必须手动收起键盘才可以继续输入的情况。本篇文章介绍如何处理这些问题，首先我们来介绍一下adjustSize和adjustPan属性。">
+<meta name="keywords" content="adjustResize,adjustPan,软键盘遮挡">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android软键盘遮挡输入文本框问题">
+<meta property="og:url" content="http://yoursite.com/2018/10/29/Android开发笔记/Android软键盘遮挡输入文本框问题/index.html">
 <meta property="og:site_name" content="markzl的博客">
+<meta property="og:description" content="在开发过程中，经常遇到在某个界面有多个文本框时，点击输入会出现软件盘遮挡输入框的情况，或者是类似在登录或注册页面可以输入信息，但是键盘遮挡登录注册按钮的问题，还有遮挡住输入框下面的输入框，用户必须手动收起键盘才可以继续输入的情况。本篇文章介绍如何处理这些问题，首先我们来介绍一下adjustSize和adjustPan属性。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-10-30T06:42:04.227Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="markzl的博客">
+<meta name="twitter:title" content="Android软键盘遮挡输入文本框问题">
+<meta name="twitter:description" content="在开发过程中，经常遇到在某个界面有多个文本框时，点击输入会出现软件盘遮挡输入框的情况，或者是类似在登录或注册页面可以输入信息，但是键盘遮挡登录注册按钮的问题，还有遮挡住输入框下面的输入框，用户必须手动收起键盘才可以继续输入的情况。本篇文章介绍如何处理这些问题，首先我们来介绍一下adjustSize和adjustPan属性。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -95,7 +100,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="markzl的博客" height="28">
+                <img src="/images/logo.svg" alt="Android软键盘遮挡输入文本框问题" height="28">
             
             </a>
         </div>
@@ -129,6 +134,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -143,23 +152,12 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">App Links</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-11-01T06:48:16.000Z">2018-11-01</time>
+                <time class="level-item has-text-grey" datetime="2018-10-29T09:52:17.000Z">2018-10-29</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
@@ -169,7 +167,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分钟 读完 (大约 2039 个字)
+                    5 分钟 读完 (大约 809 个字)
                 </span>
                 
                 
@@ -178,31 +176,118 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/11/01/Android开发笔记/第1章：Activity基础知识点/">第1章：Activity基础知识点</a>
+                Android软键盘遮挡输入文本框问题
             
         </h1>
         <div class="content">
-            <h3 id="1-1-Activity是什么？"><a href="#1-1-Activity是什么？" class="headerlink" title="1.1 Activity是什么？"></a>1.1 Activity是什么？</h3><p>Activity是用户与程序的窗口，使用前需要在清单文件中通过Actvity标签的android:name属性声明，Activity清单文件的属性配置可以参考<a href="https://developer.android.google.cn/guide/topics/manifest/activity-element.html" target="_blank" rel="noopener">官方说明</a>。</p>
+            <p>在开发过程中，经常遇到在某个界面有多个文本框时，点击输入会出现软件盘遮挡输入框的情况，或者是类似在登录或注册页面可以输入信息，但是键盘遮挡登录注册按钮的问题，还有遮挡住输入框下面的输入框，用户必须手动收起键盘才可以继续输入的情况。本篇文章介绍如何处理这些问题，首先我们来介绍一下adjustSize和adjustPan属性。<a id="more"></a></p>
+<p>在搜索相关软件盘遮挡问题时，大部分文章都是推荐我们在AndroidManifest文件中的Activity标签中添加 “android:windowSoftInputMode=”adjustResize” 或者是 “android:windowSoftInputMode=”adjustPan”属性，这里我们先来介绍一下 adjustResize 和 adjustPan。<a href="https://developer.android.google.cn/guide/topics/manifest/activity-element.html#wsoft" target="_blank" rel="noopener">官网的描述</a>如下：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>adjustResize</td>
+<td>始终调整Activity主窗口的尺寸，以为屏幕上的软键盘腾出空间</td>
+</tr>
+<tr>
+<td>adjustPan</td>
+<td>不通过调整Activity主窗口的尺寸为软键盘腾出空间。相反窗口的内容会自动平移，使键盘永远无法覆盖当前焦点，以便用户始终看到自己输入的内容。这通常不如调整窗口尺寸可取，因为用户可能需关闭软键盘才能进入被遮盖的窗口部分，并与之交互。</td>
+</tr>
+</tbody></table>
+<p><strong>当设置属性”android:windowSoftInputMode=”adjustResize”时</strong>，多文本输入框且根布局为LinearLayout没有使用ScrollView包裹时，点击文本输入7时，主窗口尺寸被调整压缩如下所示：</p>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g8f5pbd3adj30u01hc76z.jpg" width="300">
+
+<p>在设置布局文件根布局为ScrollView时，如下所示：</p>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8fbtyp3vog30u01hcqv5.gif" width="300">
+
+
+<p>可以看到当我们设置属性为”android:windowSoftInputMode=”adjustResize”且根布局为ScrollView时，调整窗口尺寸是通过平移ScrollView中的内容来实现的，注意这里的文本标题并没有平移。且ScrollView中的文本内容我们可以滚动到最底部，不会被软键盘遮挡。</p>
+<p><strong>当我们设置Activity属性为”android:windowSoftInputMode=”adjustPan”</strong>且根布局为LinearLayout时，点击文本输入8可以看到整个窗口包括标题向上平移如下所示：</p>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8fc1v28fsg30u01hckjl.gif" width="300">
+
+<p>当我们设置activity属性为adjustPan且根布局为ScrollView，这时候发现当我们点击文本输入8后滑动视图时，始终有部分文本输入框被软键盘遮挡，必须用户手动隐藏软键盘，才可以选择下面的文本输入。如下图所示：</p>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g8f6r04q8bj30u01hcmzq.jpg" width="300">
+
+<p>文本输入12下面的文本输入框被键盘遮挡无法滑动。</p>
+<p>总结一下，在使用adjustResize属性而根布局不是ScrollView的情况，Activity主窗口会被压缩显示不全，无法看到输入内容，此时使用adjustPan属性会让显示效果更好，不过需要用户手动隐藏软键盘才可以继续输入。在根布局为ScrollView的情况下，Activity使用adjustResize用户体验会更好，因为此时的adjustPan属性始终会使软键盘遮挡部分布局。</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/11/01/Android开发笔记/第1章：Activity基础知识点/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/adjustPan/">adjustPan</a>, <a class="has-link-grey -link" href="/tags/adjustResize/">adjustResize</a>, <a class="has-link-grey -link" href="/tags/软键盘遮挡/">软键盘遮挡</a>
                 </div>
             </div>
         </div>
         
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
         
     </div>
 </div>
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/11/01/Android开发笔记/第1章：Activity基础知识点/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">第1章：Activity基础知识点</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/10/25/Java面试知识点/">
+                <span class="level-item">Java面试知识点</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -215,112 +300,19 @@
     
         
 
-<div class="card widget">
+    
+        
+<div class="card widget" id="toc" style="max-height: 400px;overflow: auto;">
     <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                        <figure class="image is-128x128 has-mb-6">
-                            <img class="is-rounded" src="/images/avatar.jpeg" alt="markzl">
-                        </figure>
-                    
-                    
-                    <p class="is-size-4 is-block">
-                        markzl
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        我的技术博客和读书笔记
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>江苏.南京</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        23
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分类
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        5
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        标签
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        35
-                    </p>
-                </div>
-            </div>
-        </nav>
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/markzl" target="_blank">
-                关注我</a>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/markzl">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
-                
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
-                
-                <i class="fas fa-rss"></i>
-                
-            </a>
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
             
         </div>
-        
     </div>
 </div>
 
-    
-        
     
         
 <div class="card widget">
@@ -853,17 +845,6 @@
 </div>
     
         
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            标签云
-        </h3>
-        <a href="/tags/AIO/" style="font-size: 10px;">AIO</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android开发艺术探索/" style="font-size: 10px;">Android开发艺术探索</a> <a href="/tags/App-Links/" style="font-size: 10px;">App Links</a> <a href="/tags/BIO/" style="font-size: 10px;">BIO</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/List/" style="font-size: 10px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Rxjava操作符/" style="font-size: 20px;">Rxjava操作符</a> <a href="/tags/Set/" style="font-size: 10px;">Set</a> <a href="/tags/adjustPan/" style="font-size: 10px;">adjustPan</a> <a href="/tags/adjustResize/" style="font-size: 10px;">adjustResize</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jre/" style="font-size: 10px;">jre</a> <a href="/tags/jvm/" style="font-size: 10px;">jvm</a> <a href="/tags/throw/" style="font-size: 10px;">throw</a> <a href="/tags/throws/" style="font-size: 10px;">throws</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/基本类型/" style="font-size: 10px;">基本类型</a> <a href="/tags/堆栈/" style="font-size: 10px;">堆栈</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/抽象/" style="font-size: 10px;">抽象</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/特征/" style="font-size: 10px;">特征</a> <a href="/tags/生命周期/" style="font-size: 10px;">生命周期</a> <a href="/tags/线程/" style="font-size: 15px;">线程</a> <a href="/tags/软键盘遮挡/" style="font-size: 10px;">软键盘遮挡</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
-    </div>
-</div>
-
-
     
         
 
@@ -905,14 +886,12 @@
 
     
     
-        <div class="column-right-shadow is-hidden-widescreen ">
+        <div class="column-right-shadow  ">
         
         </div>
     
 </div>
 
-                
-                
                 
             </div>
         </div>
@@ -923,7 +902,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="markzl的博客" height="28">
+                    <img src="/images/logo.svg" alt="Android软键盘遮挡输入文本框问题" height="28">
                 
                 </a>
                 <p class="is-size-7">

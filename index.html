@@ -159,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 355 个字)
+                    2 分钟 读完 (大约 366 个字)
                 </span>
                 
                 
@@ -174,12 +174,7 @@
         <div class="content">
             <p>常见gradle配置记录，如输出应用包名，相关debug和release版本信息分开配置等，对于gradle中常见问题如版本重复依赖版本冲突等问题的处理记录。</p>
 <p><strong>输出包名</strong></p>
-<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="对于项目中出现重复依赖且版本冲突处理方式"><a href="#对于项目中出现重复依赖且版本冲突处理方式" class="headerlink" title="对于项目中出现重复依赖且版本冲突处理方式"></a>对于项目中出现重复依赖且版本冲突处理方式</h2><blockquote>
-<p>详情查看文章<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html" target="_blank" rel="noopener">链接</a></p>
-</blockquote>
-<p>对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本）出现的 Rxjava 版本冲突最终处理如下：统一项目使用的 Rxjava 版本。</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//修改apk包名</span></span><br><span class="line"> applicationVariants.all &#123; variant -&gt;</span><br><span class="line">     variant.outputs.all &#123; output -&gt;</span><br><span class="line">         outputFileName = <span class="hljs-string">"app-$&#123;variant.name&#125;-$&#123;defaultConfig.versionName&#125;-$&#123;defaultConfig.versionCode&#125;.apk"</span></span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
         </div>
         
         
@@ -478,7 +473,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1339 个字)
+                    9 分钟 读完 (大约 1336 个字)
                 </span>
                 
                 
@@ -492,7 +487,7 @@
         </h1>
         <div class="content">
             <blockquote>
-<p>注意：下述代码根据 AppCompatActivity 及主题  <code>parent=&quot;Theme.AppCompat.NoActionBar&quot;</code> 和<code>midSdk 21</code>实现。</p>
+<p>下述代码根据 AppCompatActivity 及主题  <code>parent=&quot;Theme.AppCompat.NoActionBar&quot;</code> 和<code>midSdk 21</code>实现。</p>
 </blockquote>
 <h2 id="对于非刘海屏幕而言有两种方式设置全屏"><a href="#对于非刘海屏幕而言有两种方式设置全屏" class="headerlink" title="对于非刘海屏幕而言有两种方式设置全屏"></a>对于非刘海屏幕而言有两种方式设置全屏</h2><ol>
 <li><p>代码中设定，需要写在 setContentView() 之前： </p>
@@ -580,7 +575,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-11-01T06:48:16.000Z">2018-11-01</time>
+                <time class="level-item has-text-grey" datetime="2018-11-01T07:00:58.000Z">2018-11-01</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
@@ -590,7 +585,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分钟 读完 (大约 2039 个字)
+                    4 分钟 读完 (大约 600 个字)
                 </span>
                 
                 
@@ -599,18 +594,23 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/11/01/Activity基础知识点/">Activity基础知识点</a>
+                <a class="has-link-black-ter" href="/2018/11/01/Android开发笔记/第2章：BroadcastReceiver广播接收器/">第2章：BroadcastReceiver广播接收器</a>
             
         </h1>
         <div class="content">
-            <h3 id="1-1-Activity是什么？"><a href="#1-1-Activity是什么？" class="headerlink" title="1.1 Activity是什么？"></a>1.1 Activity是什么？</h3><p>Activity是用户与程序的窗口，使用前需要在清单文件中通过Actvity标签的android:name属性声明，Activity清单文件的属性配置可以参考<a href="https://developer.android.google.cn/guide/topics/manifest/activity-element.html" target="_blank" rel="noopener">官方说明</a>。</p>
+            <h4 id="常见广播的使用场景："><a href="#常见广播的使用场景：" class="headerlink" title="常见广播的使用场景："></a>常见广播的使用场景：</h4><ol>
+<li>同一app内有多个进程的不同组件之间的消息通信。</li>
+<li>不同app之间的组件之间消息的通信。</li>
+</ol>
+<h4 id="有序广播和无序广播区别："><a href="#有序广播和无序广播区别：" class="headerlink" title="有序广播和无序广播区别："></a>有序广播和无序广播区别：</h4><p><strong>无序广播</strong>是通过<code>context.sendBroadcast(Intent)</code>方法发送的广播，不可拦截，当然发送的数据接受者是无法进行修改的。</p>
+<p><strong>有序广播</strong>是通过<code>context.sendOrderBroadcast(Intent)</code>方法发送的广播，可被拦截，而且接受者是可以修改发送的数据的。下一个接受者接受的数据是上一个接受者修改过的。</p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/11/01/Activity基础知识点/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2018/11/01/Android开发笔记/第2章：BroadcastReceiver广播接收器/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -632,7 +632,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-29T09:52:17.000Z">2018-10-29</time>
+                <time class="level-item has-text-grey" datetime="2018-11-01T06:48:16.000Z">2018-11-01</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
@@ -642,7 +642,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 809 个字)
+                    14 分钟 读完 (大约 2039 个字)
                 </span>
                 
                 
@@ -651,18 +651,18 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/10/29/Android软键盘遮挡输入文本框问题/">Android软键盘遮挡输入文本框问题</a>
+                <a class="has-link-black-ter" href="/2018/11/01/Android开发笔记/第1章：Activity基础知识点/">第1章：Activity基础知识点</a>
             
         </h1>
         <div class="content">
-            <p>在开发过程中，经常遇到在某个界面有多个文本框时，点击输入会出现软件盘遮挡输入框的情况，或者是类似在登录或注册页面可以输入信息，但是键盘遮挡登录注册按钮的问题，还有遮挡住输入框下面的输入框，用户必须手动收起键盘才可以继续输入的情况。本篇文章介绍如何处理这些问题，首先我们来介绍一下adjustSize和adjustPan属性。</p>
+            <h3 id="1-1-Activity是什么？"><a href="#1-1-Activity是什么？" class="headerlink" title="1.1 Activity是什么？"></a>1.1 Activity是什么？</h3><p>Activity是用户与程序的窗口，使用前需要在清单文件中通过Actvity标签的android:name属性声明，Activity清单文件的属性配置可以参考<a href="https://developer.android.google.cn/guide/topics/manifest/activity-element.html" target="_blank" rel="noopener">官方说明</a>。</p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/10/29/Android软键盘遮挡输入文本框问题/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2018/11/01/Android开发笔记/第1章：Activity基础知识点/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -745,7 +745,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        22
+                        23
                     </p>
                 </div>
             </div>
@@ -765,7 +765,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        34
+                        35
                     </p>
                 </div>
             </div>
@@ -936,7 +936,7 @@
                 <span class="level-item">Android开发笔记</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
@@ -1023,7 +1023,7 @@
                     <span class="level-item">十一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1127,6 +1127,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/BIO/">
                         <span class="tag">BIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
+                        <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1346,7 +1353,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AIO/" style="font-size: 10px;">AIO</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android开发艺术探索/" style="font-size: 10px;">Android开发艺术探索</a> <a href="/tags/App-Links/" style="font-size: 10px;">App Links</a> <a href="/tags/BIO/" style="font-size: 10px;">BIO</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/List/" style="font-size: 10px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Rxjava操作符/" style="font-size: 20px;">Rxjava操作符</a> <a href="/tags/Set/" style="font-size: 10px;">Set</a> <a href="/tags/adjustPan/" style="font-size: 10px;">adjustPan</a> <a href="/tags/adjustResize/" style="font-size: 10px;">adjustResize</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jre/" style="font-size: 10px;">jre</a> <a href="/tags/jvm/" style="font-size: 10px;">jvm</a> <a href="/tags/throw/" style="font-size: 10px;">throw</a> <a href="/tags/throws/" style="font-size: 10px;">throws</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/基本类型/" style="font-size: 10px;">基本类型</a> <a href="/tags/堆栈/" style="font-size: 10px;">堆栈</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/抽象/" style="font-size: 10px;">抽象</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/特征/" style="font-size: 10px;">特征</a> <a href="/tags/生命周期/" style="font-size: 10px;">生命周期</a> <a href="/tags/线程/" style="font-size: 15px;">线程</a> <a href="/tags/软键盘遮挡/" style="font-size: 10px;">软键盘遮挡</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        <a href="/tags/AIO/" style="font-size: 10px;">AIO</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android开发艺术探索/" style="font-size: 10px;">Android开发艺术探索</a> <a href="/tags/App-Links/" style="font-size: 10px;">App Links</a> <a href="/tags/BIO/" style="font-size: 10px;">BIO</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/List/" style="font-size: 10px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Rxjava操作符/" style="font-size: 20px;">Rxjava操作符</a> <a href="/tags/Set/" style="font-size: 10px;">Set</a> <a href="/tags/adjustPan/" style="font-size: 10px;">adjustPan</a> <a href="/tags/adjustResize/" style="font-size: 10px;">adjustResize</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jre/" style="font-size: 10px;">jre</a> <a href="/tags/jvm/" style="font-size: 10px;">jvm</a> <a href="/tags/throw/" style="font-size: 10px;">throw</a> <a href="/tags/throws/" style="font-size: 10px;">throws</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/基本类型/" style="font-size: 10px;">基本类型</a> <a href="/tags/堆栈/" style="font-size: 10px;">堆栈</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/抽象/" style="font-size: 10px;">抽象</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/特征/" style="font-size: 10px;">特征</a> <a href="/tags/生命周期/" style="font-size: 10px;">生命周期</a> <a href="/tags/线程/" style="font-size: 15px;">线程</a> <a href="/tags/软键盘遮挡/" style="font-size: 10px;">软键盘遮挡</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
     </div>
 </div>
 

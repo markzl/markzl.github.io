@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="常见gradle配置记录，如输出应用包名，相关debug和release版本信息分开配置等，对于gradle中常见问题如版本重复依赖版本冲突等问题的处理记录。 输出包名 12  对于项目中出现重复依赖且版本冲突处理方式 详情查看文章链接  对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本">
+    <meta name="description" content="常见gradle配置记录，如输出应用包名，相关debug和release版本信息分开配置等，对于gradle中常见问题如版本重复依赖版本冲突等问题的处理记录。 输出包名 123456//修改apk包名 applicationVariants.all &amp;#123; variant -&amp;gt;     variant.outputs.all &amp;#123; output -&amp;gt;         ou">
 <meta name="keywords" content="gradle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gradle 配置常见问题">
 <meta property="og:url" content="http://yoursite.com/2019/07/31/gradle配置笔记/Android Gradle配置/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="常见gradle配置记录，如输出应用包名，相关debug和release版本信息分开配置等，对于gradle中常见问题如版本重复依赖版本冲突等问题的处理记录。 输出包名 12  对于项目中出现重复依赖且版本冲突处理方式 详情查看文章链接  对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本">
+<meta property="og:description" content="常见gradle配置记录，如输出应用包名，相关debug和release版本信息分开配置等，对于gradle中常见问题如版本重复依赖版本冲突等问题的处理记录。 输出包名 123456//修改apk包名 applicationVariants.all &amp;#123; variant -&amp;gt;     variant.outputs.all &amp;#123; output -&amp;gt;         ou">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-25T01:53:01.122Z">
+<meta property="og:updated_time" content="2019-11-04T09:42:43.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gradle 配置常见问题">
-<meta name="twitter:description" content="常见gradle配置记录，如输出应用包名，相关debug和release版本信息分开配置等，对于gradle中常见问题如版本重复依赖版本冲突等问题的处理记录。 输出包名 12  对于项目中出现重复依赖且版本冲突处理方式 详情查看文章链接  对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本">
+<meta name="twitter:description" content="常见gradle配置记录，如输出应用包名，相关debug和release版本信息分开配置等，对于gradle中常见问题如版本重复依赖版本冲突等问题的处理记录。 输出包名 123456//修改apk包名 applicationVariants.all &amp;#123; variant -&amp;gt;     variant.outputs.all &amp;#123; output -&amp;gt;         ou">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -167,7 +167,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 355 个字)
+                    2 分钟 读完 (大约 366 个字)
                 </span>
                 
                 
@@ -182,14 +182,14 @@
         <div class="content">
             <p>常见gradle配置记录，如输出应用包名，相关debug和release版本信息分开配置等，对于gradle中常见问题如版本重复依赖版本冲突等问题的处理记录。</p>
 <p><strong>输出包名</strong></p>
-<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//修改apk包名</span></span><br><span class="line"> applicationVariants.all &#123; variant -&gt;</span><br><span class="line">     variant.outputs.all &#123; output -&gt;</span><br><span class="line">         outputFileName = <span class="hljs-string">"app-$&#123;variant.name&#125;-$&#123;defaultConfig.versionName&#125;-$&#123;defaultConfig.versionCode&#125;.apk"</span></span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="对于项目中出现重复依赖且版本冲突处理方式"><a href="#对于项目中出现重复依赖且版本冲突处理方式" class="headerlink" title="对于项目中出现重复依赖且版本冲突处理方式"></a>对于项目中出现重复依赖且版本冲突处理方式</h2><blockquote>
-<p>详情查看文章<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html" target="_blank" rel="noopener">链接</a></p>
-</blockquote>
-<p>对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本）出现的 Rxjava 版本冲突最终处理如下：统一项目使用的 Rxjava 版本。</p>
 <a id="more"></a>
 
+<h2 id="对于项目中出现重复依赖且版本冲突处理方式"><a href="#对于项目中出现重复依赖且版本冲突处理方式" class="headerlink" title="对于项目中出现重复依赖且版本冲突处理方式"></a>对于项目中出现重复依赖且版本冲突处理方式</h2><blockquote>
+<p>参考资料<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html" target="_blank" rel="noopener">链接</a></p>
+</blockquote>
+<p>对于出现项目依赖 Rxjava 3.x 版本，而同时使用 RxAndroid 2.x 版本（RxAndroid 2.x 版本内部依赖 Rxjava 2.x 版本）出现的 Rxjava 版本冲突最终处理如下：统一项目使用的 Rxjava 版本。</p>
 <ol>
 <li><p>全局替换重复依赖</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy.dependencySubstitution &#123;</span><br><span class="line">        <span class="hljs-comment">// Substitute one module dependency for another</span></span><br><span class="line">        <span class="hljs-function">substitute <span class="hljs-title">module</span><span class="hljs-params">(<span class="hljs-string">"io.reactivex.rxjava2:rxjava:2.2.0"</span>)</span> with <span class="hljs-title">module</span><span class="hljs-params">(<span class="hljs-string">"io.reactivex.rxjava3:rxjava:3.0.0-RC0"</span>)</span></span></span><br><span class="line"><span class="hljs-function">    &#125;</span></span><br><span class="line"><span class="hljs-function">&#125;</span></span><br></pre></td></tr></table></figure>
@@ -205,7 +205,7 @@
 <p><strong>替换本地与远程依赖（可以在开发 Library 时使用，方便切换本地库和在线库）</strong>：</p>
   <figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy.dependencySubstitution &#123;</span><br><span class="line">        substitute module(<span class="hljs-string">"org.utils:api"</span>) because <span class="hljs-string">"we work with the unreleased development version"</span> with project(<span class="hljs-string">":api"</span>)</span><br><span class="line">        substitute module(<span class="hljs-string">"org.utils:util:2.5"</span>) with project(<span class="hljs-string">":util"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="打包统一输出配置"><a href="#打包统一输出配置" class="headerlink" title="打包统一输出配置"></a>打包统一输出配置</h2>
+
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -296,10 +296,6 @@
         <a class="is-flex" href="#对于项目中出现重复依赖且版本冲突处理方式">
         <span class="has-mr-6">1</span>
         <span>对于项目中出现重复依赖且版本冲突处理方式</span>
-        </a></li><li>
-        <a class="is-flex" href="#打包统一输出配置">
-        <span class="has-mr-6">2</span>
-        <span>打包统一输出配置</span>
         </a></li></ul>
         </div>
     </div>
@@ -426,7 +422,7 @@
                 <span class="level-item">Android开发笔记</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
@@ -513,7 +509,7 @@
                     <span class="level-item">十一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -617,6 +613,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/BIO/">
                         <span class="tag">BIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
+                        <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

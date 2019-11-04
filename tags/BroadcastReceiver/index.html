@@ -2,14 +2,14 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: App Links - markzl的博客</title>
+<title>标签: BroadcastReceiver - markzl的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="markzl的博客">
-<meta property="og:url" content="http://yoursite.com/tags/App-Links/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/BroadcastReceiver/index.html">
 <meta property="og:site_name" content="markzl的博客">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
@@ -147,7 +147,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">App Links</a></li>
+            <li class="is-active"><a href="#" aria-current="page">BroadcastReceiver</a></li>
         </ul>
         </nav>
     </div>
@@ -159,7 +159,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-11-01T06:48:16.000Z">2018-11-01</time>
+                <time class="level-item has-text-grey" datetime="2018-11-01T07:00:58.000Z">2018-11-01</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
@@ -169,7 +169,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分钟 读完 (大约 2039 个字)
+                    4 分钟 读完 (大约 600 个字)
                 </span>
                 
                 
@@ -178,18 +178,23 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/11/01/Android开发笔记/第1章：Activity基础知识点/">第1章：Activity基础知识点</a>
+                <a class="has-link-black-ter" href="/2018/11/01/Android开发笔记/第2章：BroadcastReceiver广播接收器/">第2章：BroadcastReceiver广播接收器</a>
             
         </h1>
         <div class="content">
-            <h3 id="1-1-Activity是什么？"><a href="#1-1-Activity是什么？" class="headerlink" title="1.1 Activity是什么？"></a>1.1 Activity是什么？</h3><p>Activity是用户与程序的窗口，使用前需要在清单文件中通过Actvity标签的android:name属性声明，Activity清单文件的属性配置可以参考<a href="https://developer.android.google.cn/guide/topics/manifest/activity-element.html" target="_blank" rel="noopener">官方说明</a>。</p>
+            <h4 id="常见广播的使用场景："><a href="#常见广播的使用场景：" class="headerlink" title="常见广播的使用场景："></a>常见广播的使用场景：</h4><ol>
+<li>同一app内有多个进程的不同组件之间的消息通信。</li>
+<li>不同app之间的组件之间消息的通信。</li>
+</ol>
+<h4 id="有序广播和无序广播区别："><a href="#有序广播和无序广播区别：" class="headerlink" title="有序广播和无序广播区别："></a>有序广播和无序广播区别：</h4><p><strong>无序广播</strong>是通过<code>context.sendBroadcast(Intent)</code>方法发送的广播，不可拦截，当然发送的数据接受者是无法进行修改的。</p>
+<p><strong>有序广播</strong>是通过<code>context.sendOrderBroadcast(Intent)</code>方法发送的广播，可被拦截，而且接受者是可以修改发送的数据的。下一个接受者接受的数据是上一个接受者修改过的。</p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/11/01/Android开发笔记/第1章：Activity基础知识点/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2018/11/01/Android开发笔记/第2章：BroadcastReceiver广播接收器/#more">阅读更多</a>
                 </div>
             </div>
         </div>
