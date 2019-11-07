@@ -299,11 +299,15 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-10-22T09:02:12.000Z">2018-10-22</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 137 个字)
+                    11 分钟 读完 (大约 1591 个字)
                 </span>
                 
                 
@@ -317,13 +321,17 @@
         </h1>
         <div class="content">
             <p>Handler的介绍中出现最多的关键字，Looper，ThreadLocal，MessageQueue。</p>
-<p>在工作线程的handler#sendMessage方法实际上是向主线程即UI线程的线程存储空间（ThreadLocal）或消息队列插入消息，通过Looper循环查询消息队列的新消息。</p>
-<h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;Looper&gt; sThreadLocal = <span class="hljs-keyword">new</span> ThreadLocal&lt;&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>在ActivityThread中调用 Looper.prepare方法，创建当前线程的Looper对象和MessageQueue队列，并通过sThreadLocal.set()方法保存当前队列。在Looper#loop方法中循环遍历消息队列</p>
-
+<p>在工作线程的 handler#sendMessage 方法实际上是向主线程即UI线程的消息队列插入消息，通过ActivityThread初始化Looper对象，并通过Looper.looper方法循环查询消息队列的新消息。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/22/Android开发笔记/Android的Handler消息机制分析/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -752,7 +760,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        35
+                        36
                     </p>
                 </div>
             </div>
@@ -923,7 +931,7 @@
                 <span class="level-item">Android开发笔记</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">9</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
@@ -1151,6 +1159,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Handler/">
+                        <span class="tag">Handler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/List/">
                         <span class="tag">List</span>
                         <span class="tag is-grey">1</span>
@@ -1351,7 +1366,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AIO/" style="font-size: 10px;">AIO</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android开发艺术探索/" style="font-size: 10px;">Android开发艺术探索</a> <a href="/tags/App-Links/" style="font-size: 10px;">App Links</a> <a href="/tags/BIO/" style="font-size: 10px;">BIO</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/List/" style="font-size: 10px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Rxjava操作符/" style="font-size: 16.67px;">Rxjava操作符</a> <a href="/tags/Set/" style="font-size: 10px;">Set</a> <a href="/tags/adjustPan/" style="font-size: 10px;">adjustPan</a> <a href="/tags/adjustResize/" style="font-size: 10px;">adjustResize</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jre/" style="font-size: 10px;">jre</a> <a href="/tags/jvm/" style="font-size: 10px;">jvm</a> <a href="/tags/throw/" style="font-size: 10px;">throw</a> <a href="/tags/throws/" style="font-size: 10px;">throws</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/基本类型/" style="font-size: 10px;">基本类型</a> <a href="/tags/堆栈/" style="font-size: 10px;">堆栈</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/抽象/" style="font-size: 10px;">抽象</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/特征/" style="font-size: 10px;">特征</a> <a href="/tags/生命周期/" style="font-size: 10px;">生命周期</a> <a href="/tags/线程/" style="font-size: 13.33px;">线程</a> <a href="/tags/软键盘遮挡/" style="font-size: 10px;">软键盘遮挡</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        <a href="/tags/AIO/" style="font-size: 10px;">AIO</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android开发艺术探索/" style="font-size: 10px;">Android开发艺术探索</a> <a href="/tags/App-Links/" style="font-size: 10px;">App Links</a> <a href="/tags/BIO/" style="font-size: 10px;">BIO</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/Handler/" style="font-size: 10px;">Handler</a> <a href="/tags/List/" style="font-size: 10px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Rxjava操作符/" style="font-size: 16.67px;">Rxjava操作符</a> <a href="/tags/Set/" style="font-size: 10px;">Set</a> <a href="/tags/adjustPan/" style="font-size: 10px;">adjustPan</a> <a href="/tags/adjustResize/" style="font-size: 10px;">adjustResize</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jre/" style="font-size: 10px;">jre</a> <a href="/tags/jvm/" style="font-size: 10px;">jvm</a> <a href="/tags/throw/" style="font-size: 10px;">throw</a> <a href="/tags/throws/" style="font-size: 10px;">throws</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/基本类型/" style="font-size: 10px;">基本类型</a> <a href="/tags/堆栈/" style="font-size: 10px;">堆栈</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/抽象/" style="font-size: 10px;">抽象</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/特征/" style="font-size: 10px;">特征</a> <a href="/tags/生命周期/" style="font-size: 10px;">生命周期</a> <a href="/tags/线程/" style="font-size: 13.33px;">线程</a> <a href="/tags/软键盘遮挡/" style="font-size: 10px;">软键盘遮挡</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
     </div>
 </div>
 
