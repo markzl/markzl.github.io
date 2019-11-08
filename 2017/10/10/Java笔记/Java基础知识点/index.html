@@ -16,7 +16,7 @@
 <meta property="og:description" content="面向过程编程和面向对象编程的区别在于：面向过程编程强调的是整个软件系统由一个个函数构成，最小的程序单元是函数，其中作为程序入口的函数称之为主函数，主函数依次调用其他函数，普通函数之间可以相互调用，从而实现整个系统的设计。 面向对象的设计是使所需要的对象具备某些功能，强调的是具备某些功能的对象。面向对象主要有三大特征：封装（Encapsulation），继承（Inheritance），多态（Poly">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-25T07:06:00.180Z">
+<meta property="og:updated_time" content="2019-11-07T08:11:32.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础知识点">
 <meta name="twitter:description" content="面向过程编程和面向对象编程的区别在于：面向过程编程强调的是整个软件系统由一个个函数构成，最小的程序单元是函数，其中作为程序入口的函数称之为主函数，主函数依次调用其他函数，普通函数之间可以相互调用，从而实现整个系统的设计。 面向对象的设计是使所需要的对象具备某些功能，强调的是具备某些功能的对象。面向对象主要有三大特征：封装（Encapsulation），继承（Inheritance），多态（Poly">
@@ -167,7 +167,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分钟 读完 (大约 2027 个字)
+                    14 分钟 读完 (大约 2031 个字)
                 </span>
                 
                 
@@ -277,7 +277,7 @@
 <p>这里创建对象的引用，并非对象。直接使用会报错，因为没有赋值-指向任何对象。</p>
 <p>在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配。</p>
 <p>​    <strong>堆内存：</strong>用于存放由new创建的对象或数组。在堆中分配的内存，有java虚拟机自动回收器来管理。在堆中产生一个数组或者对象后，还可以在栈中定义一个特殊的变量，这个变量的取值等于数组或者对象在堆内存中的首地址，在栈中的这个特殊的变量就变成了数组或者对象的引用变量，以后就可以在程序中使用栈内存中的引用变量来访问堆中的数组或者对象，引用变量相当于为数组或者对象起的别名或者代号。</p>
-<p>​    引用变量是普通变量，定义时在栈中分配内存，引用变量在程序运行到作用域外释放。而数组&amp;对象本身在堆中分配，即使程序运行到使用new产生数组和对象的语句所在地代码块之外，数组和对象本身占用的堆内存也不会被释放，数组和对象在没有引用变量指向它的时候，才变成垃圾，不能再被使用，但是仍然占着内存，在随后的一个不确定的时间被垃圾回收器释放掉。这个也是java比较占内存的主要原因，<strong>实际上，栈中的变量指向堆内存中的对象，这就是Java中的指针。</strong></p>
+<p>​    <strong>栈内存：</strong>引用变量是普通变量，定义时在栈中分配内存，引用变量在程序运行到作用域外释放。而数组&amp;对象本身在堆中分配，即使程序运行到使用new产生数组和对象的语句所在地代码块之外，数组和对象本身占用的堆内存也不会被释放，数组和对象在没有引用变量指向它的时候，才变成垃圾，不能再被使用，但是仍然占着内存，在随后的一个不确定的时间被垃圾回收器释放掉。这个也是java比较占内存的主要原因，<strong>实际上，栈中的变量指向堆内存中的对象，这就是Java中的指针。</strong></p>
 <p><strong>总结：</strong> 栈内存中保存的是对象的引用，而Java对象保存在堆内存上。</p>
 <p><strong>参考资料</strong></p>
 <p><a href="https://blog.csdn.net/Xk632172748/article/details/51755438" target="_blank" rel="noopener">https://blog.csdn.net/Xk632172748/article/details/51755438</a></p>
@@ -443,25 +443,6 @@
         
         <article class="media">
             
-            <a href="/2019/11/01/Android开发笔记/第4章：Service知识点/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="第4章：Service知识点">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-01T07:08:05.000Z">2019-11-01</time></div>
-                    <a href="/2019/11/01/Android开发笔记/第4章：Service知识点/" class="has-link-black-ter is-size-6">第4章：Service知识点</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Gradle 配置常见问题">
@@ -510,6 +491,25 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-20T07:30:48.000Z">2019-06-20</time></div>
                     <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第3篇 Flitering Observable</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第2篇 Transforming Observable">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T07:30:48.000Z">2019-06-19</time></div>
+                    <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="has-link-black-ter is-size-6">Rxjava操作符：第2篇 Transforming Observable</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
                     </p>
@@ -589,7 +589,7 @@
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -633,7 +633,7 @@
                     <span class="level-item">十一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
