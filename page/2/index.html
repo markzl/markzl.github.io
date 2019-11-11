@@ -478,7 +478,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 54 个字)
+                    5 分钟 读完 (大约 753 个字)
                 </span>
                 
                 
@@ -495,6 +495,23 @@
 <p>continue：仅推出本次循环，剩下循环和方法继续执行。</p>
 <p>break：终止循环，但是继续执行方法</p>
 <p>return：终止循环和方法。</p>
+<p><strong>赋值操作符 “=” 在基本类型和对象引用中区别</strong></p>
+<p>对基本数据类型的肤质是很简单的。基本类型存储了实际的数值而非指向一个对象的引用，所以在为其赋值的时候，是直接将一个地方的内容复制到另一个地方。例如，对基本数据类型使用 a=b，那么b的内容就复制给a。若接着又修改了a，而b根本不会受这种修改的影响。</p>
+<p>但是在为对象 “赋值” 的时候，情况却发生了变化。对一个对象进行操作时，我们真正操作的是对象的引用。所以倘若 “将一个对象赋值给另一个对象”，实际是将 “引用” 从一个地方复制到另一个地方。这意味着假若 c=d ，这样c和d都会指向原本只有d指向的那个对象。</p>
+<p><strong>操作符 “==” 和 equals() 方法的区别</strong></p>
+<p>“==” 对于非基本类型而言，比较的是对象的引用，对于基本类型比较的是值。较特殊的地方是String </p>
+<p>equals() 在Object类中的实现是比较对象的引用，但是大多数Java类都覆盖了equals() 方法，使之实现内容值的比较，比如 Interger 类，String 类。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// Object 类中的equals方法</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object obj)</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// String 类中的equals方法</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object anObject)</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == anObject) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">if</span> (anObject <span class="hljs-keyword">instanceof</span> String) &#123;</span><br><span class="line">    String anotherString = (String)anObject;</span><br><span class="line">    <span class="hljs-keyword">int</span> n = value.length;</span><br><span class="line">    <span class="hljs-keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line">      <span class="hljs-keyword">char</span> v1[] = value;</span><br><span class="line">      <span class="hljs-keyword">char</span> v2[] = anotherString.value;</span><br><span class="line">      <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;</span><br><span class="line">      <span class="hljs-keyword">while</span> (n-- != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (v1[i] != v2[i])</span><br><span class="line">          <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">        i++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>逻辑操作符中的短路概念</strong></p>
+<p>即已经确定结果的逻辑表达式不会执行之后的逻辑判断，例如：if( test1() || test2() ) 如果 test1() 返回值为 true，那么 test2() 方法不会被执行，因为逻辑表达式的值已经确定，没必要继续执行剩余的逻辑判断。这就是短路概念。</p>
+<p><strong>字符串操作符 + 和 +=</strong></p>
+<p>字符串操作符有一些很有趣的行为。如果表达式以一个字符串开头，那么后续所有操作必须是字符串型：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>, y = <span class="hljs-number">1</span>, z=<span class="hljs-number">2</span>;</span><br><span class="line">String s = <span class="hljs-string">"sum = "</span></span><br><span class="line">System.out.println(s+x+y+z)  <span class="hljs-comment">// output：sum = 012</span></span><br><span class="line">System.out.println(s+(x+y+z)) <span class="hljs-comment">// output：sum = 3</span></span><br></pre></td></tr></table></figure>
+
+<p>注意第一个输出语句打印的是 sum = 012 ，而不是 sum = 3。之所以会出现这种情况，是因为Java编译器会将x，y和z转换成它们的字符串形式，然后连接这些字符串，而不是先把它们加到一起。</p>
 
         </div>
         
