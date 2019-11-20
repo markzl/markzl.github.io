@@ -2,23 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Java面试知识点 - markzl的博客</title>
+<title>Android混淆手册 - markzl的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="continue、break和return区别 continue：仅推出本次循环，剩下循环和方法继续执行。 break：终止循环，但是继续执行方法 return：终止循环和方法。">
+    <meta name="description" content="只有在与代码压缩（混淆）相配合使用时，资源压缩才能发挥作用。代码压缩器移除所有未使用的代码后，资源压缩器便可确定应用仍然使用的资源有哪些。当您添加包含资源的代码库时尤其如此 - 您必须移除未使用的库代码，使库资源变为未引用资源，因而可由资源压缩器移除。">
+<meta name="keywords" content="混淆">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java面试知识点">
-<meta property="og:url" content="http://yoursite.com/2018/10/25/Java笔记/Java面试知识点/index.html">
+<meta property="og:title" content="Android混淆手册">
+<meta property="og:url" content="http://yoursite.com/2018/11/20/Android混淆手册/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="continue、break和return区别 continue：仅推出本次循环，剩下循环和方法继续执行。 break：终止循环，但是继续执行方法 return：终止循环和方法。">
+<meta property="og:description" content="只有在与代码压缩（混淆）相配合使用时，资源压缩才能发挥作用。代码压缩器移除所有未使用的代码后，资源压缩器便可确定应用仍然使用的资源有哪些。当您添加包含资源的代码库时尤其如此 - 您必须移除未使用的库代码，使库资源变为未引用资源，因而可由资源压缩器移除。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-29T09:53:17.610Z">
+<meta property="og:updated_time" content="2019-11-20T10:05:56.045Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java面试知识点">
-<meta name="twitter:description" content="continue、break和return区别 continue：仅推出本次循环，剩下循环和方法继续执行。 break：终止循环，但是继续执行方法 return：终止循环和方法。">
+<meta name="twitter:title" content="Android混淆手册">
+<meta name="twitter:description" content="只有在与代码压缩（混淆）相配合使用时，资源压缩才能发挥作用。代码压缩器移除所有未使用的代码后，资源压缩器便可确定应用仍然使用的资源有哪些。当您添加包含资源的代码库时尤其如此 - 您必须移除未使用的库代码，使库资源变为未引用资源，因而可由资源压缩器移除。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -99,7 +100,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Java面试知识点" height="28">
+                <img src="/images/logo.svg" alt="Android混淆手册" height="28">
             
             </a>
         </div>
@@ -152,13 +153,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-25T07:20:08.000Z">2018-10-25</time>
+                <time class="level-item has-text-grey" datetime="2018-11-20T10:02:37.000Z">2018-11-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 54 个字)
+                    12 分钟 读完 (大约 1850 个字)
                 </span>
                 
                 
@@ -167,15 +172,98 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Java面试知识点
+                Android混淆手册
             
         </h1>
         <div class="content">
-            <p><strong>continue、break和return区别</strong></p>
-<p>continue：仅推出本次循环，剩下循环和方法继续执行。</p>
-<p>break：终止循环，但是继续执行方法</p>
-<p>return：终止循环和方法。</p>
+            <p> 只有在与代码压缩（混淆）相配合使用时，资源压缩才能发挥作用。代码压缩器移除所有未使用的代码后，资源压缩器便可确定应用仍然使用的资源有哪些。当您添加包含资源的代码库时尤其如此 - 您必须移除未使用的库代码，使库资源变为未引用资源，因而可由资源压缩器移除。<a id="more"></a></p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">        ...</span><br><span class="line">        buildTypes &#123;</span><br><span class="line">            release &#123;</span><br><span class="line">                shrinkResources <span class="hljs-literal">true</span></span><br><span class="line">                minifyEnabled <span class="hljs-literal">true</span></span><br><span class="line">                proguardFiles getDefaultProguardFile(<span class="hljs-string">'proguard-android.txt'</span>),</span><br><span class="line">                        <span class="hljs-string">'proguard-rules.pro'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="混淆文件模版"><a href="#混淆文件模版" class="headerlink" title="混淆文件模版"></a>混淆文件模版</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br></pre></td><td class="code"><pre><span class="line">#---------------------------------1.实体类---------------------------------</span><br><span class="line"># 保留实体类和成员不被混淆</span><br><span class="line">-keep public class com.android.example.entity.** &#123;</span><br><span class="line">    *;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#-------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">#---------------------------------2.第三方包-------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#-------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">#---------------------------------3.与js互相调用的类------------------------</span><br><span class="line"></span><br><span class="line"># 保留JS方法不被混淆</span><br><span class="line">-keepclassmembers class com.example.xxx.MainActivity$JSInterface1 &#123;</span><br><span class="line">    &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#-------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">#---------------------------------4.反射相关的类和方法-----------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#----------------------------------------------------------------------------</span><br><span class="line">#############################################</span><br><span class="line">#</span><br><span class="line"># 对于一些基本指令的添加,不需要修改</span><br><span class="line">#</span><br><span class="line">#############################################</span><br><span class="line"># 代码混淆压缩比，在0和7之间，默认为5，一般不需要改</span><br><span class="line">-optimizationpasses 5</span><br><span class="line"></span><br><span class="line">#这个是给Microsoft Windows用户的，因为ProGuard假定使用的操作系统是能区分两个只是大小写不同的文件名，但是Microsoft Windows不是这样的操作系统，所以必须为ProGuard指定-dontusemixedcaseclassnames选项</span><br><span class="line"># 混淆时不使用大小写混合，混淆后的类名为小写</span><br><span class="line">-dontusemixedcaseclassnames</span><br><span class="line"></span><br><span class="line">#用于告诉ProGuard，不要跳过对非公开类的处理。默认情况下是跳过的，因为程序中不会引用它们，有些情况下人们编写的代码与类库中的类在同一个包下，并且对包中内容加以引用，此时需要加入此条声明。</span><br><span class="line"># 指定不去忽略非公共的库的类</span><br><span class="line">-dontskipnonpubliclibraryclasses</span><br><span class="line"></span><br><span class="line"># 指定不去忽略非公共的库的类的成员</span><br><span class="line">-dontskipnonpubliclibraryclassmembers</span><br><span class="line"></span><br><span class="line"># 不做预校验，preverify是proguard的4个步骤之一</span><br><span class="line"># Android不需要preverify，去掉这一步可加快混淆速度</span><br><span class="line">-dontpreverify</span><br><span class="line"></span><br><span class="line"># 有了verbose这句话，混淆后就会生成映射文件</span><br><span class="line"># 包含有类名-&gt;混淆后类名的映射关系</span><br><span class="line"># 然后使用printmapping指定映射文件的名称</span><br><span class="line">-verbose</span><br><span class="line">-printmapping proguardMapping.txt</span><br><span class="line"></span><br><span class="line"># 指定混淆时采用的算法，后面的参数是一个过滤器</span><br><span class="line"># 这个过滤器是谷歌推荐的算法，一般不改变</span><br><span class="line">-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*</span><br><span class="line"></span><br><span class="line"># 保护代码中的Annotation不被混淆，这在JSON实体映射时非常重要，比如fastJson</span><br><span class="line">-keepattributes *Annotation*,InnerClasses</span><br><span class="line"></span><br><span class="line"># 避免混淆泛型，这在JSON实体映射时非常重要，比如fastJson</span><br><span class="line">-keepattributes Signature</span><br><span class="line"></span><br><span class="line">#抛出异常时保留代码行号，在异常分析中可以方便定位</span><br><span class="line">-keepattributes SourceFile,LineNumberTable</span><br><span class="line"></span><br><span class="line">#############################################</span><br><span class="line">#</span><br><span class="line"># Android开发中一些需要保留的公共部分</span><br><span class="line">#</span><br><span class="line">#############################################</span><br><span class="line"></span><br><span class="line"># 保留了继承自Activity、Application这些类的子类</span><br><span class="line"># 因为这些子类，都有可能被外部调用</span><br><span class="line"># 比如说，第一行就保证了所有Activity的子类不要被混淆</span><br><span class="line">-keep public class * extends android.app.Activity</span><br><span class="line">-keep public class * extends android.app.Application</span><br><span class="line">-keep public class * extends android.app.Service</span><br><span class="line">-keep public class * extends android.content.BroadcastReceiver</span><br><span class="line">-keep public class * extends android.content.ContentProvider</span><br><span class="line">-keep public class * extends android.app.backup.BackupAgentHelper</span><br><span class="line">-keep public class * extends android.preference.Preference</span><br><span class="line">-keep public class * extends android.view.View</span><br><span class="line">-keep public class com.android.vending.licensing.ILicensingService</span><br><span class="line"></span><br><span class="line"># androidx混淆配置</span><br><span class="line">-keep class com.google.android.material.** &#123;*;&#125;</span><br><span class="line">-keep class androidx.** &#123;*;&#125;</span><br><span class="line">-keep public class * extends androidx.**</span><br><span class="line">-keep interface androidx.** &#123;*;&#125;</span><br><span class="line">-dontwarn com.google.android.material.**</span><br><span class="line">-dontnote com.google.android.material.**</span><br><span class="line">-dontwarn androidx.**</span><br><span class="line"></span><br><span class="line"># 保留 support 下的所有类及其内部类</span><br><span class="line">-keep class android.support.** &#123; *; &#125;</span><br><span class="line"></span><br><span class="line"># 保留继承的</span><br><span class="line">-keep public class * extends android.support.v4.**</span><br><span class="line">-keep public class * extends android.support.v7.**</span><br><span class="line">-keep public class * extends android.support.annotation.**</span><br><span class="line"></span><br><span class="line"># 保留在Activity中的方法参数是view的方法，</span><br><span class="line"># 从而我们在layout里面编写onClick就不会被影响</span><br><span class="line">-keepclassmembers class * extends android.app.Activity &#123;</span><br><span class="line">    public void *(android.view.View);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 对于带有回调函数onXXEvent的，不能被混淆</span><br><span class="line">-keepclassmembers class * &#123;</span><br><span class="line">    void *(**On*Event);</span><br><span class="line">    void *(**On*Listener);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 保留自定义控件（继承自View）不被混淆</span><br><span class="line">-keep public class * extends android.view.View &#123;</span><br><span class="line">    *** get*();</span><br><span class="line">    void set*(***);</span><br><span class="line">    public &lt;init&gt;(android.content.Context);</span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 保留所有的本地native方法不被混淆</span><br><span class="line">-keepclasseswithmembernames class * &#123;</span><br><span class="line">    native &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 枚举类不能被混淆</span><br><span class="line">-keepclassmembers enum * &#123;</span><br><span class="line">    public static **[] values();</span><br><span class="line">    public static ** valueOf(java.lang.String);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 保留Parcelable序列化的类不被混淆</span><br><span class="line">-keep class * implements android.os.Parcelable &#123;</span><br><span class="line">    public static final android.os.Parcelable$Creator *;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 保留Serializable序列化的类不被混淆</span><br><span class="line">-keepclassmembers class * implements java.io.Serializable &#123;</span><br><span class="line">    static final long serialVersionUID;</span><br><span class="line">    private static final java.io.ObjectStreamField[] serialPersistentFields;</span><br><span class="line">    private void writeObject(java.io.ObjectOutputStream);</span><br><span class="line">    private void readObject(java.io.ObjectInputStream);</span><br><span class="line">    java.lang.Object writeReplace();</span><br><span class="line">    java.lang.Object readResolve();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 对于R（资源）下的所有类及其方法，都不能被混淆</span><br><span class="line">-keep class **.R$* &#123;</span><br><span class="line">    *;</span><br><span class="line">&#125;</span><br><span class="line">#-------------------------webview(项目中没有使用可以忽略)------------------------------</span><br><span class="line">-keepclassmembers class fqcn.of.javascript.interface.for.Webview &#123;</span><br><span class="line">   public *;</span><br><span class="line">&#125;</span><br><span class="line">-keepclassmembers class * extends android.webkit.WebViewClient &#123;</span><br><span class="line">    public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);</span><br><span class="line">    public boolean *(android.webkit.WebView, java.lang.String);</span><br><span class="line">&#125;</span><br><span class="line">-keepclassmembers class * extends android.webkit.WebViewClient &#123;</span><br><span class="line">    public void *(android.webkit.WebView, jav.lang.String);</span><br><span class="line">&#125;</span><br><span class="line"># ----------------------------- 其他的 -----------------------------</span><br><span class="line">#</span><br><span class="line"># 删除代码中Log相关的代码</span><br><span class="line">-assumenosideeffects class android.util.Log &#123;</span><br><span class="line">    public static boolean isLoggable(java.lang.String, int);</span><br><span class="line">    public static int v(...);</span><br><span class="line">    public static int i(...);</span><br><span class="line">    public static int w(...);</span><br><span class="line">    public static int d(...);</span><br><span class="line">    public static int e(...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 保持测试相关的代码</span><br><span class="line">-dontnote junit.framework.**</span><br><span class="line">-dontnote junit.runner.**</span><br><span class="line">-dontwarn android.test.**</span><br><span class="line">-dontwarn android.support.test.**</span><br><span class="line">-dontwarn org.junit.**</span><br></pre></td></tr></table></figure>
+
+<h2 id="Keep-配置"><a href="#Keep-配置" class="headerlink" title="Keep 配置"></a>Keep 配置</h2><table>
+<thead>
+<tr>
+<th>保留</th>
+<th>防止被移除或者被重命名</th>
+<th>防止被重命名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类和类成员</td>
+<td>-keep</td>
+<td>-keepnames</td>
+</tr>
+<tr>
+<td>仅类成员</td>
+<td>-keepmembers</td>
+<td>-keepmembernames</td>
+</tr>
+<tr>
+<td>如果拥有某成员，保留类和类成员</td>
+<td>-keepclasseswithmembers</td>
+<td>-keepclasseswithmembernames</td>
+</tr>
+</tbody></table>
+<p>如果不确定自己该用哪个的话，就用 -keep，它能保证匹配的类在压缩这一阶段不被移除，并且在混淆阶段不会被重新命名。</p>
+<blockquote>
+<ul>
+<li>如果只声明保护一个类，并没有指定受保护的成员。proguard只会保护它的类名和它的无参构造函数。其它。其它成员依旧会被压缩、优化、混淆。</li>
+<li>如果声明保护一个方法，proguard会把它当作程序的入口点，方法名不会变，它里面的方法依旧会被优化、混淆。</li>
+</ul>
+</blockquote>
+<h3 id="Proguard-常用通配符"><a href="#Proguard-常用通配符" class="headerlink" title="Proguard 常用通配符"></a>Proguard 常用通配符</h3><table>
+<thead>
+<tr>
+<th align="center">Proguard 通配符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;field&gt;</td>
+<td>匹配类中的所有字段</td>
+</tr>
+<tr>
+<td align="center">&lt;method&gt;</td>
+<td>匹配类中的所有方法</td>
+</tr>
+<tr>
+<td align="center">&lt;init&gt;</td>
+<td>匹配类中所有的构造函数</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td>匹配任意长度字符，不包含包名分割符 (.)</td>
+</tr>
+<tr>
+<td align="center">**</td>
+<td>匹配任意长度字符，包含包名分隔符 (.)</td>
+</tr>
+<tr>
+<td align="center">…</td>
+<td>…</td>
+</tr>
+</tbody></table>
+<h3 id="常用自定义混淆规则"><a href="#常用自定义混淆规则" class="headerlink" title="常用自定义混淆规则"></a>常用自定义混淆规则</h3><ul>
+<li><p>混淆类相关规则</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//不混淆某个包下所有的类</span></span><br><span class="line">-keep <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">android</span>.<span class="hljs-title">example</span>.** </span>&#123; *; &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//不混淆所有类名中包含了"model"的类及成员</span></span><br><span class="line">-keep <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> **.*<span class="hljs-title">model</span>*.** </span>&#123;*;&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//不混淆某个类</span></span><br><span class="line">-keep <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">android</span>.<span class="hljs-title">example</span>.<span class="hljs-title">Test</span> </span>&#123; *; &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//不混淆某个类下的内部类</span></span><br><span class="line">-keep <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">android</span>.<span class="hljs-title">example</span>.<span class="hljs-title">Text</span>$* </span>&#123; *; &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//不混淆某个类的子类</span></span><br><span class="line">-keep <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> * <span class="hljs-keyword">extends</span> <span class="hljs-title">com</span>.<span class="hljs-title">android</span>.<span class="hljs-title">example</span>.<span class="hljs-title">Test</span> </span>&#123; *; &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//不混淆某个接口的实现类</span></span><br><span class="line">-keep <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> * <span class="hljs-keyword">implements</span> <span class="hljs-title">com</span>.<span class="hljs-title">android</span>.<span class="hljs-title">example</span>.<span class="hljs-title">MyInterface</span> </span>&#123;*;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>混淆构造方法和普通方法规则</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 不混淆构造方法</span></span><br><span class="line">-keep <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">android</span>.<span class="hljs-title">example</span>.<span class="hljs-title">Test</span></span>&#123;</span><br><span class="line">  <span class="hljs-keyword">public</span> &lt;init&gt;();</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// 不混淆带String类型参数构造方法</span></span><br><span class="line">-keep <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">android</span>.<span class="hljs-title">example</span>.<span class="hljs-title">Test</span></span>&#123;</span><br><span class="line">  <span class="hljs-keyword">public</span> &lt;init&gt;(java.lang.String)</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">//不混淆某个类中指定方法</span></span><br><span class="line">-keep <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">android</span>.<span class="hljs-title">example</span>.<span class="hljs-title">Test</span></span>&#123;</span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>混淆之后打包会在<code>/build/outputs/mapping/release</code>路径下生成 <code>mapping.txt</code> ，使用 AndroidStudio 的 Analyze APK 分析工具可以通过解析此文件反编译后得到混淆之前的源文件。也可以通过 Bugly 中的上传符号表配置上传 mapping 文件，方便我们查看混淆之前的异常。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/混淆/">混淆</a>
+                </div>
+            </div>
         </div>
         
         
@@ -224,16 +312,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/10/29/Android开发笔记/Android软键盘遮挡输入文本框问题/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/06/Android开发笔记/Android使用RenderScript处理图片/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Android软键盘遮挡输入文本框问题</span>
+                <span class="level-item">Android使用RenderScript处理图片</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2018/10/22/Android开发笔记/Android的Handler消息机制分析/">
-                <span class="level-item">Android的Handler消息机制分析</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/11/01/Android开发笔记/第4章：Service知识点/">
+                <span class="level-item">第4章：Service知识点</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -375,7 +463,7 @@
                 <span class="level-item">Android开发笔记</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
@@ -473,7 +561,7 @@
                     <span class="level-item">十一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -484,7 +572,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -517,7 +605,7 @@
                     <span class="level-item">十月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -757,6 +845,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/混淆/">
+                        <span class="tag">混淆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/特征/">
                         <span class="tag">特征</span>
                         <span class="tag is-grey">1</span>
@@ -861,7 +956,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Java面试知识点" height="28">
+                    <img src="/images/logo.svg" alt="Android混淆手册" height="28">
                 
                 </a>
                 <p class="is-size-7">

@@ -149,6 +149,58 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-11-01T07:08:05.000Z">2018-11-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 分钟 读完 (大约 2266 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/11/01/Android开发笔记/第4章：Service知识点/">第4章：Service知识点</a>
+            
+        </h1>
+        <div class="content">
+            <h4 id="1-什么是Service"><a href="#1-什么是Service" class="headerlink" title="1. 什么是Service"></a>1. 什么是Service</h4><p>Service` 是一种可在后台执行长时间运行操作而不提供界面的应用组件，服务可由其他应用组件启动，而且即使用户切换到其他应用，服务仍将在后台继续运行，此外，组件可通过绑定到服务与之进行交互，甚至是执行进程间通信（IPC）。例如，服务可在后台处理网络事务、播放音乐，执行文件I/O或内容提供程序进行交互。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/11/01/Android开发笔记/第4章：Service知识点/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-11-01T07:00:58.000Z">2018-11-01</time>
                 
                 <div class="level-item">
@@ -478,7 +530,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 753 个字)
+                    8 分钟 读完 (大约 1145 个字)
                 </span>
                 
                 
@@ -495,26 +547,16 @@
 <p>continue：仅推出本次循环，剩下循环和方法继续执行。</p>
 <p>break：终止循环，但是继续执行方法</p>
 <p>return：终止循环和方法。</p>
-<p><strong>赋值操作符 “=” 在基本类型和对象引用中区别</strong></p>
-<p>对基本数据类型的肤质是很简单的。基本类型存储了实际的数值而非指向一个对象的引用，所以在为其赋值的时候，是直接将一个地方的内容复制到另一个地方。例如，对基本数据类型使用 a=b，那么b的内容就复制给a。若接着又修改了a，而b根本不会受这种修改的影响。</p>
-<p>但是在为对象 “赋值” 的时候，情况却发生了变化。对一个对象进行操作时，我们真正操作的是对象的引用。所以倘若 “将一个对象赋值给另一个对象”，实际是将 “引用” 从一个地方复制到另一个地方。这意味着假若 c=d ，这样c和d都会指向原本只有d指向的那个对象。</p>
-<p><strong>操作符 “==” 和 equals() 方法的区别</strong></p>
-<p>“==” 对于非基本类型而言，比较的是对象的引用，对于基本类型比较的是值。较特殊的地方是String </p>
-<p>equals() 在Object类中的实现是比较对象的引用，但是大多数Java类都覆盖了equals() 方法，使之实现内容值的比较，比如 Interger 类，String 类。</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// Object 类中的equals方法</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object obj)</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// String 类中的equals方法</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object anObject)</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == anObject) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">if</span> (anObject <span class="hljs-keyword">instanceof</span> String) &#123;</span><br><span class="line">    String anotherString = (String)anObject;</span><br><span class="line">    <span class="hljs-keyword">int</span> n = value.length;</span><br><span class="line">    <span class="hljs-keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line">      <span class="hljs-keyword">char</span> v1[] = value;</span><br><span class="line">      <span class="hljs-keyword">char</span> v2[] = anotherString.value;</span><br><span class="line">      <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;</span><br><span class="line">      <span class="hljs-keyword">while</span> (n-- != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (v1[i] != v2[i])</span><br><span class="line">          <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">        i++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>逻辑操作符中的短路概念</strong></p>
-<p>即已经确定结果的逻辑表达式不会执行之后的逻辑判断，例如：if( test1() || test2() ) 如果 test1() 返回值为 true，那么 test2() 方法不会被执行，因为逻辑表达式的值已经确定，没必要继续执行剩余的逻辑判断。这就是短路概念。</p>
-<p><strong>字符串操作符 + 和 +=</strong></p>
-<p>字符串操作符有一些很有趣的行为。如果表达式以一个字符串开头，那么后续所有操作必须是字符串型：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>, y = <span class="hljs-number">1</span>, z=<span class="hljs-number">2</span>;</span><br><span class="line">String s = <span class="hljs-string">"sum = "</span></span><br><span class="line">System.out.println(s+x+y+z)  <span class="hljs-comment">// output：sum = 012</span></span><br><span class="line">System.out.println(s+(x+y+z)) <span class="hljs-comment">// output：sum = 3</span></span><br></pre></td></tr></table></figure>
-
-<p>注意第一个输出语句打印的是 sum = 012 ，而不是 sum = 3。之所以会出现这种情况，是因为Java编译器会将x，y和z转换成它们的字符串形式，然后连接这些字符串，而不是先把它们加到一起。</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/10/25/Java笔记/Java面试知识点/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -631,66 +673,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-10-17T08:11:41.000Z">2017-10-17</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/java笔记/">java笔记</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    22 分钟 读完 (大约 3250 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/10/17/Java笔记/Java中NIO、BIO和AIO介绍/">Java中NIO、BIO和AIO介绍</a>
-            
-        </h1>
-        <div class="content">
-            <p>原文链接：<a href="http://mp.weixin.qq.com/s?__biz=MzIzMzgxOTQ5NA==&mid=100000199&idx=1&sn=1e9006f2289cdfb612f22e9f6b7b44cb&chksm=68fe9dce5f8914d8ba791b26ae6de6742686dc660db0f38a67c41ed87c942cbe679f26a4b24c#rd" target="_blank" rel="noopener">mp.weixin.qq.com</a></p>
-<h2 id="BIO、NIO、AIO的基本定义和类比描述："><a href="#BIO、NIO、AIO的基本定义和类比描述：" class="headerlink" title="BIO、NIO、AIO的基本定义和类比描述："></a>BIO、NIO、AIO的基本定义和类比描述：</h2><ul>
-<li><p>BIO（Blocking I/O）: 同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成。这里使用那个经典的烧开水例子，这里假设一个烧开水的场景，有一排水壶在烧开水，BIO的工作模式就是，叫一个线程停留在一个水壶那，直到这个水壶烧开，采取处理下一个水壶。但是线程实际上在等待水壶烧开的时间段什么都没有做。</p>
-</li>
-<li><p>NIO（New I/O）: 同时支持阻塞和非阻塞模式，但这里我们以同步非阻塞来说明，那么什么叫做同步非阻塞？如果还拿烧开水来说，NIO的做法是叫一个线程不断的轮询每个水壶的状态，看看是否有水壶的状态发生了改变，从而进行下一步的操作。</p>
-</li>
-<li><p>AIO（Asynchronous I/O）:异步非阻塞I/O模型。异步非阻塞和同步非阻塞的区别在哪里？异步非阻塞无需一个线程去轮询所有IO操作的状态改变，在相应的状态改变后，系统会通知对应的线程来处理。对应到烧开水中就是，为每个水壶上面装了一个开关，水烧开之后，水壶会自动通知我水烧开了。</p>
-</li>
-</ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2017/10/17/Java笔记/Java中NIO、BIO和AIO介绍/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -758,7 +740,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        25
+                        26
                     </p>
                 </div>
             </div>
@@ -778,7 +760,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        36
+                        37
                     </p>
                 </div>
             </div>
@@ -949,7 +931,7 @@
                 <span class="level-item">Android开发笔记</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
@@ -1047,7 +1029,7 @@
                     <span class="level-item">十一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1331,6 +1313,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/混淆/">
+                        <span class="tag">混淆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/特征/">
                         <span class="tag">特征</span>
                         <span class="tag is-grey">1</span>
@@ -1384,7 +1373,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AIO/" style="font-size: 10px;">AIO</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android开发艺术探索/" style="font-size: 10px;">Android开发艺术探索</a> <a href="/tags/App-Links/" style="font-size: 10px;">App Links</a> <a href="/tags/BIO/" style="font-size: 10px;">BIO</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/Handler/" style="font-size: 10px;">Handler</a> <a href="/tags/List/" style="font-size: 10px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Rxjava操作符/" style="font-size: 16.67px;">Rxjava操作符</a> <a href="/tags/Set/" style="font-size: 10px;">Set</a> <a href="/tags/adjustPan/" style="font-size: 10px;">adjustPan</a> <a href="/tags/adjustResize/" style="font-size: 10px;">adjustResize</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jre/" style="font-size: 10px;">jre</a> <a href="/tags/jvm/" style="font-size: 10px;">jvm</a> <a href="/tags/throw/" style="font-size: 10px;">throw</a> <a href="/tags/throws/" style="font-size: 10px;">throws</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/基本类型/" style="font-size: 10px;">基本类型</a> <a href="/tags/堆栈/" style="font-size: 10px;">堆栈</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/抽象/" style="font-size: 10px;">抽象</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/特征/" style="font-size: 10px;">特征</a> <a href="/tags/生命周期/" style="font-size: 10px;">生命周期</a> <a href="/tags/线程/" style="font-size: 13.33px;">线程</a> <a href="/tags/软键盘遮挡/" style="font-size: 10px;">软键盘遮挡</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        <a href="/tags/AIO/" style="font-size: 10px;">AIO</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android开发艺术探索/" style="font-size: 10px;">Android开发艺术探索</a> <a href="/tags/App-Links/" style="font-size: 10px;">App Links</a> <a href="/tags/BIO/" style="font-size: 10px;">BIO</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/Handler/" style="font-size: 10px;">Handler</a> <a href="/tags/List/" style="font-size: 10px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Rxjava操作符/" style="font-size: 16.67px;">Rxjava操作符</a> <a href="/tags/Set/" style="font-size: 10px;">Set</a> <a href="/tags/adjustPan/" style="font-size: 10px;">adjustPan</a> <a href="/tags/adjustResize/" style="font-size: 10px;">adjustResize</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jre/" style="font-size: 10px;">jre</a> <a href="/tags/jvm/" style="font-size: 10px;">jvm</a> <a href="/tags/throw/" style="font-size: 10px;">throw</a> <a href="/tags/throws/" style="font-size: 10px;">throws</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/基本类型/" style="font-size: 10px;">基本类型</a> <a href="/tags/堆栈/" style="font-size: 10px;">堆栈</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/抽象/" style="font-size: 10px;">抽象</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/混淆/" style="font-size: 10px;">混淆</a> <a href="/tags/特征/" style="font-size: 10px;">特征</a> <a href="/tags/生命周期/" style="font-size: 10px;">生命周期</a> <a href="/tags/线程/" style="font-size: 13.33px;">线程</a> <a href="/tags/软键盘遮挡/" style="font-size: 10px;">软键盘遮挡</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
     </div>
 </div>
 

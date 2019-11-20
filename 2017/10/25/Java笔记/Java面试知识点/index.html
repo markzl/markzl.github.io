@@ -7,18 +7,18 @@
 
 
 
-    <meta name="description" content="continue、break和return区别 continue：仅推出本次循环，剩下循环和方法继续执行。 break：终止循环，但是继续执行方法 return：终止循环和方法。 赋值操作符 “=” 在基本类型和对象引用中区别 对基本数据类型的肤质是很简单的。基本类型存储了实际的数值而非指向一个对象的引用，所以在为其赋值的时候，是直接将一个地方的内容复制到另一个地方。例如，对基本数据类型使用 a=">
+    <meta name="description" content="continue、break和return区别 continue：仅推出本次循环，剩下循环和方法继续执行。 break：终止循环，但是继续执行方法 return：终止循环和方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java面试知识点">
 <meta property="og:url" content="http://yoursite.com/2017/10/25/Java笔记/Java面试知识点/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="continue、break和return区别 continue：仅推出本次循环，剩下循环和方法继续执行。 break：终止循环，但是继续执行方法 return：终止循环和方法。 赋值操作符 “=” 在基本类型和对象引用中区别 对基本数据类型的肤质是很简单的。基本类型存储了实际的数值而非指向一个对象的引用，所以在为其赋值的时候，是直接将一个地方的内容复制到另一个地方。例如，对基本数据类型使用 a=">
+<meta property="og:description" content="continue、break和return区别 continue：仅推出本次循环，剩下循环和方法继续执行。 break：终止循环，但是继续执行方法 return：终止循环和方法。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-11-11T08:53:59.731Z">
+<meta property="og:updated_time" content="2019-11-13T01:46:27.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java面试知识点">
-<meta name="twitter:description" content="continue、break和return区别 continue：仅推出本次循环，剩下循环和方法继续执行。 break：终止循环，但是继续执行方法 return：终止循环和方法。 赋值操作符 “=” 在基本类型和对象引用中区别 对基本数据类型的肤质是很简单的。基本类型存储了实际的数值而非指向一个对象的引用，所以在为其赋值的时候，是直接将一个地方的内容复制到另一个地方。例如，对基本数据类型使用 a=">
+<meta name="twitter:description" content="continue、break和return区别 continue：仅推出本次循环，剩下循环和方法继续执行。 break：终止循环，但是继续执行方法 return：终止循环和方法。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -158,7 +158,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 753 个字)
+                    8 分钟 读完 (大约 1145 个字)
                 </span>
                 
                 
@@ -175,6 +175,8 @@
 <p>continue：仅推出本次循环，剩下循环和方法继续执行。</p>
 <p>break：终止循环，但是继续执行方法</p>
 <p>return：终止循环和方法。</p>
+<a id="more"></a>
+
 <p><strong>赋值操作符 “=” 在基本类型和对象引用中区别</strong></p>
 <p>对基本数据类型的肤质是很简单的。基本类型存储了实际的数值而非指向一个对象的引用，所以在为其赋值的时候，是直接将一个地方的内容复制到另一个地方。例如，对基本数据类型使用 a=b，那么b的内容就复制给a。若接着又修改了a，而b根本不会受这种修改的影响。</p>
 <p>但是在为对象 “赋值” 的时候，情况却发生了变化。对一个对象进行操作时，我们真正操作的是对象的引用。所以倘若 “将一个对象赋值给另一个对象”，实际是将 “引用” 从一个地方复制到另一个地方。这意味着假若 c=d ，这样c和d都会指向原本只有d指向的那个对象。</p>
@@ -192,6 +194,9 @@
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>, y = <span class="hljs-number">1</span>, z=<span class="hljs-number">2</span>;</span><br><span class="line">String s = <span class="hljs-string">"sum = "</span></span><br><span class="line">System.out.println(s+x+y+z)  <span class="hljs-comment">// output：sum = 012</span></span><br><span class="line">System.out.println(s+(x+y+z)) <span class="hljs-comment">// output：sum = 3</span></span><br></pre></td></tr></table></figure>
 
 <p>注意第一个输出语句打印的是 sum = 012 ，而不是 sum = 3。之所以会出现这种情况，是因为Java编译器会将x，y和z转换成它们的字符串形式，然后连接这些字符串，而不是先把它们加到一起。</p>
+<p><strong>finalize() 的作用</strong></p>
+<p>程序员都了解初始化的重要性，但常常会忘记同样也重要的清理工作。毕竟，谁需要清理一个int呢？但在使用程序库时，把一个对象用完后就“弃之不顾”的做法并不总是安全的。当然，Java有垃圾回收器负责回收无用对象占据的内存资源。但也有特殊情况：假定你的对象（并非使用new）获得了一块“特殊”内存。为了应对这种情况，Java允许在类中定义一个名为finalize() 的方法。它的工作原理“假定”是这样的：一旦垃圾回收器准备好时放对象占用的存储空间，将首先调用其finalize()方法，并且在下一次垃圾回收动作发生时，才会真正回收对象占用的内存。所以要是你打算用finalize()，就能在垃圾回收时刻做一些重要的清理工作。</p>
+<p>特殊情况例如 Java中调用非Java方法分配内存，在非Java代码中，也许会调用C的 <strong>malloc()</strong> 函数序列来分配存储空间，而且除非调用了 <strong>free()</strong> 函数，否则存储空间将得不到释放，从而造成内存泄漏。当然，<strong>free()</strong> 是C和C++中的函数，所以需要在 finalize() 中用本地方法（是指非Java代码）调用它。</p>
 
         </div>
         
@@ -392,7 +397,7 @@
                 <span class="level-item">Android开发笔记</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
@@ -490,7 +495,7 @@
                     <span class="level-item">十一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -769,6 +774,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/操作系统/">
                         <span class="tag">操作系统</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/混淆/">
+                        <span class="tag">混淆</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
