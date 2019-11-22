@@ -16,7 +16,7 @@
 <meta property="og:description" content="并发编程使我们可以将程序划分为多个分离的、独立运行的任务。通过使用多线程机制，这些独立任务（也被称为子任务）中的每一个都将执行线程来驱动。一个线程就是在进程中的一个单一的顺序控制流，因此，单个进程可以用于多个并发执行的任务，但是你的程序使得每个任务都好像有自己的CPU一样。其底层机制是切分CPU时间，但通常你不需要考虑它。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-24T02:58:06.754Z">
+<meta property="og:updated_time" content="2019-11-21T14:50:57.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程详解">
 <meta name="twitter:description" content="并发编程使我们可以将程序划分为多个分离的、独立运行的任务。通过使用多线程机制，这些独立任务（也被称为子任务）中的每一个都将执行线程来驱动。一个线程就是在进程中的一个单一的顺序控制流，因此，单个进程可以用于多个并发执行的任务，但是你的程序使得每个任务都好像有自己的CPU一样。其底层机制是切分CPU时间，但通常你不需要考虑它。">
@@ -167,7 +167,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 697 个字)
+                    7 分钟 读完 (大约 1111 个字)
                 </span>
                 
                 
@@ -196,6 +196,25 @@
 <li>使用Thread#stop方法实现，这个方法不推荐使用。（因为与suspend、resume一样可能出现意料以外的情况。</li>
 <li>使用Thread#interrupt方法终止线程</li>
 </ol>
+<h2 id="线程池（ExecutorService-Executors）"><a href="#线程池（ExecutorService-Executors）" class="headerlink" title="线程池（ExecutorService Executors）"></a>线程池（ExecutorService Executors）</h2><p><code>Thread.yield()</code> 线程调度器（Java线程机制的一部分，可以将CPU从一个线程转移到另一个线程的一种建议），它在声明“我已执行完生命周期中最重要的部分了，此刻正是切换给其他任务执行一段时间的大好时机”</p>
+<p><strong>CacheThreadPool</strong>：为每一个任务都创建一个线程。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executor = Executors.newCachedThreadPool();</span><br></pre></td></tr></table></figure>
+
+<p><strong>FixedThradPool</strong>：创建有限的线程集执行任务。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executor = Executors.newFixedThreadPool(<span class="hljs-number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>使用FixedThreadPool，可以限制线程的数量，不必为每个任务都固定地付出创建线程的开销。</p>
+<p><strong>SingleThreadExecutor</strong>：是线程数量为1的FixedThreadPool。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executor = Executors.newSingleThreadExecutor();</span><br></pre></td></tr></table></figure>
+
+<p>即便向SingleThreadExecutor中提交了多个任务，这些任务依旧会排队执行，每个任务都会在下一个任务之前运行结束，所有的任务都使用相同的线程。</p>
+<p>如何使用线程池执行任务？调用 ExecutorService#execute(Runable) 执行任务， ExecutorService#shutdown() 方法可以防止新任务提交给Executor，当前线程将继续执行 shutdown 方法被调用之前提交的任务，在任务完成时退出。</p>
+<h2 id="执行任务的返回值-Callable-lt-T-gt"><a href="#执行任务的返回值-Callable-lt-T-gt" class="headerlink" title="执行任务的返回值 Callable&lt;T&gt;"></a>执行任务的返回值 Callable&lt;T&gt;</h2><p>其实Callable 和 Runnable 的区别就是多一个返回值，看一下Callable类:</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@FunctionalInterface</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Callable</span>&lt;<span class="hljs-title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Computes a result, or throws an exception if unable to do so.</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> computed result</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception if unable to compute a result</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function">V <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行任务的返回值调用 ExecutorService#submit(Callable)方法而不是 execute(Runable) 方法，返回值类型如下：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt; <span class="hljs-function">Future&lt;T&gt; <span class="hljs-title">submit</span><span class="hljs-params">(Callable&lt;T&gt; task)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <h2 id="volatile的作用以及用法"><a href="#volatile的作用以及用法" class="headerlink" title="volatile的作用以及用法"></a>volatile的作用以及用法</h2><p>volatile关键字让程序每次都在主存获取变量，而不是从各个线程的工作内存获取。</p>
 <p>volatile具有synchronized关键字的<strong>可见性</strong>，但是没有synchronized关键字的<strong>并发正确性</strong>，也就是说不能保证线程执行的顺序性。每个工作线程都可以获取当前volatile变量的最新值，但是volatile变量并不能保证并发的正确性。volatile关键字并不能保证操作的原子性。</p>
 <p><strong>参考资料</strong></p>
@@ -304,8 +323,16 @@
         <span class="has-mr-6">2</span>
         <span>终止线程的三个方法</span>
         </a></li><li>
-        <a class="is-flex" href="#volatile的作用以及用法">
+        <a class="is-flex" href="#线程池（ExecutorService-Executors）">
         <span class="has-mr-6">3</span>
+        <span>线程池（ExecutorService Executors）</span>
+        </a></li><li>
+        <a class="is-flex" href="#执行任务的返回值-Callable-lt-T-gt">
+        <span class="has-mr-6">4</span>
+        <span>执行任务的返回值 Callable&lt;T&gt;</span>
+        </a></li><li>
+        <a class="is-flex" href="#volatile的作用以及用法">
+        <span class="has-mr-6">5</span>
         <span>volatile的作用以及用法</span>
         </a></li></ul>
         </div>
