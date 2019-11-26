@@ -16,7 +16,7 @@
 <meta property="og:description" content="并发编程使我们可以将程序划分为多个分离的、独立运行的任务。通过使用多线程机制，这些独立任务（也被称为子任务）中的每一个都将执行线程来驱动。一个线程就是在进程中的一个单一的顺序控制流，因此，单个进程可以用于多个并发执行的任务，但是你的程序使得每个任务都好像有自己的CPU一样。其底层机制是切分CPU时间，但通常你不需要考虑它。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-11-21T14:50:57.554Z">
+<meta property="og:updated_time" content="2019-11-25T13:56:06.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程详解">
 <meta name="twitter:description" content="并发编程使我们可以将程序划分为多个分离的、独立运行的任务。通过使用多线程机制，这些独立任务（也被称为子任务）中的每一个都将执行线程来驱动。一个线程就是在进程中的一个单一的顺序控制流，因此，单个进程可以用于多个并发执行的任务，但是你的程序使得每个任务都好像有自己的CPU一样。其底层机制是切分CPU时间，但通常你不需要考虑它。">
@@ -167,7 +167,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1111 个字)
+                    10 分钟 读完 (大约 1476 个字)
                 </span>
                 
                 
@@ -214,6 +214,18 @@
 
 <p>执行任务的返回值调用 ExecutorService#submit(Callable)方法而不是 execute(Runable) 方法，返回值类型如下：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt; <span class="hljs-function">Future&lt;T&gt; <span class="hljs-title">submit</span><span class="hljs-params">(Callable&lt;T&gt; task)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置线程的优先级"><a href="#设置线程的优先级" class="headerlink" title="设置线程的优先级"></a>设置线程的优先级</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread.currentThread().setPriority(priority);</span><br></pre></td></tr></table></figure>
+
+<p>常用 Thread.MIN_PRIORITY、Thread.NORM_PRIORITY 和 Thrad.MAX_PRIORITY。</p>
+<p>##让步（Thread.yield()）</p>
+<p>线程调度机制的一个暗示，表示所在线程的工作已经做得差不多了，可以让别的线程使用CPU了。这个暗示将通过调用yield()方法来作出（不过这只是一个暗示，没有任何机制保证它将会被采纳）。</p>
+<h2 id="后台（daemon）线程"><a href="#后台（daemon）线程" class="headerlink" title="后台（daemon）线程"></a>后台（daemon）线程</h2><p>是指在程序运行的时候在后台提供一种通用服务的线程，并且这种线程并不属于程序不可或缺的部分。因此，当所有非后台线程结束时，程序也就终止了，同时会杀死进程中的所有后台线程。反过来说，只要有任何非后台线程还在运行，程序就不会终止。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Thread daemon = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> SimpleDaemons());</span><br><span class="line">daemon.setDaemon(<span class="hljs-keyword">true</span>);<span class="hljs-comment">// Must call before start()</span></span><br><span class="line">daemon.start();</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果一个线程是后台线程，那么由这个线程创建的所有线程都属于后台线程</strong>。</p>
+<p>后台线程中不执行 <strong>finally</strong> 语句的情况下就会终止其 <strong>run()</strong> 方法。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ADaemon</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Starting ADaemon"</span>);</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="hljs-number">1</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"Exiting via InterruptException"</span>);</span><br><span class="line">        &#125;<span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"This should always run?"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DaemonsDontRunFinally</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread thread = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> ADaemon());</span><br><span class="line">        thread.setDaemon(<span class="hljs-keyword">true</span>);</span><br><span class="line">        thread.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="volatile的作用以及用法"><a href="#volatile的作用以及用法" class="headerlink" title="volatile的作用以及用法"></a>volatile的作用以及用法</h2><p>volatile关键字让程序每次都在主存获取变量，而不是从各个线程的工作内存获取。</p>
 <p>volatile具有synchronized关键字的<strong>可见性</strong>，但是没有synchronized关键字的<strong>并发正确性</strong>，也就是说不能保证线程执行的顺序性。每个工作线程都可以获取当前volatile变量的最新值，但是volatile变量并不能保证并发的正确性。volatile关键字并不能保证操作的原子性。</p>
@@ -331,8 +343,16 @@
         <span class="has-mr-6">4</span>
         <span>执行任务的返回值 Callable&lt;T&gt;</span>
         </a></li><li>
-        <a class="is-flex" href="#volatile的作用以及用法">
+        <a class="is-flex" href="#设置线程的优先级">
         <span class="has-mr-6">5</span>
+        <span>设置线程的优先级</span>
+        </a></li><li>
+        <a class="is-flex" href="#后台（daemon）线程">
+        <span class="has-mr-6">6</span>
+        <span>后台（daemon）线程</span>
+        </a></li><li>
+        <a class="is-flex" href="#volatile的作用以及用法">
+        <span class="has-mr-6">7</span>
         <span>volatile的作用以及用法</span>
         </a></li></ul>
         </div>
