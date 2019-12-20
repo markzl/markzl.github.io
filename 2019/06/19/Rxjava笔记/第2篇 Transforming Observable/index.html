@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。">
+    <meta name="description" content="本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。 Operators that transform items that are emitted by an Observable.  Buffer — periodically gather items from an Observable into bundles and emit these bundles">
 <meta name="keywords" content="Rxjava操作符">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Rxjava操作符：第2篇 Transforming Observable">
 <meta property="og:url" content="http://yoursite.com/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/index.html">
 <meta property="og:site_name" content="markzl的博客">
-<meta property="og:description" content="本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。">
+<meta property="og:description" content="本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。 Operators that transform items that are emitted by an Observable.  Buffer — periodically gather items from an Observable into bundles and emit these bundles">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-23T09:53:16.962Z">
+<meta property="og:updated_time" content="2019-12-20T02:13:10.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rxjava操作符：第2篇 Transforming Observable">
-<meta name="twitter:description" content="本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。">
+<meta name="twitter:description" content="本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。 Operators that transform items that are emitted by an Observable.  Buffer — periodically gather items from an Observable into bundles and emit these bundles">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -181,8 +181,6 @@
         </h1>
         <div class="content">
             <p>本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。</p>
-<a id="more"></a>
-
 <p><strong>Operators that transform items that are emitted by an Observable.</strong></p>
 <ul>
 <li><p><a href="http://reactivex.io/documentation/operators/buffer.html" target="_blank" rel="noopener"><strong>Buffer</strong></a> — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time</p>
@@ -204,6 +202,8 @@
 <p>定期将Observable中的项目细分为Observable窗口并发出这些窗口，而不是一次发出一个项目</p>
 </li>
 </ul>
+<a id="more"></a>
+
 <h2 id="buffer-操作符"><a href="#buffer-操作符" class="headerlink" title="buffer 操作符"></a>buffer 操作符</h2><p> <code>buffer</code> 操作符是缓存多个 <code>emiter.onNext</code> 事件，一次发出。<code>buffer</code> 方法有多个重载方法，可以仔细阅读源码注释。Buffer 方法的返回值是 <code>Observable&lt;List&lt;T&gt;&gt;</code> 类型。</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Observable.range(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)</span><br><span class="line">    .buffer(<span class="hljs-number">4</span>)</span><br><span class="line">    .subscribe((List&lt;Integer&gt; buffer) -&gt; System.out.println(buffer));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// prints:</span></span><br><span class="line"><span class="hljs-comment">// [0, 1, 2, 3]</span></span><br><span class="line"><span class="hljs-comment">// [4, 5, 6, 7]</span></span><br><span class="line"><span class="hljs-comment">// [8, 9]</span></span><br></pre></td></tr></table></figure>
 
@@ -426,6 +426,44 @@
         
         <article class="media">
             
+            <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中的IPC之Binder机制">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T10:11:48.000Z">2019-10-23</time></div>
+                    <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="has-link-black-ter is-size-6">Android中的IPC之Binder机制</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发艺术探索笔记/">Android开发艺术探索笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android的Handler消息机制分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-22T09:02:12.000Z">2019-10-22</time></div>
+                    <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="has-link-black-ter is-size-6">Android的Handler消息机制分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Gradle 配置常见问题">
@@ -455,44 +493,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T07:30:48.000Z">2019-06-21</time></div>
                     <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第4篇 Combining Observables</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第3篇 Flitering Observable">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-20T07:30:48.000Z">2019-06-20</time></div>
-                    <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第3篇 Flitering Observable</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第2篇 Transforming Observable">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T07:30:48.000Z">2019-06-19</time></div>
-                    <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="has-link-black-ter is-size-6">Rxjava操作符：第2篇 Transforming Observable</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
                     </p>
@@ -578,6 +578,17 @@
         </li>
         
         <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
                     <span class="level-item">七月 2019</span>
@@ -594,18 +605,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -627,7 +627,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -644,9 +644,9 @@
         </li>
         
         <li>
-            <a class="level is-marginless" href="/archives/2018/04/">
+            <a class="level is-marginless" href="/archives/2018/05/">
                 <span class="level-start">
-                    <span class="level-item">四月 2018</span>
+                    <span class="level-item">五月 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -655,12 +655,12 @@
         </li>
         
         <li>
-            <a class="level is-marginless" href="/archives/2017/10/">
+            <a class="level is-marginless" href="/archives/2018/04/">
                 <span class="level-start">
-                    <span class="level-item">十月 2017</span>
+                    <span class="level-item">四月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>

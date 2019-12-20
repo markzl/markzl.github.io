@@ -184,6 +184,16 @@
         </h1>
         <div class="content">
             <p>本文基于Rxjava 2.x版本,介绍用于操作多个 Observable 对象的操作符。</p>
+<p><strong>Operators that work with multiple source Observables to create a single Observable</strong></p>
+<ul>
+<li><a href="http://reactivex.io/documentation/operators/and-then-when.html" target="_blank" rel="noopener"><strong>And/Then/When</strong></a> — combine sets of items emitted by two or more Observables by means of <code>Pattern</code>and <code>Plan</code> intermediaries</li>
+<li><a href="http://reactivex.io/documentation/operators/combinelatest.html" target="_blank" rel="noopener"><strong>CombineLatest</strong></a> — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function</li>
+<li><a href="http://reactivex.io/documentation/operators/join.html" target="_blank" rel="noopener"><strong>Join</strong></a> — combine items emitted by two Observables whenever an item from one Observable is emitted during a time window defined according to an item emitted by the other Observable</li>
+<li><a href="http://reactivex.io/documentation/operators/merge.html" target="_blank" rel="noopener"><strong>Merge</strong></a> — combine multiple Observables into one by merging their emissions</li>
+<li><a href="http://reactivex.io/documentation/operators/startwith.html" target="_blank" rel="noopener"><strong>StartWith</strong></a> — emit a specified sequence of items before beginning to emit the items from the source Observable</li>
+<li><a href="http://reactivex.io/documentation/operators/switch.html" target="_blank" rel="noopener"><strong>Switch</strong></a> — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently-emitted of those Observables</li>
+<li><a href="http://reactivex.io/documentation/operators/zip.html" target="_blank" rel="noopener"><strong>Zip</strong></a> — combine the emissions of multiple Observables together via a specified function and emit single items for each combination based on the results of this function</li>
+</ul>
         </div>
         
         
@@ -236,6 +246,45 @@
         </h1>
         <div class="content">
             <p>本文基于Rxjava 2.x版本,介绍用于 Observable 过滤发射项目的操作符。</p>
+<p><strong>Operators that selectively emit items from a source Observable.</strong></p>
+<ul>
+<li><p><a href="http://reactivex.io/documentation/operators/debounce.html" target="_blank" rel="noopener"><strong>Debounce</strong></a> — only emit an item from an Observable if a particular timespan has passed without it emitting another item</p>
+<p>如果特定的时间跨度已经过去而没有发出另一个项目，则只从Observable中发出一个项目</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/distinct.html" target="_blank" rel="noopener"><strong>Distinct</strong></a> — suppress duplicate items emitted by an Observable</p>
+<p>过滤重复发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/elementat.html" target="_blank" rel="noopener"><strong>ElementAt</strong></a> — emit only item <em>n</em> emitted by an Observable</p>
+<p>仅发出方法中指定的发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/filter.html" target="_blank" rel="noopener"><strong>Filter</strong></a> — emit only those items from an Observable that pass a predicate test</p>
+<p>仅发出符合过滤条件的发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/first.html" target="_blank" rel="noopener"><strong>First</strong></a> — emit only the first item, or the first item that meets a condition, from an Observable</p>
+<p>仅保留发射序列的第一个发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/ignoreelements.html" target="_blank" rel="noopener"><strong>IgnoreElements</strong></a> — do not emit any items from an Observable but mirror its termination notification</p>
+<p>忽略发射序列的所有元素，只会响应 onComplete 方法</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/last.html" target="_blank" rel="noopener"><strong>Last</strong></a> — emit only the last item emitted by an Observable</p>
+<p>仅保留发射序列的最后一个发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/sample.html" target="_blank" rel="noopener"><strong>Sample</strong></a> — emit the most recent item emitted by an Observable within periodic time intervals</p>
+<p>取每个时间周期内的最后一个发射源。</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/skip.html" target="_blank" rel="noopener"><strong>Skip</strong></a> — suppress the first <em>n</em> items emitted by an Observable</p>
+<p>跳过起始位置的 n 个发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/skiplast.html" target="_blank" rel="noopener"><strong>SkipLast</strong></a> — suppress the last <em>n</em> items emitted by an Observable</p>
+<p>跳过终点位置的 n 个发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/take.html" target="_blank" rel="noopener"><strong>Take</strong></a> — emit only the first <em>n</em> items emitted by an Observable</p>
+<p>保留起始位置的 n 个发射源</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/takelast.html" target="_blank" rel="noopener"><strong>TakeLast</strong></a> — emit only the last <em>n</em> items emitted by an Observable</p>
+<p>保留终点位置的 n 个发射源</p>
+</li>
+</ul>
         </div>
         
         
@@ -288,6 +337,27 @@
         </h1>
         <div class="content">
             <p>本文基于Rxjava 2.x版本,介绍用于变换 Observable 对象的操作符。</p>
+<p><strong>Operators that transform items that are emitted by an Observable.</strong></p>
+<ul>
+<li><p><a href="http://reactivex.io/documentation/operators/buffer.html" target="_blank" rel="noopener"><strong>Buffer</strong></a> — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time</p>
+<p>定期将Observable中的项目收集到包中并发出这些包，而不是一次发送一个项目</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/flatmap.html" target="_blank" rel="noopener"><strong>FlatMap</strong></a> — transform the items emitted by an Observable into Observables, then flatten the emissions from those into a single Observable</p>
+<p>将Observable发出的项目转换为Observables，然后将这些项目的排放量变为单个Observable</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/groupby.html" target="_blank" rel="noopener"><strong>GroupBy</strong></a> — divide an Observable into a set of Observables that each emit a different group of items from the original Observable, organized by key</p>
+<p>将一个Observable划分为一组Observable，每个Observable从原始Observable中发出一组不同的项目，按键组织</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/map.html" target="_blank" rel="noopener"><strong>Map</strong></a> — transform the items emitted by an Observable by applying a function to each item</p>
+<p>通过将函数应用于每个项目来转换Observable发出的项目</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/scan.html" target="_blank" rel="noopener"><strong>Scan</strong></a> — apply a function to each item emitted by an Observable, sequentially, and emit each successive value</p>
+<p>将函数应用于Observable发出的每个项目，按顺序发出每个连续的值</p>
+</li>
+<li><p><a href="http://reactivex.io/documentation/operators/window.html" target="_blank" rel="noopener"><strong>Window</strong></a> — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time</p>
+<p>定期将Observable中的项目细分为Observable窗口并发出这些窗口，而不是一次发出一个项目</p>
+</li>
+</ul>
         </div>
         
         
@@ -340,6 +410,19 @@
         </h1>
         <div class="content">
             <p>本文基于Rxjava 2.x版本,介绍用于创建 Observable 对象的操作符。</p>
+<p><strong>Operators that originate new Observables.</strong></p>
+<ul>
+<li><a href="http://reactivex.io/documentation/operators/create.html" target="_blank" rel="noopener"><strong>Create</strong></a> — create an Observable from scratch by calling observer methods programmatically</li>
+<li><a href="http://reactivex.io/documentation/operators/defer.html" target="_blank" rel="noopener"><strong>Defer</strong></a> — do not create the Observable until the observer subscribes, and create a fresh Observable for each observer</li>
+<li><a href="http://reactivex.io/documentation/operators/empty-never-throw.html" target="_blank" rel="noopener"><strong>Empty/Never/Throw</strong></a> — create Observables that have very precise and limited behavior</li>
+<li><a href="http://reactivex.io/documentation/operators/from.html" target="_blank" rel="noopener"><strong>From</strong></a> — convert some other object or data structure into an Observable</li>
+<li><a href="http://reactivex.io/documentation/operators/interval.html" target="_blank" rel="noopener"><strong>Interval</strong></a> — create an Observable that emits a sequence of integers spaced by a particular time interval</li>
+<li><a href="http://reactivex.io/documentation/operators/just.html" target="_blank" rel="noopener"><strong>Just</strong></a> — convert an object or a set of objects into an Observable that emits that or those objects</li>
+<li><a href="http://reactivex.io/documentation/operators/range.html" target="_blank" rel="noopener"><strong>Range</strong></a> — create an Observable that emits a range of sequential integers</li>
+<li><a href="http://reactivex.io/documentation/operators/repeat.html" target="_blank" rel="noopener"><strong>Repeat</strong></a> — create an Observable that emits a particular item or sequence of items repeatedly</li>
+<li><a href="http://reactivex.io/documentation/operators/start.html" target="_blank" rel="noopener"><strong>Start</strong></a> — create an Observable that emits the return value of a function</li>
+<li><a href="http://reactivex.io/documentation/operators/timer.html" target="_blank" rel="noopener"><strong>Timer</strong></a> — create an Observable that emits a single item after a given delay</li>
+</ul>
         </div>
         
         
@@ -507,6 +590,44 @@
         
         <article class="media">
             
+            <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中的IPC之Binder机制">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T10:11:48.000Z">2019-10-23</time></div>
+                    <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="has-link-black-ter is-size-6">Android中的IPC之Binder机制</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发艺术探索笔记/">Android开发艺术探索笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android的Handler消息机制分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-22T09:02:12.000Z">2019-10-22</time></div>
+                    <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="has-link-black-ter is-size-6">Android的Handler消息机制分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Gradle 配置常见问题">
@@ -536,44 +657,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T07:30:48.000Z">2019-06-21</time></div>
                     <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第4篇 Combining Observables</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第3篇 Flitering Observable">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-20T07:30:48.000Z">2019-06-20</time></div>
-                    <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第3篇 Flitering Observable</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第2篇 Transforming Observable">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T07:30:48.000Z">2019-06-19</time></div>
-                    <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="has-link-black-ter is-size-6">Rxjava操作符：第2篇 Transforming Observable</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
                     </p>
@@ -659,6 +742,17 @@
         </li>
         
         <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
                     <span class="level-item">七月 2019</span>
@@ -675,18 +769,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -708,7 +791,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -725,9 +808,9 @@
         </li>
         
         <li>
-            <a class="level is-marginless" href="/archives/2018/04/">
+            <a class="level is-marginless" href="/archives/2018/05/">
                 <span class="level-start">
-                    <span class="level-item">四月 2018</span>
+                    <span class="level-item">五月 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -736,12 +819,12 @@
         </li>
         
         <li>
-            <a class="level is-marginless" href="/archives/2017/10/">
+            <a class="level is-marginless" href="/archives/2018/04/">
                 <span class="level-start">
-                    <span class="level-item">十月 2017</span>
+                    <span class="level-item">四月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>

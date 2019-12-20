@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Java基础知识点 - markzl的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="面向过程编程和面向对象编程的区别在于：面向过程编程强调的是整个软件系统由一个个函数构成，最小的程序单元是函数，其中作为程序入口的函数称之为主函数，主函数依次调用其他函数，普通函数之间可以相互调用，从而实现整个系统的设计。 面向对象的设计是使所需要的对象具备某些功能，强调的是具备某些功能的对象。面向对象主要有三大特征：封装（Encapsulation），继承（Inheritance），多态（Poly">
+<meta name="keywords" content="特征,接口,抽象,堆栈,基本类型,引用类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础知识点">
+<meta property="og:url" content="http://yoursite.com/2018/10/10/Java笔记/Java基础知识点/index.html">
+<meta property="og:site_name" content="markzl的博客">
+<meta property="og:description" content="面向过程编程和面向对象编程的区别在于：面向过程编程强调的是整个软件系统由一个个函数构成，最小的程序单元是函数，其中作为程序入口的函数称之为主函数，主函数依次调用其他函数，普通函数之间可以相互调用，从而实现整个系统的设计。 面向对象的设计是使所需要的对象具备某些功能，强调的是具备某些功能的对象。面向对象主要有三大特征：封装（Encapsulation），继承（Inheritance），多态（Poly">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-12-20T02:11:49.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础知识点">
+<meta name="twitter:description" content="面向过程编程和面向对象编程的区别在于：面向过程编程强调的是整个软件系统由一个个函数构成，最小的程序单元是函数，其中作为程序入口的函数称之为主函数，主函数依次调用其他函数，普通函数之间可以相互调用，从而实现整个系统的设计。 面向对象的设计是使所需要的对象具备某些功能，强调的是具备某些功能的对象。面向对象主要有三大特征：封装（Encapsulation），继承（Inheritance），多态（Poly">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+        <script type="text/javascript" src="https://js.users.51.la/20211709.js"></script>
+    
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Java基础知识点" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">首页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/categories">分类</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/photos">相册</a>
+                
+                <a class="navbar-item" href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/markzl">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-10T03:09:17.000Z">2018-10-10</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/java笔记/">java笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 分钟 读完 (大约 2046 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Java基础知识点
+            
+        </h1>
+        <div class="content">
+            <p>面向过程编程和面向对象编程的区别在于：面向过程编程强调的是整个软件系统由一个个函数构成，最小的程序单元是函数，其中作为程序入口的函数称之为主函数，主函数依次调用其他函数，普通函数之间可以相互调用，从而实现整个系统的设计。 面向对象的设计是使所需要的对象具备某些功能，强调的是具备某些功能的对象。面向对象主要有三大特征：封装（Encapsulation），继承（Inheritance），多态（Polymorphism）。<br> <a id="more"></a></p>
+<h2 id="面向对象的特征"><a href="#面向对象的特征" class="headerlink" title="面向对象的特征"></a>面向对象的特征</h2><ol>
+<li><strong>封装：</strong>封装是保证软件部件具有优良的模块性的基础，封装的目标就是要实现软件部件的”高内聚、低耦合“，防止程序相互依赖性而带来的变动影响。在面向对象的编程语言中，对象是封装的最基本单位。面向对象的封装就是把描述一个对象的属性和行为的代码封装在一个类中，属性用变量定义，行为用方法进行定义，方法可以直接访问同一个对象中的属性。把握一个原则：<strong>把对同一事物进行操作的方法和相关的方法放在同一个类中，把方法和它操作的数据放在同一个类中</strong>。</li>
+<li><strong>继承:</strong> 继承是子类自动共享父类数据和方法的机制，这是类之间的一种关系，提高了软件的可重用性和可扩展性。</li>
+<li><strong>多态：</strong>多态是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行时才确定，即一个引用变量到底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在程序运行期间才能确定。多态性增强了程序的灵活性和扩展性。</li>
+</ol>
+<h2 id="接口和抽象类区别"><a href="#接口和抽象类区别" class="headerlink" title="接口和抽象类区别"></a>接口和抽象类区别</h2><p><strong>接口的特点：</strong></p>
+<ol>
+<li>接口中的方法，永远都被public来修饰</li>
+<li>接口中没有构造方法，也不能实例化接口对象</li>
+<li>接口中只有方法的声明，没有方法体</li>
+<li>接口中只有常量，如果定义变量，在编译的时候会默认加上“public static final”</li>
+<li>接口中定义的方法都需要实现类来实现，如果实现类不能实现接口中的所有方法，则实现类需定义为抽象类</li>
+<li>静态方法不能被子类覆盖（隐藏），因此接口中不定声明静态方法</li>
+<li>使用接口可以实现多继承</li>
+</ol>
+<p><strong>抽象类关键字和哪些关键字不能共存？</strong></p>
+<p>final：被final修饰的类不能有子类。而被abstract修饰的类一定是一个父类。</p>
+<p>private：抽象类中的私有的抽象方法，不被子类所致，就无法被复写。而抽象方法出现的就是需要被复写。</p>
+<p>static：如果static可以修饰抽象方法，直接类名调用就可以了。</p>
+<p><strong>抽象类的特点</strong></p>
+<ol>
+<li>如果一个类中有抽象方法，那么这个类一定是抽象类</li>
+<li>抽象类中不一定有抽象方法</li>
+<li>抽象类中的所有抽象方法需要有子类实现，如果子类不实现，则子类也需要定义为抽象的</li>
+<li>抽象类不可以用new创建对象，因为调用抽象方法没意义</li>
+</ol>
+<h2 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h2><p><strong>public:</strong>    任何地方都可以访问</p>
+<p><strong>protected:</strong> 同包中的类和不同包的子类中可以访问，<strong>但是protected关键字不可以修饰类名</strong></p>
+<p><strong>default：</strong>缺省包只有相同包和相同包下的子类可以访问。</p>
+<p><strong>private:</strong>   本类内可以访问。</p>
+<h2 id="对象生命周期"><a href="#对象生命周期" class="headerlink" title="对象生命周期"></a>对象生命周期</h2><p>创建阶段（Created）、应用阶段（In Use）、不可见阶段（Invisible）、不可达阶段（Unreachable）、收集阶段（collected）、终结阶段（Finalized）、对象空间重分配阶段（De-allocated）。</p>
+<h2 id="static-关键字"><a href="#static-关键字" class="headerlink" title="static 关键字"></a>static 关键字</h2><ol>
+<li>在静态方法中不能直接访问实例方法和实例变量</li>
+<li>在静态方法中不能使用this和super关键字</li>
+<li>静态方法不能被abstract修饰</li>
+<li>当类被加载时，静态代码块只能被执行一次。</li>
+</ol>
+<p><strong>静态属性和静态方法能被继承吗？静态方法是否能被重写呢？</strong></p>
+<p>静态属性和静态方法可以被继承和重写，但无法实现多态。</p>
+<h2 id="final-关键字"><a href="#final-关键字" class="headerlink" title="final 关键字"></a>final 关键字</h2><ol>
+<li>final 变量必须被显式初始化，并且只能被赋一次值</li>
+<li>final 修饰基本类型变量的时候，该变量不能重新赋值</li>
+<li>final 修饰引用类型变量的时候，该变量不能重新指向其他对象</li>
+<li>final 修饰的方法为最终的方法，该方法不能被重写</li>
+<li>private 类型的方法都默认为是final方法，因而也不能被子类重写</li>
+<li>final修饰的类为最终的类，不能被继承。</li>
+</ol>
+<h2 id="八大基本数据类型-amp-引用类型"><a href="#八大基本数据类型-amp-引用类型" class="headerlink" title="八大基本数据类型&amp;引用类型"></a>八大基本数据类型&amp;引用类型</h2><p><strong>基本数据类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>简单类型</th>
+<th>boolean</th>
+<th>byte</th>
+<th>char</th>
+<th>short</th>
+<th>int</th>
+<th>long</th>
+<th>float</th>
+<th>double</th>
+<th>void</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>二进制位数</td>
+<td>1</td>
+<td>8</td>
+<td>16</td>
+<td>16</td>
+<td>32</td>
+<td>64</td>
+<td>32</td>
+<td>64</td>
+<td>-</td>
+</tr>
+<tr>
+<td>封装器类</td>
+<td>Boolean</td>
+<td>Byte</td>
+<td>Character</td>
+<td>Short</td>
+<td>Integer</td>
+<td>Long</td>
+<td>Float</td>
+<td>Double</td>
+<td>Void</td>
+</tr>
+<tr>
+<td>初始值</td>
+<td>false</td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p><strong>引用类型：</strong></p>
+<p>Java有5种引用类型（对象类型）：类 接口 数组 枚举 标注。引用类型的初始值为 null</p>
+<h2 id="堆内存和栈内存详解"><a href="#堆内存和栈内存详解" class="headerlink" title="堆内存和栈内存详解"></a>堆内存和栈内存详解</h2><p>Java 把内存分为两种，一种叫做栈内存，一种叫做堆内存</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s;</span><br></pre></td></tr></table></figure>
+
+<p>这里创建对象的引用，并非对象。直接使用会报错，因为没有赋值-指向任何对象。</p>
+<p>在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配。</p>
+<p>​    <strong>堆内存：</strong>用于存放由new创建的对象或数组。在堆中分配的内存，有java虚拟机自动回收器来管理。在堆中产生一个数组或者对象后，还可以在栈中定义一个特殊的变量，这个变量的取值等于数组或者对象在堆内存中的首地址，在栈中的这个特殊的变量就变成了数组或者对象的引用变量，以后就可以在程序中使用栈内存中的引用变量来访问堆中的数组或者对象，引用变量相当于为数组或者对象起的别名或者代号。</p>
+<p>​    <strong>栈内存：</strong>引用变量是普通变量，定义时在栈中分配内存，引用变量在程序运行到作用域外释放。而数组&amp;对象本身在堆中分配，即使程序运行到使用new产生数组和对象的语句所在地代码块之外，数组和对象本身占用的堆内存也不会被释放，数组和对象在没有引用变量指向它的时候，才变成垃圾，不能再被使用，但是仍然占着内存，在随后的一个不确定的时间被垃圾回收器释放掉。这个也是java比较占内存的主要原因，<strong>实际上，栈中的变量指向堆内存中的对象，这就是Java中的指针。</strong></p>
+<p><strong>总结：</strong> 栈内存中保存的是对象的引用，而Java对象保存在堆内存上。</p>
+<p><strong>参考资料</strong></p>
+<p><a href="https://blog.csdn.net/Xk632172748/article/details/51755438" target="_blank" rel="noopener">https://blog.csdn.net/Xk632172748/article/details/51755438</a></p>
+<p><a href="https://www.cnblogs.com/xiaoxi/p/6392154.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaoxi/p/6392154.html</a></p>
+<p><a href="https://blog.csdn.net/u014266877/article/details/54374867" target="_blank" rel="noopener">https://blog.csdn.net/u014266877/article/details/54374867</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/基本类型/">基本类型</a>, <a class="has-link-grey -link" href="/tags/堆栈/">堆栈</a>, <a class="has-link-grey -link" href="/tags/引用类型/">引用类型</a>, <a class="has-link-grey -link" href="/tags/抽象/">抽象</a>, <a class="has-link-grey -link" href="/tags/接口/">接口</a>, <a class="has-link-grey -link" href="/tags/特征/">特征</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/10/16/Java笔记/Java内部类详解/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Java内部类详解</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/10/01/Java笔记/Java运行环境/">
+                <span class="level-item">Java运行环境</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+
+    
+        
+<div class="card widget" id="toc" style="max-height: 400px;overflow: auto;">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#面向对象的特征">
+        <span class="has-mr-6">1</span>
+        <span>面向对象的特征</span>
+        </a></li><li>
+        <a class="is-flex" href="#接口和抽象类区别">
+        <span class="has-mr-6">2</span>
+        <span>接口和抽象类区别</span>
+        </a></li><li>
+        <a class="is-flex" href="#权限修饰符">
+        <span class="has-mr-6">3</span>
+        <span>权限修饰符</span>
+        </a></li><li>
+        <a class="is-flex" href="#对象生命周期">
+        <span class="has-mr-6">4</span>
+        <span>对象生命周期</span>
+        </a></li><li>
+        <a class="is-flex" href="#static-关键字">
+        <span class="has-mr-6">5</span>
+        <span>static 关键字</span>
+        </a></li><li>
+        <a class="is-flex" href="#final-关键字">
+        <span class="has-mr-6">6</span>
+        <span>final 关键字</span>
+        </a></li><li>
+        <a class="is-flex" href="#八大基本数据类型-amp-引用类型">
+        <span class="has-mr-6">7</span>
+        <span>八大基本数据类型&amp;引用类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#堆内存和栈内存详解">
+        <span class="has-mr-6">8</span>
+        <span>堆内存和栈内存详解</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/11/05/Android开发笔记/子线程不可以更新UI吗/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="子线程不可以更新UI吗">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-05T09:49:23.000Z">2019-11-05</time></div>
+                    <a href="/2019/11/05/Android开发笔记/子线程不可以更新UI吗/" class="has-link-black-ter is-size-6">子线程不可以更新UI吗</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中的IPC之Binder机制">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T10:11:48.000Z">2019-10-23</time></div>
+                    <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="has-link-black-ter is-size-6">Android中的IPC之Binder机制</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发艺术探索笔记/">Android开发艺术探索笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android的Handler消息机制分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-22T09:02:12.000Z">2019-10-22</time></div>
+                    <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="has-link-black-ter is-size-6">Android的Handler消息机制分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gradle 配置常见问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T07:30:48.000Z">2019-07-31</time></div>
+                    <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="has-link-black-ter is-size-6">Gradle 配置常见问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/gradle配置笔记/">gradle配置笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第4篇 Combining Observables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T07:30:48.000Z">2019-06-21</time></div>
+                    <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第4篇 Combining Observables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Android开发笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发艺术探索笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Rxjava笔记/">
+            <span class="level-start">
+                <span class="level-item">Rxjava笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/gradle配置笔记/">
+            <span class="level-start">
+                <span class="level-item">gradle配置笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/java笔记/">
+            <span class="level-start">
+                <span class="level-item">java笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AIO/">
+                        <span class="tag">AIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开发艺术探索/">
+                        <span class="tag">Android开发艺术探索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/App-Links/">
+                        <span class="tag">App Links</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BIO/">
+                        <span class="tag">BIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
+                        <span class="tag">BroadcastReceiver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Error/">
+                        <span class="tag">Error</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Exception/">
+                        <span class="tag">Exception</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Handler/">
+                        <span class="tag">Handler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/List/">
+                        <span class="tag">List</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Map/">
+                        <span class="tag">Map</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NIO/">
+                        <span class="tag">NIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Rxjava操作符/">
+                        <span class="tag">Rxjava操作符</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Set/">
+                        <span class="tag">Set</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/adjustPan/">
+                        <span class="tag">adjustPan</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/adjustResize/">
+                        <span class="tag">adjustResize</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gradle/">
+                        <span class="tag">gradle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jdk/">
+                        <span class="tag">jdk</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jre/">
+                        <span class="tag">jre</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jvm/">
+                        <span class="tag">jvm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/throw/">
+                        <span class="tag">throw</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/throws/">
+                        <span class="tag">throws</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/内部类/">
+                        <span class="tag">内部类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/启动模式/">
+                        <span class="tag">启动模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/基本类型/">
+                        <span class="tag">基本类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/堆栈/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引用类型/">
+                        <span class="tag">引用类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/抽象/">
+                        <span class="tag">抽象</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/接口/">
+                        <span class="tag">接口</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/操作系统/">
+                        <span class="tag">操作系统</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/混淆/">
+                        <span class="tag">混淆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/特征/">
+                        <span class="tag">特征</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/生命周期/">
+                        <span class="tag">生命周期</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/软键盘遮挡/">
+                        <span class="tag">软键盘遮挡</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/进程/">
+                        <span class="tag">进程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/闭包/">
+                        <span class="tag">闭包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+        <div class="column-right-shadow  ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Java基础知识点" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 markzl&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

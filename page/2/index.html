@@ -362,169 +362,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-22T09:02:12.000Z">2018-10-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    11 分钟 读完 (大约 1591 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/10/22/Android开发笔记/Android的Handler消息机制分析/">Android的Handler消息机制分析</a>
-            
-        </h1>
-        <div class="content">
-            <p>Handler的介绍中出现最多的关键字，Looper，ThreadLocal，MessageQueue。</p>
-<p>在工作线程的 handler#sendMessage 方法实际上是向主线程即UI线程的消息队列插入消息，通过ActivityThread初始化Looper对象，并通过Looper.looper方法循环查询消息队列的新消息。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/10/22/Android开发笔记/Android的Handler消息机制分析/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-22T01:40:20.000Z">2018-06-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    14 分钟 读完 (大约 2032 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/06/22/Android开发笔记/Android okhttp使用详解/">Android okhttp使用详解</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="Get-请求"><a href="#Get-请求" class="headerlink" title="Get 请求"></a>Get 请求</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Request request = <span class="hljs-keyword">new</span> Request.Builder()</span><br><span class="line">  .url(url)</span><br><span class="line">  .build();</span><br><span class="line">OkHttpClient client = <span class="hljs-keyword">new</span> OkHttpClient();</span><br><span class="line"><span class="hljs-keyword">try</span> (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> response.body().string();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过Request构建请求体，然后由 client 执行。这里 Request 默认请求类型是Get。<strong>注意这个是SynchronousGet是同步执行的</strong>。在Android UI线程直接运行会报错提示：==android.os.NetworkOnMainThreadException==。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/22/Android开发笔记/Android okhttp使用详解/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-04-18T01:40:20.000Z">2018-04-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1385 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/04/18/Android开发笔记/Android预览pdf文档/">Android预览pdf文档</a>
-            
-        </h1>
-        <div class="content">
-            <p>谷歌为我们提供了PdfRender工具类对pdf文档进行渲染，首先看一下PdfRender的构造方法：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Creates a new instance.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;strong&gt;Note:&lt;/strong&gt; The provided file descriptor must be &lt;strong&gt;seekable&lt;/strong&gt;,</span></span><br><span class="line"><span class="hljs-comment"> * i.e. its data being randomly accessed, e.g. pointing to a file.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;strong&gt;Note:&lt;/strong&gt; This class takes ownership of the passed in file descriptor</span></span><br><span class="line"><span class="hljs-comment"> * and is responsible for closing it when the renderer is closed.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * If the file is from an untrusted source it is recommended to run the renderer in a separate,</span></span><br><span class="line"><span class="hljs-comment"> * isolated process with minimal permissions to limit the impact of security exploits.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> input Seekable file descriptor to read from.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> java.io.IOException If an error occurs while reading the file.</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> java.lang.SecurityException If the file requires a password or</span></span><br><span class="line"><span class="hljs-comment"> *         the security scheme is not supported.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PdfRenderer</span><span class="hljs-params">(@NonNull ParcelFileDescriptor input)</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">//略...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看构造方法中的参数是ParcelFileDescriptor的一个实例，那么ParcelFileDescriptor类是做什么的呢？ParcelFileDescriptor是Android 提供的一种数据结构，支持数据的写入和写出。我们通过ParcelFileDescriptor#open 建立文件和ParcelFileDescriptor的联系</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/04/18/Android开发笔记/Android预览pdf文档/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-10-25T07:20:08.000Z">2017-10-25</time>
+                <time class="level-item has-text-grey" datetime="2018-10-25T07:20:08.000Z">2018-10-25</time>
                 
                 
                 <span class="level-item has-text-grey">
@@ -539,7 +377,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2017/10/25/Java笔记/Java面试知识点/">Java面试知识点</a>
+                <a class="has-link-black-ter" href="/2018/10/25/Java笔记/Java面试知识点/">Java面试知识点</a>
             
         </h1>
         <div class="content">
@@ -553,7 +391,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2017/10/25/Java笔记/Java面试知识点/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2018/10/25/Java笔记/Java面试知识点/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -575,7 +413,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-10-24T03:11:24.000Z">2017-10-24</time>
+                <time class="level-item has-text-grey" datetime="2018-10-24T03:11:24.000Z">2018-10-24</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/java笔记/">java笔记</a>
@@ -594,7 +432,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2017/10/24/Java笔记/Java集合详解/">Java集合详解</a>
+                <a class="has-link-black-ter" href="/2018/10/24/Java笔记/Java集合详解/">Java集合详解</a>
             
         </h1>
         <div class="content">
@@ -605,7 +443,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2017/10/24/Java笔记/Java集合详解/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2018/10/24/Java笔记/Java集合详解/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -627,7 +465,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-10-21T08:04:37.000Z">2017-10-21</time>
+                <time class="level-item has-text-grey" datetime="2018-10-21T08:04:37.000Z">2018-10-21</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/java笔记/">java笔记</a>
@@ -637,7 +475,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    19 分钟 读完 (大约 2828 个字)
+                    22 分钟 读完 (大约 3301 个字)
                 </span>
                 
                 
@@ -646,7 +484,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2017/10/21/Java笔记/Java线程详解/">Java线程详解</a>
+                <a class="has-link-black-ter" href="/2018/10/21/Java笔记/Java线程详解/">Java线程详解</a>
             
         </h1>
         <div class="content">
@@ -657,7 +495,175 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2017/10/21/Java笔记/Java线程详解/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2018/10/21/Java笔记/Java线程详解/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-17T08:11:41.000Z">2018-10-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/java笔记/">java笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    22 分钟 读完 (大约 3250 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/17/Java笔记/Java中NIO、BIO和AIO介绍/">Java中NIO、BIO和AIO介绍</a>
+            
+        </h1>
+        <div class="content">
+            <p>原文链接：<a href="http://mp.weixin.qq.com/s?__biz=MzIzMzgxOTQ5NA==&mid=100000199&idx=1&sn=1e9006f2289cdfb612f22e9f6b7b44cb&chksm=68fe9dce5f8914d8ba791b26ae6de6742686dc660db0f38a67c41ed87c942cbe679f26a4b24c#rd" target="_blank" rel="noopener">mp.weixin.qq.com</a></p>
+<h2 id="BIO、NIO、AIO的基本定义和类比描述："><a href="#BIO、NIO、AIO的基本定义和类比描述：" class="headerlink" title="BIO、NIO、AIO的基本定义和类比描述："></a>BIO、NIO、AIO的基本定义和类比描述：</h2><ul>
+<li><p>BIO（Blocking I/O）: 同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成。这里使用那个经典的烧开水例子，这里假设一个烧开水的场景，有一排水壶在烧开水，BIO的工作模式就是，叫一个线程停留在一个水壶那，直到这个水壶烧开，采取处理下一个水壶。但是线程实际上在等待水壶烧开的时间段什么都没有做。</p>
+</li>
+<li><p>NIO（New I/O）: 同时支持阻塞和非阻塞模式，但这里我们以同步非阻塞来说明，那么什么叫做同步非阻塞？如果还拿烧开水来说，NIO的做法是叫一个线程不断的轮询每个水壶的状态，看看是否有水壶的状态发生了改变，从而进行下一步的操作。</p>
+</li>
+<li><p>AIO（Asynchronous I/O）:异步非阻塞I/O模型。异步非阻塞和同步非阻塞的区别在哪里？异步非阻塞无需一个线程去轮询所有IO操作的状态改变，在相应的状态改变后，系统会通知对应的线程来处理。对应到烧开水中就是，为每个水壶上面装了一个开关，水烧开之后，水壶会自动通知我水烧开了。</p>
+</li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/17/Java笔记/Java中NIO、BIO和AIO介绍/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-17T02:10:48.000Z">2018-10-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/java笔记/">java笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 分钟 读完 (大约 1731 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/17/Java笔记/Java异常详解/">Java异常详解</a>
+            
+        </h1>
+        <div class="content">
+            <p><strong>摘要</strong> (来自于 Java编程思想)</p>
+<blockquote>
+<p>Java 的基本理念是“结构不佳的代码不能运行”。</p>
+</blockquote>
+<p><strong>改进的错误恢复机制是提高代码健壮性的最强有力的方式。错误恢复在我们所编写的每一个程序中都是基本的要素</strong>，但是在 Java 中它显得格外重要，因为 Java 的主要目标之一就是创建供他人使用的程序构件。发现错误的理想时机是在编译阶段，也就是在你试图运行程序之前。然而，编译期间并不能找出所有的错误，余下的问题必须在运行期间解决。这就需要错误源能通过某种方式，把适当的信息传递给某个接受者–该接受者将知道如何正确处理这个问题。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/17/Java笔记/Java异常详解/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-16T07:00:35.000Z">2018-10-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/java笔记/">java笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分钟 读完 (大约 1285 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/16/Java笔记/Java内部类详解/">Java内部类详解</a>
+            
+        </h1>
+        <div class="content">
+            <p>内部类的定义：一个定义在另一个类中的类，叫做内部类。内部类是一种非常有用的特性，因为它允许你把一些逻辑相关的类组织在一起，并控制位于内部的类的可见性。然而必须要了解，内部类与组合是完全不同的概念，这一点很重要。在最初，内部类看起来就像是一种代码隐藏机制：将类置于其他类的内部。但是，你将会了解到，内部类远不止如此，它了解外部类，并能与之通信，而且你用内部类写出的代码更加更加优雅而清晰，尽管并不总是这样（而且Java8的Lambda表达式和方法引用减少了编写内部类的需求）。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/16/Java笔记/Java内部类详解/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -839,6 +845,44 @@
         
         <article class="media">
             
+            <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中的IPC之Binder机制">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T10:11:48.000Z">2019-10-23</time></div>
+                    <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="has-link-black-ter is-size-6">Android中的IPC之Binder机制</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发艺术探索笔记/">Android开发艺术探索笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android的Handler消息机制分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-22T09:02:12.000Z">2019-10-22</time></div>
+                    <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="has-link-black-ter is-size-6">Android的Handler消息机制分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Gradle 配置常见问题">
@@ -868,44 +912,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T07:30:48.000Z">2019-06-21</time></div>
                     <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第4篇 Combining Observables</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第3篇 Flitering Observable">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-20T07:30:48.000Z">2019-06-20</time></div>
-                    <a href="/2019/06/20/Rxjava笔记/第3篇 Flitering Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第3篇 Flitering Observable</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第2篇 Transforming Observable">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T07:30:48.000Z">2019-06-19</time></div>
-                    <a href="/2019/06/19/Rxjava笔记/第2篇 Transforming Observable/" class="has-link-black-ter is-size-6">Rxjava操作符：第2篇 Transforming Observable</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
                     </p>
@@ -991,6 +997,17 @@
         </li>
         
         <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
                     <span class="level-item">七月 2019</span>
@@ -1007,18 +1024,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1040,7 +1046,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1057,9 +1063,9 @@
         </li>
         
         <li>
-            <a class="level is-marginless" href="/archives/2018/04/">
+            <a class="level is-marginless" href="/archives/2018/05/">
                 <span class="level-start">
-                    <span class="level-item">四月 2018</span>
+                    <span class="level-item">五月 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -1068,12 +1074,12 @@
         </li>
         
         <li>
-            <a class="level is-marginless" href="/archives/2017/10/">
+            <a class="level is-marginless" href="/archives/2018/04/">
                 <span class="level-start">
-                    <span class="level-item">十月 2017</span>
+                    <span class="level-item">四月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
