@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Android单元测试框架 - markzl的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="建议各类测试所占比例如下：小型测试（单元测试）占 70%，中型测试（集成测试）占 20%，大型（端到端）测试占 10%。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android单元测试框架">
+<meta property="og:url" content="http://yoursite.com/2019/03/23/Android面试/Android单元测试框架/index.html">
+<meta property="og:site_name" content="markzl的博客">
+<meta property="og:description" content="建议各类测试所占比例如下：小型测试（单元测试）占 70%，中型测试（集成测试）占 20%，大型（端到端）测试占 10%。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2020-03-23T13:32:39.146Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android单元测试框架">
+<meta name="twitter:description" content="建议各类测试所占比例如下：小型测试（单元测试）占 70%，中型测试（集成测试）占 20%，大型（端到端）测试占 10%。">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+        <script type="text/javascript" src="https://js.users.51.la/20211709.js"></script>
+    
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Android单元测试框架" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">首页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/categories">分类</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/photos">相册</a>
+                
+                <a class="navbar-item" href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/markzl">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-23T13:16:58.000Z">2019-03-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android面试/">Android面试</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1213 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Android单元测试框架
+            
+        </h1>
+        <div class="content">
+            <p>建议各类测试所占比例如下：小型测试（单元测试）占 70%，中型测试（集成测试）占 20%，大型（端到端）测试占 10%。<a id="more"></a></p>
+<p>单元测试分为：</p>
+<ul>
+<li><p>本地单元测试，始终在JVM驱动的开发计算机上运行的测试，使用robolectric框架。Robolectric 支持Android 的以下几个方面</p>
+<ul>
+<li>组件生命周期</li>
+<li>事件循环</li>
+<li>所有资源</li>
+</ul>
+</li>
+<li><p>插桩单元测试，在物理设备或者模拟设备上面运行测试，使用AndroidX Test API</p>
+<ul>
+<li>主线程，也称为”界面线程“或”Activity 线程“。</li>
+<li>插桩线程，大多数测试都在此线程上运行。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-本地单元测试"><a href="#1-本地单元测试" class="headerlink" title="1. 本地单元测试"></a>1. 本地单元测试</h2><p>单元测试编写目录对应test目录</p>
+<h3 id="1-1-Java-中的-JUnit-测试框架"><a href="#1-1-Java-中的-JUnit-测试框架" class="headerlink" title="1.1 Java 中的 JUnit 测试框架"></a>1.1 Java 中的 JUnit 测试框架</h3><p>AndroidStudio 新建项目会自动配置 JUnit 测试框架</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">  	...</span><br><span class="line">    testImplementation <span class="hljs-string">'junit:junit:4.12'</span></span><br><span class="line">		...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简单的测试案例：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExampleUnitTest</span> </span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function">fun <span class="hljs-title">addition_isCorrect</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        assertEquals(<span class="hljs-number">4</span>, <span class="hljs-number">2</span> + <span class="hljs-number">2</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>JUnit 中的常用注解：</p>
+<ul>
+<li>@Before：执行每个@Test方法之前调用</li>
+<li>@After：执行每个@Test方法之后调用</li>
+<li>@Test：</li>
+<li>@BeforeClass：在执行一个测试类的<strong>所有测试方法</strong>之前</li>
+<li>@AfterClass：在执行一个测试类的<strong>所有测试方法</strong>之后</li>
+<li>@Ignore：测试类中某些测试方法可能暂时处于不可测试阶段，那么为了保证这个测试类的正常运行，可以使用@Ignore标记这些测试方法。</li>
+</ul>
+<h3 id="1-2-单元测试框架Robolectric"><a href="#1-2-单元测试框架Robolectric" class="headerlink" title="1.2 单元测试框架Robolectric"></a>1.2 单元测试框架Robolectric</h3><p><strong>Robolectric</strong> 的设计思想是通过 JVM 运行Android代码，从而实现脱离Android环境进行测试。Robolectric 框架依赖于 JUnit，所以需要同时添加两个框架依赖：</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line"></span><br><span class="line">  testOptions &#123;</span><br><span class="line">    unitTests &#123;</span><br><span class="line">      <span class="hljs-comment">// 设置单元测试可以访问编译版本的资源</span></span><br><span class="line">      includeAndroidResources = <span class="hljs-literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">  	...</span><br><span class="line">    testImplementation <span class="hljs-string">'junit:junit:4.12'</span></span><br><span class="line">    testImplementation <span class="hljs-string">'org.robolectric:robolectric:4.3'</span></span><br><span class="line">		...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@RunWith</span>(RobolectricTestRunner.class)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivityTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  	<span class="hljs-comment">// 测试Activity标题是否与期望值一致</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">titleIsCorrect</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        MainActivity activity = Robolectric.setupActivity(MainActivity.class);</span><br><span class="line">        assertEquals(<span class="hljs-string">"TestingSample"</span>, activity.getTitle());</span><br><span class="line">    &#125;</span><br><span class="line">		</span><br><span class="line">  	<span class="hljs-comment">// 测试生命周期</span></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testLifecycle</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        ActivityController&lt;MainActivity&gt; controller = </span><br><span class="line">                Robolectric.buildActivity(MainActivity.class)</span><br><span class="line">                .create().start();</span><br><span class="line">        Activity activity = controller.get();</span><br><span class="line">        TextView textView =activity.findViewById(R.id.login);</span><br><span class="line">        assertEquals(<span class="hljs-string">"onCreate()"</span>,textView.getText().toString());</span><br><span class="line">        controller.resume();</span><br><span class="line">        assertEquals(<span class="hljs-string">"onResume()"</span>,textView.getText().toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-插桩测试（Mockito）"><a href="#1-3-插桩测试（Mockito）" class="headerlink" title="1.3 插桩测试（Mockito）"></a>1.3 插桩测试（Mockito）</h3><p>Mockito 环境配置：</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line"></span><br><span class="line">  testOptions &#123;</span><br><span class="line">    unitTests &#123;</span><br><span class="line">      <span class="hljs-comment">// 设置单元测试可以访问编译版本的资源</span></span><br><span class="line">      includeAndroidResources = <span class="hljs-literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">  	...</span><br><span class="line">    testImplementation <span class="hljs-string">'junit:junit:4.12'</span></span><br><span class="line">    testImplementation <span class="hljs-string">'org.robolectric:robolectric:4.3'</span></span><br><span class="line">    testImplementation <span class="hljs-string">'org.mockito:mockito-core:2.19.0'</span>    </span><br><span class="line">		...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExampleUnitTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mockTest</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 创建接口 List 的 mock 对象</span></span><br><span class="line">        List mockedList = Mockito.mock(List.class);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 使用 mock 对象执行操作</span></span><br><span class="line">        mockedList.add(<span class="hljs-string">"one"</span>);</span><br><span class="line">        mockedList.clear();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//验证对应的操作是否执行过</span></span><br><span class="line">        Mockito.verify(mockedList).add(<span class="hljs-string">"one"</span>);</span><br><span class="line">        Mockito.verify(mockedList).clear();</span><br><span class="line"></span><br><span class="line">        LinkedList linkedList = Mockito.mock(LinkedList.class);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 在mock对象执行某个操作时，插入桩函数</span></span><br><span class="line">        when(linkedList.get(<span class="hljs-number">0</span>)).thenReturn(<span class="hljs-string">"first"</span>);</span><br><span class="line">        when(linkedList.get(<span class="hljs-number">1</span>)).thenReturn(<span class="hljs-keyword">new</span> RuntimeException());</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 打印 first</span></span><br><span class="line">        System.out.println(linkedList.get(<span class="hljs-number">0</span>));</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 打印 java.lang.RuntimeException</span></span><br><span class="line">        System.out.println(linkedList.get(<span class="hljs-number">1</span>));</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 打印 null</span></span><br><span class="line">        System.out.println(linkedList.get(<span class="hljs-number">999</span>));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-界面测试"><a href="#2-界面测试" class="headerlink" title="2. 界面测试"></a>2. 界面测试</h2><p>界面测试编写目录对应androidTest目录。</p>
+<h3 id="2-1-单个应用的界面测试（Espresso）"><a href="#2-1-单个应用的界面测试（Espresso）" class="headerlink" title="2.1 单个应用的界面测试（Espresso）"></a>2.1 单个应用的界面测试（Espresso）</h3><p><strong>添加Espresso依赖</strong></p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">  	...</span><br><span class="line">    androidTestImplementation <span class="hljs-string">'androidx.test.espresso:espresso-core:3.2.0'</span></span><br><span class="line">		...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@RunWith</span>(AndroidJUnit4.class)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ChangeTextBehaviorTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> String stringToBetyped;</span><br><span class="line">		</span><br><span class="line">  	<span class="hljs-comment">// 需要添加依赖：implementation 'androidx.test:rules:1.2.0'</span></span><br><span class="line">    <span class="hljs-meta">@Rule</span></span><br><span class="line">    <span class="hljs-keyword">public</span> ActivityTestRule&lt;MainActivity&gt; activityTestRule =</span><br><span class="line">            <span class="hljs-keyword">new</span> ActivityTestRule&lt;&gt;(MainActivity.class);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Before</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initValidString</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// Specify a valid string.</span></span><br><span class="line">        stringToBetyped = <span class="hljs-string">"Espresso"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">changeText_sameActivity</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        onView(withId(R.id.editTextUserInput)).perform(typeText(stringToBetyped),</span><br><span class="line">                ViewActions.closeSoftKeyboard());</span><br><span class="line">        onView(withId(R.id.changeTextBt)).perform(click());</span><br><span class="line">      </span><br><span class="line">   			onView(withId(R.id.textToBeChanged))</span><br><span class="line">     					.check(matches(withText(stringToBetyped)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-多个应用的界面测试（UIAutomator）"><a href="#2-2-多个应用的界面测试（UIAutomator）" class="headerlink" title="2.2 多个应用的界面测试（UIAutomator）"></a>2.2 多个应用的界面测试（UIAutomator）</h3><p>添加UIAutomator依赖：</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">  	...</span><br><span class="line">    androidTestImplementation <span class="hljs-string">'androidx.test.espresso:espresso-core:3.2.0'</span></span><br><span class="line">		...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设计测试案例之前，需要确保UI Anutomator可以访问你的组件，即组件是否具有可见性或是否设置 android:contentDescription 属性。</p>
+<h4 id="2-2-1-uiautomatorviewer-工具"><a href="#2-2-1-uiautomatorviewer-工具" class="headerlink" title="2.2.1 uiautomatorviewer 工具"></a>2.2.1 uiautomatorviewer 工具</h4><p>使用 uiautomatorviewer 的步骤：</p>
+<ul>
+<li>在你模拟器或者测试设备上打开要测试的应用，并连接到AndroidStudio</li>
+<li>前往 Android/sdk/tools/bin 目录打开 uiautomatorviewer 工具。</li>
+<li>在 uiautomatorviewer 界面选择 device screenshot ，在右侧即可看见组件具体信息。 </li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@RunWith</span>(AndroidJUnit4.class)</span><br><span class="line"><span class="hljs-meta">@SdkSuppress</span>(minSdkVersion = <span class="hljs-number">18</span>)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UIAutomatorChangeTextBehaviorTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BASIC_SAMPLE_PACKAGE</span><br><span class="line">            = <span class="hljs-string">"com.markzl.android.testingsample"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> LAUNCH_TIMEOUT = <span class="hljs-number">5000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String STRING_TO_BE_TYPED = <span class="hljs-string">"UiAutomator"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> UiDevice mDevice;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Before</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startMainActivityFromHomeScreen</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        mDevice = UiDevice.getInstance(getInstrumentation());</span><br><span class="line">        mDevice.pressHome();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">final</span> String launcherPackage = getLauncherPackageName();</span><br><span class="line">        assertThat(launcherPackage, notNullValue());</span><br><span class="line">        mDevice.wait(Until.hasObject(By.pkg(launcherPackage).depth(<span class="hljs-number">0</span>)), LAUNCH_TIMEOUT);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// Launch the blueprint app</span></span><br><span class="line">        Context context = getApplicationContext();</span><br><span class="line">        <span class="hljs-keyword">final</span> Intent intent = context.getPackageManager()</span><br><span class="line">                .getLaunchIntentForPackage(BASIC_SAMPLE_PACKAGE);</span><br><span class="line">        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);</span><br><span class="line">        context.startActivity(intent);</span><br><span class="line"></span><br><span class="line">        mDevice.wait(Until.hasObject(By.pkg(BASIC_SAMPLE_PACKAGE).depth(<span class="hljs-number">0</span>)), LAUNCH_TIMEOUT);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">checkPreconditions</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        assertThat(mDevice,notNullValue());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testChangeText_sameActivity</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        mDevice.findObject(By.res(BASIC_SAMPLE_PACKAGE,<span class="hljs-string">"editTextUserInput"</span>))</span><br><span class="line">                .setText(STRING_TO_BE_TYPED);</span><br><span class="line">        mDevice.findObject(By.res(BASIC_SAMPLE_PACKAGE,<span class="hljs-string">"changeTextBt"</span>))</span><br><span class="line">                .click();</span><br><span class="line"></span><br><span class="line">        UiObject2 changedText = mDevice.wait(Until.findObject(By.res(BASIC_SAMPLE_PACKAGE,<span class="hljs-string">"textToBeChanged"</span>)),</span><br><span class="line">                <span class="hljs-number">500</span>);</span><br><span class="line">        assertThat(changedText.getText(),is(equalTo(STRING_TO_BE_TYPED)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testChangeText_newActivity</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        mDevice.findObject(By.res(BASIC_SAMPLE_PACKAGE,<span class="hljs-string">"editTextUserInput"</span>))</span><br><span class="line">                .setText(STRING_TO_BE_TYPED);</span><br><span class="line">        mDevice.findObject(By.res(BASIC_SAMPLE_PACKAGE,<span class="hljs-string">"activityChangeTextBtn"</span>))</span><br><span class="line">                .click();</span><br><span class="line"></span><br><span class="line">        UiObject2 changedText = mDevice.wait(Until.findObject(By.res(BASIC_SAMPLE_PACKAGE,<span class="hljs-string">"show_text_view"</span>)),</span><br><span class="line">                <span class="hljs-number">500</span>);</span><br><span class="line">        assertThat(changedText.getText(),is(equalTo(STRING_TO_BE_TYPED)));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> String <span class="hljs-title">getLauncherPackageName</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">final</span> Intent intent = <span class="hljs-keyword">new</span> Intent(Intent.ACTION_MAIN);</span><br><span class="line">        intent.addCategory(Intent.CATEGORY_HOME);</span><br><span class="line"></span><br><span class="line">        PackageManager packageManager = getApplicationContext().getPackageManager();</span><br><span class="line">        ResolveInfo resolveInfo = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);</span><br><span class="line">        <span class="hljs-keyword">return</span> resolveInfo.activityInfo.packageName;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>UIAutomator API：</strong></p>
+<ul>
+<li>UiCollection</li>
+<li>UiObject</li>
+<li>UiScrollable</li>
+<li>UiSelector</li>
+<li>Configurator</li>
+</ul>
+
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/03/23/Android面试/Android触摸事件传递机制/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Android触摸事件传递机制</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/03/23/Android面试/Android冷热启动优化/">
+                <span class="level-item">Android冷热启动优化</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/23/Android面试/Android中查看启动或方法耗时的技巧/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中查看启动或方法耗时的技巧">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-23T13:14:38.000Z">2020-03-23</time></div>
+                    <a href="/2020/03/23/Android面试/Android中查看启动或方法耗时的技巧/" class="has-link-black-ter is-size-6">Android中查看启动或方法耗时的技巧</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android面试/">Android面试</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/23/Android面试/Android中的AOP面向切面编程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中的AOP面向切面编程">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-23T13:14:49.000Z">2019-11-23</time></div>
+                    <a href="/2019/11/23/Android面试/Android中的AOP面向切面编程/" class="has-link-black-ter is-size-6">Android中的AOP面向切面编程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android面试/">Android面试</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/05/Android开发笔记/子线程不可以更新UI吗/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="子线程不可以更新UI吗">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-05T09:49:23.000Z">2019-11-05</time></div>
+                    <a href="/2019/11/05/Android开发笔记/子线程不可以更新UI吗/" class="has-link-black-ter is-size-6">子线程不可以更新UI吗</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中的IPC之Binder机制">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T10:11:48.000Z">2019-10-23</time></div>
+                    <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="has-link-black-ter is-size-6">Android中的IPC之Binder机制</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发艺术探索笔记/">Android开发艺术探索笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android的Handler消息机制分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-22T09:02:12.000Z">2019-10-22</time></div>
+                    <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="has-link-black-ter is-size-6">Android的Handler消息机制分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Android开发笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发艺术探索笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android面试/">
+            <span class="level-start">
+                <span class="level-item">Android面试</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">22</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Rxjava笔记/">
+            <span class="level-start">
+                <span class="level-item">Rxjava笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/gradle配置笔记/">
+            <span class="level-start">
+                <span class="level-item">gradle配置笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/java笔记/">
+            <span class="level-start">
+                <span class="level-item">java笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">16</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AIO/">
+                        <span class="tag">AIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开发艺术探索/">
+                        <span class="tag">Android开发艺术探索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/App-Links/">
+                        <span class="tag">App Links</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BIO/">
+                        <span class="tag">BIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
+                        <span class="tag">BroadcastReceiver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Error/">
+                        <span class="tag">Error</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Exception/">
+                        <span class="tag">Exception</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Handler/">
+                        <span class="tag">Handler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/List/">
+                        <span class="tag">List</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Map/">
+                        <span class="tag">Map</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NIO/">
+                        <span class="tag">NIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Rxjava操作符/">
+                        <span class="tag">Rxjava操作符</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Set/">
+                        <span class="tag">Set</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/View/">
+                        <span class="tag">View</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/adjustPan/">
+                        <span class="tag">adjustPan</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/adjustResize/">
+                        <span class="tag">adjustResize</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gradle/">
+                        <span class="tag">gradle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jdk/">
+                        <span class="tag">jdk</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jre/">
+                        <span class="tag">jre</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jvm/">
+                        <span class="tag">jvm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/throw/">
+                        <span class="tag">throw</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/throws/">
+                        <span class="tag">throws</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/内部类/">
+                        <span class="tag">内部类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/启动模式/">
+                        <span class="tag">启动模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/基本类型/">
+                        <span class="tag">基本类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/堆栈/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引用类型/">
+                        <span class="tag">引用类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/抽象/">
+                        <span class="tag">抽象</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/接口/">
+                        <span class="tag">接口</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/操作系统/">
+                        <span class="tag">操作系统</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/混淆/">
+                        <span class="tag">混淆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/特征/">
+                        <span class="tag">特征</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/生命周期/">
+                        <span class="tag">生命周期</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/软键盘遮挡/">
+                        <span class="tag">软键盘遮挡</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/进程/">
+                        <span class="tag">进程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/闭包/">
+                        <span class="tag">闭包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+        <div class="column-right-shadow  ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Android单元测试框架" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 markzl&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

@@ -16,7 +16,7 @@
 <meta property="og:description" content="并发编程使我们可以将程序划分为多个分离的、独立运行的任务。通过使用多线程机制，这些独立任务（也被称为子任务）中的每一个都将执行线程来驱动。一个线程就是在进程中的一个单一的顺序控制流，因此，单个进程可以用于多个并发执行的任务，但是你的程序使得每个任务都好像有自己的CPU一样。其底层机制是切分CPU时间，但通常你不需要考虑它。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-12-20T02:12:10.520Z">
+<meta property="og:updated_time" content="2020-01-07T03:06:04.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程详解">
 <meta name="twitter:description" content="并发编程使我们可以将程序划分为多个分离的、独立运行的任务。通过使用多线程机制，这些独立任务（也被称为子任务）中的每一个都将执行线程来驱动。一个线程就是在进程中的一个单一的顺序控制流，因此，单个进程可以用于多个并发执行的任务，但是你的程序使得每个任务都好像有自己的CPU一样。其底层机制是切分CPU时间，但通常你不需要考虑它。">
@@ -167,7 +167,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    22 分钟 读完 (大约 3301 个字)
+                    22 分钟 读完 (大约 3323 个字)
                 </span>
                 
                 
@@ -271,7 +271,8 @@
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Accessor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> id;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Accessor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">while</span>(!Thread.currentThread().isInterrupted())&#123;</span><br><span class="line">            ThreadLocalVariableHolder.increment();</span><br><span class="line">            System.out.println(<span class="hljs-keyword">this</span>);</span><br><span class="line">            Thread.yield();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">"#"</span>+id+<span class="hljs-string">": "</span>+ThreadLocalVariableHolder.get();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadLocalVariableHolder</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ThreadLocal&lt;Integer&gt; value = <span class="hljs-keyword">new</span> ThreadLocal&lt;Integer&gt;()&#123;</span><br><span class="line">        <span class="hljs-keyword">private</span> Random random = <span class="hljs-keyword">new</span> Random(<span class="hljs-number">47</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">synchronized</span> Integer <span class="hljs-title">initialValue</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">        </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> random.nextInt(<span class="hljs-number">10000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">increment</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        value.set(value.get()+<span class="hljs-number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">get</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-keyword">return</span> value.get();&#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        ExecutorService executorService = Executors.newCachedThreadPool();</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt;<span class="hljs-number">5</span>;i++)&#123;</span><br><span class="line">            executorService.execute(<span class="hljs-keyword">new</span> Accessor(i));</span><br><span class="line">        &#125;</span><br><span class="line">        TimeUnit.SECONDS.sleep(<span class="hljs-number">3</span>);</span><br><span class="line">        executorService.shutdownNow();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>ThreadLocal对象通常用作静态域存储。在创建ThreadLocal时，你只能通过get() 和 set() 来访问该对象的内容。</p>
-<h2 id="5-终结任务"><a href="#5-终结任务" class="headerlink" title="5 终结任务"></a>5 终结任务</h2><p><strong>参考资料</strong></p>
+<h2 id="5-终结任务"><a href="#5-终结任务" class="headerlink" title="5 终结任务"></a>5 终结任务</h2><h3 id="5-2-在阻塞时终结"><a href="#5-2-在阻塞时终结" class="headerlink" title="5.2 在阻塞时终结"></a>5.2 在阻塞时终结</h3><p><strong>线程状态</strong>：新建、就绪、阻塞、死亡</p>
+<p><strong>参考资料</strong></p>
 <p><a href="https://www.cnblogs.com/sunddenly/p/4106562.html" target="_blank" rel="noopener">https://www.cnblogs.com/sunddenly/p/4106562.html</a></p>
 <p><a href="https://www.cnblogs.com/sunrunzhi/p/3930297.html" target="_blank" rel="noopener">https://www.cnblogs.com/sunrunzhi/p/3930297.html</a></p>
 
@@ -436,7 +437,11 @@
         <a class="is-flex" href="#5-终结任务">
         <span class="has-mr-6">5</span>
         <span>5 终结任务</span>
-        </a></li></ul>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#5-2-在阻塞时终结">
+        <span class="has-mr-6">5.1</span>
+        <span>5.2 在阻塞时终结</span>
+        </a></li></ul></li></ul>
         </div>
     </div>
 </div>
@@ -448,6 +453,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/23/Android面试/Android中查看启动或方法耗时的技巧/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中查看启动或方法耗时的技巧">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-23T13:14:38.000Z">2020-03-23</time></div>
+                    <a href="/2020/03/23/Android面试/Android中查看启动或方法耗时的技巧/" class="has-link-black-ter is-size-6">Android中查看启动或方法耗时的技巧</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android面试/">Android面试</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/23/Android面试/Android中的AOP面向切面编程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中的AOP面向切面编程">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-23T13:14:49.000Z">2019-11-23</time></div>
+                    <a href="/2019/11/23/Android面试/Android中的AOP面向切面编程/" class="has-link-black-ter is-size-6">Android中的AOP面向切面编程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android面试/">Android面试</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -506,44 +549,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gradle 配置常见问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-31T07:30:48.000Z">2019-07-31</time></div>
-                    <a href="/2019/07/31/gradle配置笔记/Android Gradle配置/" class="has-link-black-ter is-size-6">Gradle 配置常见问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/gradle配置笔记/">gradle配置笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Rxjava操作符：第4篇 Combining Observables">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T07:30:48.000Z">2019-06-21</time></div>
-                    <a href="/2019/06/21/Rxjava笔记/第4篇 Combining Observables/" class="has-link-black-ter is-size-6">Rxjava操作符：第4篇 Combining Observables</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Rxjava笔记/">Rxjava笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -571,6 +576,14 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android面试/">
+            <span class="level-start">
+                <span class="level-item">Android面试</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">22</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Rxjava笔记/">
@@ -611,12 +624,23 @@
         <ul class="menu-list">
         
         <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2019/11/">
                 <span class="level-start">
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -628,6 +652,17 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -650,6 +685,28 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">16</span>
                 </span>
             </a>
         </li>
@@ -705,6 +762,17 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -827,6 +895,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Set/">
                         <span class="tag">Set</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/View/">
+                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1059,7 +1134,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 markzl&nbsp;
+                &copy; 2020 markzl&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

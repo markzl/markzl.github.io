@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>markzl的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="View 事件体系">
+<meta name="keywords" content="View">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markzl的博客">
+<meta property="og:url" content="http://yoursite.com/2018/03/23/Android面试/Android自定义View/index.html">
+<meta property="og:site_name" content="markzl的博客">
+<meta property="og:description" content="View 事件体系">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2020-03-23T13:32:01.612Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="markzl的博客">
+<meta name="twitter:description" content="View 事件体系">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+        <script type="text/javascript" src="https://js.users.51.la/20211709.js"></script>
+    
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">首页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/categories">分类</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/photos">相册</a>
+                
+                <a class="navbar-item" href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/markzl">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-9-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-03-23T13:15:32.000Z">2018-03-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android面试/">Android面试</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    21 分钟 读完 (大约 3141 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                
+            
+        </h1>
+        <div class="content">
+            <h1 id="View-事件体系"><a href="#View-事件体系" class="headerlink" title="View 事件体系"></a>View 事件体系</h1><a id="more"></a>
+
+<h2 id="1-View-的基础知识"><a href="#1-View-的基础知识" class="headerlink" title="1. View 的基础知识"></a>1. View 的基础知识</h2><p>View 的基础知识有：View 的位置参数、MotionEvent 和 TouchSlop 对象、VelocityTracker、GestureD etector 和 Scroller 对象。</p>
+<h3 id="1-1-View-的位置参数"><a href="#1-1-View-的位置参数" class="headerlink" title="1.1 View 的位置参数"></a>1.1 View 的位置参数</h3><p>View 的位置主要由它的四个顶点来决定，分别对应于View的四个属性：top、left、right、bottom，其中top、left为左上角坐标，right和bottom为右下角坐标。<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1g9kgpmsg8rj30og0igdk6.jpg" alt="截屏2019-12-04上午10.04.27"></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">left = getLeft();</span><br><span class="line">top = getTop();</span><br><span class="line">right = getRight();</span><br><span class="line">bottom = getBottom();</span><br></pre></td></tr></table></figure>
+
+<p>View 中的其他参数如 x、y、transitionX 和 transitionY，其中x，y为View相对于父容器左上角的坐标，transitionX和transitionY为相对于View左上角坐标的偏移量，初始值为0。几个参数的换算关系为：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = left+transitionX ;</span><br><span class="line">y = top+transitionY</span><br></pre></td></tr></table></figure>
+
+<p>如果为当前View执行补间动画，View的实际位置不会发生变化即left等四个属性不会改变，此时改变的是x、y、transitionX和transitionY四个变量。注意事项：</p>
+<ul>
+<li>Event#getRawX() ：获取的是相对于屏幕的坐标</li>
+<li>Event#getX()：获取相对于当前View左上角的坐标</li>
+<li>View#getX()：获取的是相对于父容器的坐标。</li>
+</ul>
+<h3 id="1-2-MotionEvent-和-TouchSlop"><a href="#1-2-MotionEvent-和-TouchSlop" class="headerlink" title="1.2 MotionEvent 和 TouchSlop"></a>1.2 MotionEvent 和 TouchSlop</h3><p><strong>MotionEvent</strong> 产生的典型事件类型如下：</p>
+<ul>
+<li>ACTION_DOWN 手指接触屏幕</li>
+<li>ACTION_MOVE  手指在屏幕上移动</li>
+<li>ACTION_UP        手指抬起</li>
+</ul>
+<p>每一次点击事件都会触发ACTION_DOWN和ACTION_UP事件，如果有滑动的话也会触发ACTION_MOVE。从ACTION_DOWN 到 ACTION_UP 事件是一次完整的点击的事件流程，当然其中也会有事件分发。</p>
+<p><strong>TouchSlop</strong> 是系统所能识别的被认为是滑动的最小距离，如果滑动的距离小于这个常量，系统就不会下发ACTION_MOVE 这个事件，可以通过 <code>ViewConfiguration.get(this).getScaledTouchSlop()</code> 方法获取这个常量。</p>
+<h3 id="1-3-VelocityTracker、GestureDetector-和-Scroller"><a href="#1-3-VelocityTracker、GestureDetector-和-Scroller" class="headerlink" title="1.3 VelocityTracker、GestureDetector 和 Scroller"></a>1.3 VelocityTracker、GestureDetector 和 Scroller</h3><ul>
+<li><p>VelocatiyTracker</p>
+<p>速度追踪，用于追踪手指在滑动过程中的速度，包括水平速度和垂直速度，速度是可能为负值的。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">VelocityTracker velocityTracker = VelocityTracker.obtain();</span><br><span class="line">velocityTracker.addMovement(event);</span><br><span class="line"><span class="hljs-comment">// 设置事件间隔</span></span><br><span class="line">velocityTracker.computeCurrentVelocity(<span class="hljs-number">1000</span>);</span><br><span class="line"><span class="hljs-keyword">int</span> xVelocity = (<span class="hljs-keyword">int</span>) velocityTracker.getXVelocity();</span><br><span class="line"><span class="hljs-keyword">int</span> yVelocity = (<span class="hljs-keyword">int</span>) velocityTracker.getYVelocity();</span><br><span class="line">velocityTracker.clear();</span><br><span class="line">velocityTracker.recycle();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>GestureDetector</p>
+<p>手势检测，用于辅助检测用户的单机、滑动、长按、双击等行为。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GestureDetector gestureDetector = <span class="hljs-keyword">new</span> GestureDetector(<span class="hljs-keyword">this</span>);</span><br><span class="line"><span class="hljs-comment">// 解决长按无法滑动问题</span></span><br><span class="line">gestureDetector.setIsLongpressEnabled(<span class="hljs-keyword">false</span>);</span><br><span class="line"><span class="hljs-keyword">return</span> gestureDetector.onTouchEvent(event);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Scroller</p>
+<p>主要用来实现View的滑动，当使用 View 的 scrollTo/scrollBy 方法来进行滑动时，其过程是瞬间完成的，没有过渡效果这样用户体验不好。使用Scroller可以实现View滚动时候的过渡效果，其过程不是瞬间完成的，而是在设置的时间间隔内完成。Scroller 本身无法让View实现弹性滑动，需要配合 View#computerScroll 方法。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> Scroller scroller;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">smoothScrollTo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> destX, <span class="hljs-keyword">int</span> destY)</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">int</span> scrollX = getScrollX();</span><br><span class="line">  <span class="hljs-keyword">int</span> delta = destX - scrollX;</span><br><span class="line">  scroller.startScroll(scrollX, <span class="hljs-number">0</span>, delta, <span class="hljs-number">0</span>, <span class="hljs-number">1000</span>);</span><br><span class="line">  invalidate();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">computeScroll</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (scroller.computeScrollOffset()) &#123;</span><br><span class="line">    scrollTo(scroller.getCurrX(), scroller.getCurrY());</span><br><span class="line">    postInvalidate();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="2-View绘制的整体流程"><a href="#2-View绘制的整体流程" class="headerlink" title="2. View绘制的整体流程"></a>2. View绘制的整体流程</h2><p>Android 中 Activity 是作为应用程序的载体存在的，它代表一个完整的用户界面，提供了一个窗口来绘制各种视图，PhoneWindow 是 Activity 和 View 交互的窗口。DecorView 本质上是 FrameLayout ，包含 TitleView 和ContentView，TitleView是我们设置的ActionBar，ContentView是我们在 onCreate 方法中调用 setContentView 时候定义的。</p>
+<h4 id="2-1-绘制的整体流程"><a href="#2-1-绘制的整体流程" class="headerlink" title="2.1 绘制的整体流程"></a>2.1 绘制的整体流程</h4><p>当Activity启动时，绘制会从根视图 ViewRootImpl 的 performTraversals() 方法开始，从上到下遍历整个视图，每个View 控件负责绘制自己，而 ViewGroup 还需要负责通知自己的子 View 进行绘制操作。视图的绘制过程分为三个步骤，分别是测量（Measure）、布局（Layout）和绘制（Draw）。performTraversals() 方法的核心代码如下：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">performTraversals</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="hljs-keyword">int</span> childWidthMeasureSpec = getRootMeasureSpec(mWidth, lp.width);</span><br><span class="line">    <span class="hljs-keyword">int</span> childHeightMeasureSpec = getRootMeasureSpec(mHeight, lp.height);</span><br><span class="line">    ...</span><br><span class="line">    <span class="hljs-comment">// 执行测量流程</span></span><br><span class="line">     <span class="hljs-comment">// Ask host how big it wants to be</span></span><br><span class="line">    performMeasure(childWidthMeasureSpec, childHeightMeasureSpec);</span><br><span class="line">  	...</span><br><span class="line">    <span class="hljs-comment">//执行布局流程</span></span><br><span class="line">    performLayout(lp, mWidth, mHeight);</span><br><span class="line">    ...</span><br><span class="line">    <span class="hljs-comment">//执行绘制流程</span></span><br><span class="line">    performDraw();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-Measure"><a href="#2-2-Measure" class="headerlink" title="2.2 Measure"></a>2.2 Measure</h4><p> MeasureSpec 表示的是一个32位的整形值，它的高2位表示测量模式SpecMode，低30位表示某种测量模式下的规格大小 SpecSize。MeasureSpec 是View的一个静态内部类，用来说明应该如何测量这个View。</p>
+<p>MeasureSpec 的三种测量模式：</p>
+<ul>
+<li>UNSPECIFIED：不指定测量模式，父视图没有限制子视图的大小，子视图可以是想要的任何尺寸，通常用于系统内部，应用开发中很少使用到。</li>
+<li>EXACTLY：精确测量模式，当前视图的 layout_width 或者 layout_height 指定为具体数值或者match_parent 时生效，表示父视图已经决定了子视图的精确大小，这种模式下View 的测量值就是SpecSize的值。</li>
+<li>AT_MOST：最大值模式，当该视图的 layout_width 或 layout_height 指定为wrap_content时生效，此时子视图的尺寸可以是不超过父视图允许的最大尺寸的任何尺寸。</li>
+</ul>
+<p>对于普通View，其MeasureSpec由父容器的测量模式和自身的LayoutParam 决定。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// ViewGroup.java</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getChildMeasureSpec</span><span class="hljs-params">(<span class="hljs-keyword">int</span> spec, <span class="hljs-keyword">int</span> padding, <span class="hljs-keyword">int</span> childDimension)</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">int</span> specMode = MeasureSpec.getMode(spec);</span><br><span class="line">  <span class="hljs-keyword">int</span> specSize = MeasureSpec.getSize(spec);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">int</span> size = Math.max(<span class="hljs-number">0</span>, specSize - padding);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">int</span> resultSize = <span class="hljs-number">0</span>;</span><br><span class="line">  <span class="hljs-keyword">int</span> resultMode = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">switch</span> (specMode) &#123;</span><br><span class="line">      <span class="hljs-comment">// Parent has imposed an exact size on us</span></span><br><span class="line">    <span class="hljs-keyword">case</span> MeasureSpec.EXACTLY:</span><br><span class="line">      <span class="hljs-keyword">if</span> (childDimension &gt;= <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        resultSize = childDimension;</span><br><span class="line">        resultMode = MeasureSpec.EXACTLY;</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (childDimension == LayoutParams.MATCH_PARENT) &#123;</span><br><span class="line">        <span class="hljs-comment">// Child wants to be our size. So be it.</span></span><br><span class="line">        resultSize = size;</span><br><span class="line">        resultMode = MeasureSpec.EXACTLY;</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (childDimension == LayoutParams.WRAP_CONTENT) &#123;</span><br><span class="line">        <span class="hljs-comment">// Child wants to determine its own size. It can't be</span></span><br><span class="line">        <span class="hljs-comment">// bigger than us.</span></span><br><span class="line">        resultSize = size;</span><br><span class="line">        resultMode = MeasureSpec.AT_MOST;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="hljs-comment">// Parent has imposed a maximum size on us</span></span><br><span class="line">    <span class="hljs-keyword">case</span> MeasureSpec.AT_MOST:</span><br><span class="line">      <span class="hljs-keyword">if</span> (childDimension &gt;= <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        <span class="hljs-comment">// Child wants a specific size... so be it</span></span><br><span class="line">        resultSize = childDimension;</span><br><span class="line">        resultMode = MeasureSpec.EXACTLY;</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (childDimension == LayoutParams.MATCH_PARENT) &#123;</span><br><span class="line">        <span class="hljs-comment">// Child wants to be our size, but our size is not fixed.</span></span><br><span class="line">        <span class="hljs-comment">// Constrain child to not be bigger than us.</span></span><br><span class="line">        resultSize = size;</span><br><span class="line">        resultMode = MeasureSpec.AT_MOST;</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (childDimension == LayoutParams.WRAP_CONTENT) &#123;</span><br><span class="line">        <span class="hljs-comment">// Child wants to determine its own size. It can't be</span></span><br><span class="line">        <span class="hljs-comment">// bigger than us.</span></span><br><span class="line">        resultSize = size;</span><br><span class="line">        resultMode = MeasureSpec.AT_MOST;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="hljs-comment">// Parent asked to see how big we want to be</span></span><br><span class="line">    <span class="hljs-keyword">case</span> MeasureSpec.UNSPECIFIED:</span><br><span class="line">      <span class="hljs-keyword">if</span> (childDimension &gt;= <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        <span class="hljs-comment">// Child wants a specific size... let him have it</span></span><br><span class="line">        resultSize = childDimension;</span><br><span class="line">        resultMode = MeasureSpec.EXACTLY;</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (childDimension == LayoutParams.MATCH_PARENT) &#123;</span><br><span class="line">        <span class="hljs-comment">// Child wants to be our size... find out how big it should</span></span><br><span class="line">        <span class="hljs-comment">// be</span></span><br><span class="line">        resultSize = View.sUseZeroUnspecifiedMeasureSpec ? <span class="hljs-number">0</span> : size;</span><br><span class="line">        resultMode = MeasureSpec.UNSPECIFIED;</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (childDimension == LayoutParams.WRAP_CONTENT) &#123;</span><br><span class="line">        <span class="hljs-comment">// Child wants to determine its own size.... find out how</span></span><br><span class="line">        <span class="hljs-comment">// big it should be</span></span><br><span class="line">        resultSize = View.sUseZeroUnspecifiedMeasureSpec ? <span class="hljs-number">0</span> : size;</span><br><span class="line">        resultMode = MeasureSpec.UNSPECIFIED;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">//noinspection ResourceType</span></span><br><span class="line">  <span class="hljs-keyword">return</span> MeasureSpec.makeMeasureSpec(resultSize, resultMode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-Layout"><a href="#2-3-Layout" class="headerlink" title="2.3 Layout"></a>2.3 Layout</h4><p>Layout 过程用来确定View在父容器中的布局位置，它是由父容器获取子View的位置参数后，调用子View 的layout 方法并将位置参数传入实现的。</p>
+<h4 id="2-4-Draw"><a href="#2-4-Draw" class="headerlink" title="2.4. Draw"></a>2.4. Draw</h4><h5 id="2-4-1-View-绘制顺序"><a href="#2-4-1-View-绘制顺序" class="headerlink" title="2.4.1 View 绘制顺序"></a>2.4.1 View 绘制顺序</h5><ul>
+<li><p><strong>super.onDraw()</strong> 方法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class AppImageView extends ImageView &#123;</span><br><span class="line">		</span><br><span class="line">    protected void onDraw(Canvas canvas) &#123;</span><br><span class="line">    		// 如果有背景图片，绘制在背景图片之下</span><br><span class="line">        super.onDraw(canvas);</span><br><span class="line">       	// 绘制在背景图片之上</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>super.dispatchDraw()</strong> 方法，只存在于 ViewGroup 对象中。每一个 ViewGroup 在绘制时会先调用 onDraw 方法绘制完自己的主体之后才去绘制它的子View。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpottedLinearLayout</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">LinearLayout</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="hljs-comment">// 把 onDraw() 换成了 dispatchDraw()</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dispatchDraw</span><span class="hljs-params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">       <span class="hljs-keyword">super</span>.dispatchDraw(canvas);</span><br><span class="line">    	<span class="hljs-comment">//绘制在完成ViewGroup中子View绘制之前</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>super.onDrawForeground()</strong> 绘制前景方法，要求 minSdk 版本达到23，不然低版本手机没有效果。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppImageView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ImageView</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDrawForeground</span><span class="hljs-params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">      <span class="hljs-comment">// 会被xml设置的 foreground 属性遮住</span></span><br><span class="line">       <span class="hljs-keyword">super</span>.onDrawForeground(canvas);</span><br><span class="line">       ... <span class="hljs-comment">// 绘制「New」标签</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>super.draw()</strong> 方法</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> AppEditText extends EditText &#123;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">      	<span class="hljs-comment">// 绘制在所有绘制发生之前，包括背景</span></span><br><span class="line">        canvas.drawColor(Color.parseColor(<span class="hljs-string">"#66BB6A"</span>)); <span class="hljs-comment">// 涂上绿色</span></span><br><span class="line"> </span><br><span class="line">        <span class="hljs-keyword">super</span>.draw(canvas); <span class="hljs-comment">// View 绘制总调度方法</span></span><br><span class="line">      	<span class="hljs-comment">// 绘制在所有绘制之后</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p><strong>draw()</strong> 方法是绘制过程的调度方法。一个View的绘制过程都发生在 draw() 方法里，包括绘制背景、主体、子View、滑动相关以及前景的绘制。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// View.java 的 draw() 方法的简化版大致结构（是大致结构，不是源码哦）：</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    drawBackground(Canvas); <span class="hljs-comment">// 绘制背景（不能重写）</span></span><br><span class="line">    onDraw(Canvas); <span class="hljs-comment">// 绘制主体</span></span><br><span class="line">    dispatchDraw(Canvas); <span class="hljs-comment">// 绘制子 View</span></span><br><span class="line">    onDrawForeground(Canvas); <span class="hljs-comment">// 绘制滑动相关和前景</span></span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于绘制方法，有两点需要注意一下：</p>
+<ol>
+<li>出于效率的考虑，<code>ViewGroup</code> 默认会绕过 <code>draw()</code> 方法，换而直接执行 <code>dispatchDraw()</code>，以此来简化绘制流程。所以如果你自定义了某个 <code>ViewGroup</code> 的子类（比如 <code>LinearLayout</code>）并且需要在它的除 <code>dispatchDraw()</code> 以外的任何一个绘制方法内绘制内容，你<strong>可能</strong>会需要调用 <code>View.setWillNotDraw(false)</code> 这行代码来切换到完整的绘制流程（是「可能」而不是「必须」的原因是，有些 ViewGroup 是已经调用过 <code>setWillNotDraw(false)</code> 了的，例如 <code>ScrollView</code>）。</li>
+<li>有的时候，一段绘制代码写在不同的绘制方法中效果是一样的，这时你可以选一个自己喜欢或者习惯的绘制方法来重写。但有一个例外：如果绘制代码既可以写在 <code>onDraw()</code> 里，也可以写在其他绘制方法里，那么优先写在 <code>onDraw()</code> ，因为 Android 有相关的优化，可以在不需要重绘的时候自动跳过 <code>onDraw()</code> 的重复执行，以提升开发效率。享受这种优化的只有 <code>onDraw()</code> 一个方法。</li>
+</ol>
+<h2 id="3-View-的事件分发机制"><a href="#3-View-的事件分发机制" class="headerlink" title="3. View 的事件分发机制"></a>3. View 的事件分发机制</h2><p>事件分发机制即 MotionEvent 对象在Activity、ViewGroup、View之间的传递，分发过程主要由三个方法共同完成：dispatchTouchEvent、onInterceptTouchEvent 和 onTouchEvent。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">diapatchTouchEvent</span><span class="hljs-params">(MotionEvent event)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>用来进行事件的分发。如果事件能够传递给当前View，那么此方法一定会被调用，返回结果受当前View 的 onTouchEvent 和下级 View 的 dispatchTouchEvent 方法的影响，表示是否消耗当前事件。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onIterceptTouchEvent</span><span class="hljs-params">(MotionEvent event)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>只存在于 ViewGroup中，用于判断是否拦截某个事件，如果当前 ViewGroup 拦截了某个事件，那么在同一个事件序列当中，此方法不会被再次调用，返回结果表示是否拦截当前事件。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onTouchEvent</span><span class="hljs-params">(MotionEvent event)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>用来处理点击事件，返回结果表示是否消耗当前事件，如果不消耗，则在同一个事件序列中，当前View无法再次收到事件。</p>
+<p>当一个点击事件产生后，它的传递过程遵循如下顺序：Activity -&gt; Window (PhoneWindow -&gt; DecorView ) -&gt; ViewGroup -&gt;View，实际上的传递方式是 ViewGroup -&gt; View。这里我们先由ViewGroup 的 dispatchTouchEvent 方法开始分析，ViewGroup#dispatchTouchEvent() 的部分代码逻辑如下所示：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// ViewGroup.java</span></span><br><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">dispatchTouchEvent</span><span class="hljs-params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="hljs-comment">// Check for interception.</span></span><br><span class="line">  <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> intercepted;</span><br><span class="line">  <span class="hljs-keyword">if</span> (actionMasked == MotionEvent.ACTION_DOWN || mFirstTouchTarget != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> disallowIntercept = (mGroupFlags &amp; FLAG_DISALLOW_INTERCEPT) != <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (!disallowIntercept) &#123;</span><br><span class="line">      intercepted = onInterceptTouchEvent(ev);</span><br><span class="line">      ev.setAction(action); <span class="hljs-comment">// restore action in case it was changed</span></span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      intercepted = <span class="hljs-keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-comment">// There are no touch targets and this action is not an initial down</span></span><br><span class="line">    <span class="hljs-comment">// so this view group continues to intercept touches.</span></span><br><span class="line">    intercepted = <span class="hljs-keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里可以看到ViewGroup会在如下两种情况下会判断是否拦截当前事件：事件类型为 <code>ACTION_DOWN</code> 或者<code>mFirstTouchTarget != null</code>。从后续的代码中，我可以看到当 ACTION_DOWN 事件被ViewGroup的子元素成功处理时，mFirstTouchTarget 会被赋值指向并指向子元素。所以当ViewGroup中拦截当前事件，此时mFirstTouchTarget参数为空，此时的 ACTION_MOVE 和 ACTION_UP 也无法向下传递且不会再调用ViewGroup#onInterceptTouchEvent 方法。对于参数 disallowIntercept（不允许拦截） 指定true时，intercept为false，这个参数可由ViewGroup某些方法设置，解决ViewGroup和View的事件冲突。</p>
+<p><strong>总结</strong>：</p>
+<ol>
+<li>注意 Activity#dispatchTouchEvent() 方法在返回值为true或false，事件不会继续向下传递且不会触发Activity#onTouchEvent() 方法和View#onClick()方法。</li>
+<li>当ACTION_DOWN事件被在ViewGroup#onInterceptTouchEvent() 拦截后，ACTION_MOVE和ACTION_UP事件无法继续传递，且onInterceptTouchEvent() 不再被调用。</li>
+<li>某个View如果不消耗ACTION_DOWN事件，那么后续的事件不会交给它处理，并将事件交与它的父View处理。</li>
+<li>正常处理顺序优先级 View#onTouchListener &gt; View#onTouchEvent &gt; View#onClickListener。</li>
+<li>可以通过 requestDisallowInterceptTouchEvent 方法可以在子元素中干涉父元素的事件分发过程，但是ACTION_DOWN事件触发。例如调用此方法可以处理EditText内容滚动和ScrollView滚动冲突的问题。</li>
+</ol>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/View/">View</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/04/18/Android开发笔记/Android预览pdf文档/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Android预览pdf文档</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/03/23/Android面试/Android中注解的使用/">
+                <span class="level-item">Android中注解的使用</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+
+    
+        
+<div class="card widget" id="toc" style="max-height: 400px;overflow: auto;">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#View-事件体系">
+        <span class="has-mr-6">1</span>
+        <span>View 事件体系</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-View-的基础知识">
+        <span class="has-mr-6">1.1</span>
+        <span>1. View 的基础知识</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-View-的位置参数">
+        <span class="has-mr-6">1.1.1</span>
+        <span>1.1 View 的位置参数</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-2-MotionEvent-和-TouchSlop">
+        <span class="has-mr-6">1.1.2</span>
+        <span>1.2 MotionEvent 和 TouchSlop</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-3-VelocityTracker、GestureDetector-和-Scroller">
+        <span class="has-mr-6">1.1.3</span>
+        <span>1.3 VelocityTracker、GestureDetector 和 Scroller</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-View绘制的整体流程">
+        <span class="has-mr-6">1.2</span>
+        <span>2. View绘制的整体流程</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-View-的事件分发机制">
+        <span class="has-mr-6">1.3</span>
+        <span>3. View 的事件分发机制</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/23/Android面试/Android中查看启动或方法耗时的技巧/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中查看启动或方法耗时的技巧">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-23T13:14:38.000Z">2020-03-23</time></div>
+                    <a href="/2020/03/23/Android面试/Android中查看启动或方法耗时的技巧/" class="has-link-black-ter is-size-6">Android中查看启动或方法耗时的技巧</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android面试/">Android面试</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/23/Android面试/Android中的AOP面向切面编程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中的AOP面向切面编程">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-23T13:14:49.000Z">2019-11-23</time></div>
+                    <a href="/2019/11/23/Android面试/Android中的AOP面向切面编程/" class="has-link-black-ter is-size-6">Android中的AOP面向切面编程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android面试/">Android面试</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/05/Android开发笔记/子线程不可以更新UI吗/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="子线程不可以更新UI吗">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-05T09:49:23.000Z">2019-11-05</time></div>
+                    <a href="/2019/11/05/Android开发笔记/子线程不可以更新UI吗/" class="has-link-black-ter is-size-6">子线程不可以更新UI吗</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android中的IPC之Binder机制">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T10:11:48.000Z">2019-10-23</time></div>
+                    <a href="/2019/10/23/Android开发笔记/AndroidIPC机制/" class="has-link-black-ter is-size-6">Android中的IPC之Binder机制</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发艺术探索笔记/">Android开发艺术探索笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Android的Handler消息机制分析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-22T09:02:12.000Z">2019-10-22</time></div>
+                    <a href="/2019/10/22/Android开发笔记/Android的Handler消息机制分析/" class="has-link-black-ter is-size-6">Android的Handler消息机制分析</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Android开发笔记/">Android开发笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Android开发笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android开发艺术探索笔记/">
+            <span class="level-start">
+                <span class="level-item">Android开发艺术探索笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android面试/">
+            <span class="level-start">
+                <span class="level-item">Android面试</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">22</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Rxjava笔记/">
+            <span class="level-start">
+                <span class="level-item">Rxjava笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/gradle配置笔记/">
+            <span class="level-start">
+                <span class="level-item">gradle配置笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/java笔记/">
+            <span class="level-start">
+                <span class="level-item">java笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">16</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AIO/">
+                        <span class="tag">AIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开发艺术探索/">
+                        <span class="tag">Android开发艺术探索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/App-Links/">
+                        <span class="tag">App Links</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BIO/">
+                        <span class="tag">BIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
+                        <span class="tag">BroadcastReceiver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Error/">
+                        <span class="tag">Error</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Exception/">
+                        <span class="tag">Exception</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Handler/">
+                        <span class="tag">Handler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/List/">
+                        <span class="tag">List</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Map/">
+                        <span class="tag">Map</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NIO/">
+                        <span class="tag">NIO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Rxjava操作符/">
+                        <span class="tag">Rxjava操作符</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Set/">
+                        <span class="tag">Set</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/View/">
+                        <span class="tag">View</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/adjustPan/">
+                        <span class="tag">adjustPan</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/adjustResize/">
+                        <span class="tag">adjustResize</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gradle/">
+                        <span class="tag">gradle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jdk/">
+                        <span class="tag">jdk</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jre/">
+                        <span class="tag">jre</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jvm/">
+                        <span class="tag">jvm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/throw/">
+                        <span class="tag">throw</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/throws/">
+                        <span class="tag">throws</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/内部类/">
+                        <span class="tag">内部类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/启动模式/">
+                        <span class="tag">启动模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/基本类型/">
+                        <span class="tag">基本类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/堆栈/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引用类型/">
+                        <span class="tag">引用类型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/抽象/">
+                        <span class="tag">抽象</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/接口/">
+                        <span class="tag">接口</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/操作系统/">
+                        <span class="tag">操作系统</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/混淆/">
+                        <span class="tag">混淆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/特征/">
+                        <span class="tag">特征</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/生命周期/">
+                        <span class="tag">生命周期</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线程/">
+                        <span class="tag">线程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/软键盘遮挡/">
+                        <span class="tag">软键盘遮挡</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/进程/">
+                        <span class="tag">进程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/闭包/">
+                        <span class="tag">闭包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+        <div class="column-right-shadow  ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 markzl&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
